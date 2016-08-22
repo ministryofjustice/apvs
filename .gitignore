@@ -1,0 +1,2 @@
+# Exclude all IntelliJ configuration files.
+.idea/
