@@ -1,63 +1,68 @@
 {% extends "layout.html" %}
 
 {% block page_title %}
-  GOV.UK prototype kit
+Assisted Prison Visit Service
 {% endblock %}
 
 {% block content %}
 
 <main id="content" role="main">
-  <div class="grid-row">
-    <div class="column-two-thirds">
 
-      <h1 class="heading-xlarge">
-        The GOV.UK prototype kit
-        <span class="heading-secondary">{{releaseVersion}}</span>
-      </h1>
-      <p>
-        This kit lets you rapidly create HTML prototypes of GOV.UK services.
-      </p>
-
-      <p>
-        It contains all you need to prototype anything from simple static pages to complex, data-driven transactions.
-      </p>
-
-      <h2 class="heading-medium">About this page</h2>
-
-      <p>We recommend you add links to your prototype to this page, rather than delete it.
-        You'll find this page in the kit at '/app/views/index.html'.</p>
-      <p>You can change the service name by editing the file '/app/config.js'.</p>
-
-			<h2 class="heading-medium">Examples and documentation</h2>
-
-			<ul class="list list-bullet">
-				<li><a href="/examples">Example pages and patterns</a></li>
-				<li><a href="https://github.com/alphagov/govuk_prototype_kit/tree/master/docs">
-						Read the full documentation</a></li>
-			</ul>
-
-      <h2 class="heading-medium">Other resources</h2>
-
-			<ul class="list list-bullet">
-				<li>
-					<a href="https://govuk-elements.herokuapp.com/snippets/">
-						Guide to GOV.UK Elements
-					</a>
-				</li>
-				<li>
-					<a href="https://www.gov.uk/service-manual">
-						Service design manual
-					</a>
-				</li>
-				<li>
-					<a href="https://www.gov.uk/design-principles">
-						Government Digital Service Design Principles
-					</a>
-				</li>
-			</ul>
-
+    <div class="breadcrumbs">
+        <ol>
+            <li><a href="https://www.gov.uk">Home</a></li>
+            <li><a href="">Section</a></li>
+            <li>Subsection</li>
+        </ol>
     </div>
-  </div>
+
+    <div class="grid-row">
+        <div class="column-two-thirds">
+
+            <h1 class="heading-xlarge">
+                {% if serviceName %} {{ serviceName }} {% endif %}
+            </h1>
+
+            <p>Use this service to:</p>
+
+            <ul class="list list-bullet">
+                <li>do something</li>
+                <li>update your name, address or other details</li>
+                <li>you need to do this in order to do something else</li>
+            </uL>
+
+            <p>Registering takes around 5 minutes.</p>
+
+            <p>
+                <a class="button button-start" href="#" role="button">Start now</a>
+            </p>
+
+            <h2 class="heading-medium">Before you start</h2>
+
+            <ul class="list list-bullet">
+                <li>do something</li>
+                <li>update your name, address or other details</li>
+                <li>you need to do this in order to do something else</li>
+            </uL>
+
+        </div>
+        <div class="column-third">
+
+            <aside class="govuk-related-items" role="complementary">
+                <h2 class="heading-medium" id="subsection-title">Subsection</h2>
+                <nav role="navigation" aria-labelledby="subsection-title">
+                    <ul class="font-xsmall">
+                        <li><a href="#">Related link</a></li>
+                        <li><a href="#">Related link</a></li>
+                        <li><a href="#" class="bold-xsmall">More <span class="visuallyhidden">in Subsection</span></a>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+
+        </div>
+    </div>
+
 </main>
 
 {% endblock %}
