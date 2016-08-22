@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+  APVS Application Form
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  {% include "includes/phase_banner_alpha.html" %}
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <h1 class="heading-xlarge">
+        Apply for APVS
+      </h1>
+      <p>
+        This form lets you apply for the Assisted Prison Visits Scheme.
+      </p>
+
+      <p>
+        You may be eligible to receive support for costs associated with visiting a relative or friend in prison.
+      </p>
+
+      <form>
+          <label>First Name</label>
+          <input/>
+          <label>Surname</label>
+          <input/>
+          <label>Address line 1</label>
+          <input/>
+          <label>Address line 2</label>
+          <input/>
+          <label>Postcode</label>
+          <input/>
+      </form>
+
+    </div>
+  </div>
+</main>
+
+{% endblock %}
+
+

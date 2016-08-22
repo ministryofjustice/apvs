@@ -1,6 +1,9 @@
 # Exclude all IntelliJ configuration files.
 .idea/
 
+# Exclude all VSCode configuration files.
+alpha/external-web/.vscode/
+
 # Ignores for Gov Prototype elements.
 alpha/external-web/.sass-cache
 alpha/external-web/.start.pid
