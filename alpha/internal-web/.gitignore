@@ -1,0 +1,9 @@
+# Ignores for Gov Prototype elements.
+.sass-cache
+.start.pid
+.port.tmp
+/public
+/lib/govuk_template.html
+/govuk_modules
+/node_modules/
+/.tmuxp.*
