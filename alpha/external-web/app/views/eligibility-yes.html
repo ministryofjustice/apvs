@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+{% if serviceName %} {{ serviceName }} {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+    {% include "includes/phase_banner_alpha.html" %}
+
+    <div class="breadcrumbs">
+        <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="">Check Eligibility</a></li>
+        </ol>
+    </div>
+
+    <div class="grid-row">
+        <div class="column-two-thirds">
+
+
+            <h2 class="heading-large">
+                Eligibility status
+            </h2>
+
+            <p>insert content</p>
+
+        </div>
+    </div>
+
+</main>
+
+{% endblock %}
+
+
