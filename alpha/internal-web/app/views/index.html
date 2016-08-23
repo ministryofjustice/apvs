@@ -24,7 +24,8 @@ Assisted Prison Visit Service (Internal)
                 {% if serviceName %} {{ serviceName }} {% endif %}
             </h1>
 
-            <p>DISPLAY LIST OF CLAIMANTS HERE</p>
+            <h2>LIST OF CLAIMANTS</h2>
+            {{ claimant.first_name }} {{ claimant.last_name }}
 
         </div>
 
