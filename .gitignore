@@ -1,5 +1,6 @@
 # Exclude all IntelliJ configuration files.
 .idea/
+alpha/alpha.iml
 
 # Exclude all VSCode configuration files.
 alpha/external-web/.vscode/

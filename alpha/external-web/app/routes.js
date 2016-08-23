@@ -31,3 +31,16 @@ router.get('/examples/over-18', function (req, res) {
 // add your routes here
 
 module.exports = router
+
+
+
+
+router.post('/save-claimant', function (req, res) {
+  console.log(req.body);
+  // Render something.
+});
+
+
+
+
+
