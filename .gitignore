@@ -1,16 +1,6 @@
 # Exclude all IntelliJ configuration files.
-.idea/
-alpha/alpha.iml
+**.idea/
+**.iml
 
 # Exclude all VSCode configuration files.
-alpha/external-web/.vscode/
-
-# Ignores for Gov Prototype elements.
-alpha/external-web/.sass-cache
-alpha/external-web/.start.pid
-alpha/external-web/.port.tmp
-alpha/external-web/public
-alpha/external-web/lib/govuk_template.html
-alpha/external-web/govuk_modules
-alpha/external-web/node_modules/
-alpha/external-web/.tmuxp.*
+**.vscode/
