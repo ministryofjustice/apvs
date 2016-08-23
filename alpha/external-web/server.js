@@ -10,26 +10,6 @@ var browserSync = require('browser-sync');
 var config = require('./app/config.js');
 var utils = require('./lib/utils.js');
 
-// Connect to a local Redis database.
-var redis = require('redis');
-var client = redis.createClient();
-
-// TODO: Error checking. Is the database there.
-
-client.on('connect', function() {
-    console.log('Connected to database!');
-});
-
-// Test save of a claimant.
-client.hmset('claimant', {
-    'first_name' : 'John',
-    'last_name'  : 'Smith'
-});
-
-client.hgetall('claimant', function(err, object) {
-    console.log(object);
-});
-
 var packageJson = require(path.join(__dirname, '/package.json'));
 
 // Grab environment variables specified in Procfile or as Heroku config vars
