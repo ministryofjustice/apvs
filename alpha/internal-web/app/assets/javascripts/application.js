@@ -110,4 +110,7 @@ $(document).ready(function () {
   var toggleContent = new ShowHideContent()
   toggleContent.showHideRadioToggledContent()
   toggleContent.showHideCheckboxToggledContent()
+
+  // Initialise datatable used for dispaying list of claimants
+  $('#claimants-table').DataTable()
 })
