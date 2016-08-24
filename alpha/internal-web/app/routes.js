@@ -5,7 +5,7 @@ var router = express.Router()
 var MongoClient = require('mongodb').MongoClient
 var db
 
-MongoClient.connect('mongodb://localhost:27017/apvs', function(err, database) {
+MongoClient.connect('mongodb://localhost:27017/apvs', function (err, database) {
   if (!err) {
     db = database
     console.log('Connected to MongoDB')
@@ -13,27 +13,22 @@ MongoClient.connect('mongodb://localhost:27017/apvs', function(err, database) {
 })
 
 // Get the list of claimants from the database.
-router.get('/list-users', function (req, res) {
+router.get('/', function (req, res) {
 
+  db.collection('claimants').find().toArray(function (err, results) {
 
-    db.collection('claimants').find().toArray(function (err, results) {
-
-      console.log(response)
-      res.render('index', { 'claimant': response })
-
-
-      console.log(results)
-    })
+    console.log(results)
+    res.render('index', { 'claimants': JSON.stringify(results) })
+  })
 
 })
-
 
 // Example routes - feel free to delete these
 
 // Passing data into a page
 
 router.get('/examples/template-data', function (req, res) {
-  res.render('examples/template-data', {'name': 'Foo'})
+  res.render('examples/template-data', { 'name': 'Foo' })
 })
 
 // Branching
