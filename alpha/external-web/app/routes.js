@@ -34,32 +34,35 @@ module.exports = router
 
 // TODO: Split out the elements here such that only the route is defined in this file.
 
-// Connect to a local Redis database.
-var redis = require('redis');
-var client = redis.createClient();
+// Connect to a local Mongo DB
+var MongoClient = require('mongodb').MongoClient
+var db
 
-// TODO: Error checking. Is the database there.
-
-client.on('connect', function () {
-  console.log('Connected to database!');
-});
+MongoClient.connect('mongodb://localhost:27017/apvs', (err, database) => {
+  if (!err) {
+    db = database
+    console.log('Connected to MongoDB')
+  }
+})
 
 // Route to save a claimant to the system.
 router.post('/application_form', function (req, res) {
-  console.log(req.body);
+  console.log(req.body)
   // Render something.
 
-  var firstName = req.body.first_name;
-  var lastName = req.body.last_name;
-
   // Test save of a claimant.
-  client.hmset('claimant', {
-    'first_name': firstName,
-    'last_name': lastName
+  db.collection('claimants').save(req.body, (err, result) => {
+    if (!err) {
+      res.render('add_user_success')
+    }
+  })
+})
+
+router.get('/list-users', function (req, res) {
+
+  db.collection('claimants').find().toArray((err, results) => {
+    console.log(results);
   });
 
-  res.render('add_user_success');
-
-});
-
-
+  res.render('examples/template-data', { 'name': 'Foo' })
+})

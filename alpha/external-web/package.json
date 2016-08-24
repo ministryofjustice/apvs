@@ -33,10 +33,10 @@
     "grunt-sync": "^0.5.1",
     "hogan.js": "3.0.2",
     "minimist": "0.0.8",
+    "mongo": "^0.1.0",
     "portscanner": "^1.0.0",
     "prompt": "^0.2.14",
     "readdir": "0.0.6",
-    "redis": "^2.6.2",
     "serve-favicon": "2.3.0",
     "standard": "^7.1.2"
   }
