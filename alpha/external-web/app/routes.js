@@ -62,12 +62,3 @@ router.post('/application_form', function (req, res) {
   });
 
 })
-
-router.get('/list-users', function (req, res) {
-
-  db.collection('claimants').find().toArray(function (err, results) {
-    console.log(results);
-  });
-
-  res.render('examples/template-data', { 'name': 'Foo' })
-})

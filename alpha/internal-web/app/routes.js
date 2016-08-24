@@ -1,22 +1,32 @@
 var express = require('express')
 var router = express.Router()
 
-var redis = require('redis')
-var client = redis.createClient()
+// Connect to a local Mongo DB
+var MongoClient = require('mongodb').MongoClient
+var db
 
-client.on('connect', function () {
-  console.log('Connected to database!')
+MongoClient.connect('mongodb://localhost:27017/apvs', function(err, database) {
+  if (!err) {
+    db = database
+    console.log('Connected to MongoDB')
+  }
 })
 
-router.get('/', function (req, res) {
-  client.hgetall('claimant', function (err, response) {
-    if (err) {
-      console.log('Error: ' + err)
-    }
-    console.log(response)
-    res.render('index', { 'claimant': response })
-  })
+// Get the list of claimants from the database.
+router.get('/list-users', function (req, res) {
+
+
+    db.collection('claimants').find().toArray(function (err, results) {
+
+      console.log(response)
+      res.render('index', { 'claimant': response })
+
+
+      console.log(results)
+    })
+
 })
+
 
 // Example routes - feel free to delete these
 
