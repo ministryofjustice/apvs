@@ -1,21 +1,14 @@
 {% extends "layout.html" %}
 
 {% block page_title %}
-Assisted Prison Visit Service
+{% if serviceName %} {{ serviceName }} {% endif %}
 {% endblock %}
 
 {% block content %}
 
 <main id="content" role="main">
-    {% include "includes/phase_banner_alpha.html" %}
 
-    <div class="breadcrumbs">
-        <ol>
-            <li><a href="https://www.gov.uk">Home</a></li>
-            <li><a href="">Section</a></li>
-            <li>Subsection</li>
-        </ol>
-    </div>
+    {% include "includes/phase_banner_alpha.html" %}
 
     <div class="grid-row">
         <div class="column-two-thirds">
@@ -24,48 +17,77 @@ Assisted Prison Visit Service
                 {% if serviceName %} {{ serviceName }} {% endif %}
             </h1>
 
-            <p>Use this service to:</p>
+            <p>You may be able to get help with the cost of visiting a close relative or partner in prison if you’re
+                aged over 18, are on certain benefits or have a low income.</p>
+
+            <h3 class="heading-medium">Eligibility</h3>
+
+            <h4 class="heading-small">Relationship</h4>
+
+            <p>You may be eligible if you are the prisoner’s:</p>
+            <ul class="list list-bullet">
+                <li><a href="eligibility.html#close-relative">Close relative</a></li>
+                <li><a href="eligibility.html#partner">Partner</a></li>
+                <li><a href="eligibility.html#sole-visitor">Sole visitor</a></li>
+                <li><a href="eligibility.html#escort-to-a-qualifying-child-or-young-person">Escort to a qualifying child
+                    or young person</a></li>
+                <li><a href="eligibility.html#escort-to-a-qualifying-adult">Escort to a qualifying adult</a></li>
+            </ul>
+
+            <h4 class="heading-small">Income/Benefits</h4>
+
+            <p>You may be eligible if you have a relationship with the prisoner (as defined above), and if you (or
+                someone on your behalf) hold a <a href="eligibility.html#health-certificate">Health Certificate (2 or
+                    3)</a>, or are in receipt of one of the following benefits:</p>
 
             <ul class="list list-bullet">
-                <li>do something</li>
-                <li>update your name, address or other details</li>
-                <li>you need to do this in order to do something else</li>
-            </uL>
+                <li><a href="eligibility.html#income-support">Income Support</a></li>
+                <li><a href="eligibility.html#income-support">Income-based Jobseeker’s Allowance</a></li>
+                <li><a href="eligibility.html#income-support">Employment and Support Allowance</a></li>
+                <li><a href="eligibility.html#universal-credit">Universal Credit</a> (and you earn less than £6,000 a
+                    year)
+                </li>
+                <li><a href="eligibility.html#tax-credits">Tax credits</a></li>
+                <li><a href="eligibility.html#pension-credit">Pension Credit</a></li>
+            </ul>
 
-            <p>Registering takes around 5 minutes.</p>
+            <p>Check your <a href="check-eligibility.html">eligibility for assisted prison visits</a> before you apply.
+            </p>
+
+            <p>You might not need to answer all the questions, depending on your circumstances. </p>
 
             <p>
                 <a class="button button-start" href="application_form.html" role="button">Start now</a>
             </p>
 
             <h2 class="heading-medium">Before you start</h2>
-
+            <p>You’ll need to have:</p>
             <ul class="list list-bullet">
-                <li>do something</li>
-                <li>update your name, address or other details</li>
-                <li>you need to do this in order to do something else</li>
+                <li>Your National Insurance number</li>
+                <li>Prison number of the prison where the prisoner related to you is held</li>
+                <li>A valid award notice (if claiming Universal credit, child tax credit, pension credit or health
+                    certificate)
+                </li>
+                <li>Proof of parentage - eg Long birth certificate (if acting as an escort for the prisoner's child)
+                </li>
+                <li>Letter from the doctor (if acting as a medical escort for another adult who qualifies for
+                    assistance)
+                </li>
             </uL>
 
-        </div>
-        <div class="column-third">
+            <p>You might also have to give details about ....</p>
 
-            <aside class="govuk-related-items" role="complementary">
-                <h2 class="heading-medium" id="subsection-title">Subsection</h2>
-                <nav role="navigation" aria-labelledby="subsection-title">
-                    <ul class="font-xsmall">
-                        <li><a href="#">Related link</a></li>
-                        <li><a href="#">Related link</a></li>
-                        <li><a href="#" class="bold-xsmall">More <span class="visuallyhidden">in Subsection</span></a>
-                        </li>
-                    </ul>
-                </nav>
-            </aside>
+            <h2 class="heading-medium">Other ways to apply</h2>
+
+            <p>You can apply by filling in a paper form instead.</p>
+
+            <p>You will need to complete the paper form and send it to the address on the form to get help with travel
+                costs.</p>
 
         </div>
+
     </div>
 
 </main>
 
 {% endblock %}
-
-

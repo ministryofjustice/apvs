@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+{% if serviceName %} {{ serviceName }} {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+    {% include "includes/phase_banner_alpha.html" %}
+
+    <div class="breadcrumbs">
+        <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="">Check Eligibility</a></li>
+        </ol>
+    </div>
+
+    <div class="grid-row">
+        <div class="column-two-thirds">
+
+
+            <h2 class="heading-large">
+                Please select your relationship with the prisoner you are vistitng
+            </h2>
+
+            <form action="eligibility-yes" method="get" class="form">
+                <div class="form-group">
+                    <fieldset>
+
+                        <label for="Close relative" class="block-label">
+                            <input type="radio" name="Close relative" value="Close relative" id="Close relative">
+                            Close relative
+                        </label>
+
+                        <label for="Partner" class="block-label">
+                            <input type="radio" name="Partner" value="Partner" id="Partner">
+                            Partner
+                        </label>
+
+                        <label for="Sole visitor" class="block-label">
+                            <input type="radio" name="Sole visitor" value="Sole visitor" id="Sole visitor">
+                            Sole visitor
+                        </label>
+
+                        <label for="Escort to a qualifying child or young person" class="block-label">
+                            <input type="radio" name="Escort to a qualifying child or young person"
+                                   value="Escort to a qualifying child or young person"
+                                   id="Escort to a qualifying child or young person">
+                            Escort to a qualifying child or young person
+                        </label>
+
+                        <label for="Escort to a qualifying adult" class="block-label">
+                            <input type="radio" name="Escort to a qualifying adult" value="Escort to a qualifying adult"
+                                   id="Escort to a qualifying adult">
+                            Escort to a qualifying adult
+                        </label>
+
+                        <label for="Escort to a qualifying adult" class="block-label">
+                            <input type="radio" name="Escort to a qualifying adult" value="Escort to a qualifying adult"
+                                   id="Escort to a qualifying adult">
+                            Other
+                        </label>
+
+                    </fieldset>
+                </div>
+
+
+                <div class="form-group"><input type="submit" name="commit" value="Continue" class="button"></div>
+            </form>
+
+        </div>
+
+</main>
+
+{% endblock %}
+
+
