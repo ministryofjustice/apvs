@@ -33,7 +33,7 @@
     "grunt-sync": "^0.5.1",
     "hogan.js": "3.0.2",
     "minimist": "0.0.8",
-    "mongo": "^0.1.0",
+    "mongodb": "^2.2.8",
     "portscanner": "^1.0.0",
     "prompt": "^0.2.14",
     "readdir": "0.0.6",
