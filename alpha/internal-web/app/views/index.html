@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+Assisted Prison Visit Service (Internal)
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+    {% include "includes/phase_banner_alpha.html" %}
+
+    <div class="breadcrumbs">
+        <ol>
+            <li><a href="https://www.gov.uk">Home</a></li>
+            <li><a href="">Section</a></li>
+            <li>Subsection</li>
+        </ol>
+    </div>
+
+    <div class="grid-row">
+        <div class="column-two-thirds">
+
+            <h1 class="heading-xlarge">
+                {% if serviceName %} {{ serviceName }} {% endif %}
+            </h1>
+
+            <h2>LIST OF CLAIMANTS</h2>
+            {{ claimants }}
+
+        </div>
+
+    </div>
+
+</main>
+
+{% endblock %}
+
+

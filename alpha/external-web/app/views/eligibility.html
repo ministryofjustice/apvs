@@ -1,0 +1,210 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+{% if serviceName %} {{ serviceName }} {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+    {% include "includes/phase_banner_alpha.html" %}
+
+    <div class="breadcrumbs">
+        <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="">Eligibility Information</a></li>
+        </ol>
+    </div>
+
+    <div class="grid-row">
+        <div class="column-two-thirds">
+
+
+            <h2 class="heading-large">Eligibility</h2>
+
+            <h3 class="heading-medium" id="close-relative">Close Relative</h3>
+
+            <p>Close relative means: wife, husband, civil partner, mother, father, sister, brother, son,
+                daughter, grandparent or adoptive step/half brother/sister, stepchild or 􏰛􏰃stepparent
+                or someone who was in loco parentis for a significant period during the prisoner’s
+                childhood.</p>
+
+            <p>The minimum age for applying for an assisted prison visit is 18 years (16 years
+                􏰖􏰛􏰂􏰃􏰞􏰋􏰊􏰃􏰖􏰓􏰓􏰗􏰟􏰆􏰌􏰛􏰃􏰞􏰋􏰊􏰃􏰖􏰌􏰃􏰖􏰅􏰅􏰆􏰅􏰇􏰂􏰈􏰃􏰓􏰊􏰆􏰅􏰋􏰌􏰃􏰔􏰆􏰅􏰆􏰇􏰃􏰆􏰅􏰃􏰡􏰢􏰃􏰟􏰂􏰖􏰊􏰅􏰃􏰑􏰡􏰣􏰃􏰟􏰂when
+                visiting a prison in Scotland) but this restriction may be waived where the governor or director
+                gives permission for a qualifying close relative or partner
+                􏰋􏰊􏰃􏰅􏰋􏰗􏰂􏰃􏰔􏰆􏰅􏰆􏰇􏰋􏰊􏰃􏰖􏰛􏰂􏰈􏰃􏰡􏰣􏰃􏰋􏰊􏰃􏰡􏰤􏰃􏰟􏰂􏰖􏰊􏰅􏰃􏰇􏰋􏰃􏰔􏰆􏰅􏰆􏰇􏰃􏰝􏰌􏰖􏰏􏰏􏰋􏰐􏰓􏰖or
+                sole visitor aged 16 or 17 years to visit unaccompanied.</p>
+
+            <h3 class="heading-medium" id="partner">Partner</h3>
+
+            <p>A partner means a person with whom the prisoner was living, as a couple, in an established
+                relationship, immediately before the period of remand or imprisonment was imposed. </p>
+
+            <p>The minimum age for applying for an assisted prison visit is 18 years (16 years
+                􏰀􏰁􏰂􏰃􏰐􏰆􏰌􏰆􏰐􏰝􏰐􏰃􏰖􏰛􏰂􏰃􏰞􏰋􏰊􏰃􏰖􏰓􏰓􏰗􏰟􏰆􏰌􏰛􏰃􏰞􏰋􏰊􏰃􏰖􏰌􏰃􏰖􏰅􏰅􏰆􏰅􏰇􏰂􏰈􏰃􏰓􏰊􏰆􏰅􏰋􏰌􏰃􏰔􏰆􏰅􏰆􏰇􏰃􏰆􏰅􏰃􏰡􏰢􏰃􏰟􏰂􏰖􏰊􏰅􏰃􏰑􏰡􏰣􏰃􏰟􏰂when
+                visiting a prison in Scotland) but this restriction may be waived where the governor or director
+                gives permission for a qualifying partner
+                􏰋􏰊􏰃􏰅􏰋􏰗􏰂􏰃􏰔􏰆􏰅􏰆􏰇􏰋􏰊􏰃􏰖􏰛􏰂􏰈􏰃􏰡􏰣􏰃􏰋􏰊􏰃􏰡􏰤􏰃􏰟􏰂􏰖􏰊􏰅􏰃􏰇􏰋􏰃􏰔􏰆􏰅􏰆􏰇􏰃􏰝􏰌􏰖􏰏􏰏􏰋􏰐􏰓􏰖􏰌􏰆􏰂􏰈􏰠􏰃aged
+                16 or 17 years to visit unaccompanied.</p>
+
+            <p>Any children living within the family unit are also eligible to receive assistance.</p>
+
+            <h3 class="heading-medium" id="sole-visitor">Sole visitor</h3>
+
+            <p>A sole visitor is someone who is not a close relative or partner but is the prisoner’s only
+                visitor during a four week period immediately before the date of
+                􏰇􏰁􏰂􏰃􏰕􏰊􏰅􏰇􏰃􏰖􏰅􏰅􏰆􏰅􏰇􏰂􏰈􏰃􏰔􏰆􏰅􏰆􏰇􏰠􏰃 the first assisted visit.</p>
+
+            <p>The minimum age for applying for an assisted prison visit is 18 years (16 years
+                􏰀􏰁􏰂􏰃􏰐􏰆􏰌􏰆􏰐􏰝􏰐􏰃􏰖􏰛􏰂􏰃􏰞􏰋􏰊􏰃􏰖􏰓􏰓􏰗􏰟􏰆􏰌􏰛􏰃􏰞􏰋􏰊􏰃􏰖􏰌􏰃􏰖􏰅􏰅􏰆􏰅􏰇􏰂􏰈􏰃􏰓􏰊􏰆􏰅􏰋􏰌􏰃􏰔􏰆􏰅􏰆􏰇􏰃􏰆􏰅􏰃􏰡􏰢􏰃􏰟􏰂􏰖􏰊􏰅􏰃􏰑􏰡􏰣􏰃􏰟􏰂when
+                visiting a prison in Scotland) but this restriction may be waived where the governor or director
+                gives permission for a qualifying sole visitor
+                􏰋􏰊􏰃􏰅􏰋􏰗􏰂􏰃􏰔􏰆􏰅􏰆􏰇􏰋􏰊􏰃􏰖􏰛􏰂􏰈􏰃􏰡􏰣􏰃􏰋􏰊􏰃􏰡􏰤􏰃􏰟􏰂􏰖􏰊􏰅􏰃􏰇􏰋􏰃􏰔􏰆􏰅􏰆􏰇􏰃􏰝􏰌􏰖􏰏􏰏􏰋􏰐􏰓􏰖􏰌􏰆􏰂􏰈􏰠􏰃aged
+                16 or 17 years to visit unaccompanied.</p>
+
+            <h3 class="heading-medium" id="escort-to-a-qualifying-child-or-young-person">Escort to a qualifying
+                child or young person</h3>
+
+            <p>There are three types of escort to a prisoner’s child/children:</p>
+            <ul class="list list-number">
+                <li><a href="">Prisoner’s spouse or partner</a></li>
+                <li><a href="">Carer</a></li>
+                <li><a href="">A person authorised by either of the above to escort the child / children to the
+                    prison on their behalf</a></li>
+            </ul>
+
+            <h4 class="heading-small">Prisoner’s spouse or partner</h4>
+            <p>Qualifying children should be included on your application form but you can
+                arrange for someone else to take the qualifying child/children to the prison on
+                your behalf. They apply for assistance as an escort. However, you must write
+                to us to authorise the escort by providing information, as shown below, and evidence to confirm
+                the prisoner is the mother/father of the child/children being escorted to the prison.</p>
+
+            <p>See below*</p>
+            <ul class="list list-bullet">
+                <li>your name, address and National Insurance Number</li>
+                <li>name and date of birth of your child/children being escorted to the prison and their
+                    relationship to the prisoner. See below*
+                </li>
+                <li>details of your income. If you are in receipt of Income Support or Income–based Job Seeker’s
+                    Allowance or Employment and Support Allowance (Income Related) we may need to contact the
+                    local office that issued the award. To give your permission, state the name and address of
+                    the local office
+                </li>
+                <li>name, prison number and location of mother/father in prison</li>
+                <li>name and address of escort.</li>
+            </ul>
+
+            <p>Unless you withdraw permission by writing to us, we will assume the named
+                escort is authorised to take your child/children on all claimed assisted prison
+                visits.</p>
+
+            <p>*One of the following is acceptable proof of parentage by confirming the surname of the
+                child/children is the same as the prisoner’s:
+            <ul class="list list-bullet">
+                <li>Original short birth certificate</li>
+                <li>Original long birth certificate</li>
+                <li>Original medical card</li>
+                <li>Child Benefit award notice</li>
+                <li>Official letter e.g. from a school, health centre etc</li>
+            </ul>
+
+            <p>If you are unable to send proof to confirm the prisoner is the father, you should contact your
+                local Register Office for advice on adding the father’s details to the birth record. Original
+                documentation from the Register Office, to confirm the birth record has been amended, must be
+                sent to us.</p>
+
+
+            <h4 class="heading-small">2.Carer</h4>
+            <p>If you do not qualify as a spouse or partner but are looking after the prisoner’s
+                child/children you may be able to claim assistance as an “escort”. You must
+                meet the qualifying rules on income. </p>
+
+            <p>Proof of parentage to confirm the prisoner is the mother or father of the escorted
+                child/children must be sent with the application form. See above.
+                If you decide to ask someone else to act as an escort you must comply with
+                all the requirements of “Prisoner’s spouse or partner”. Unless you withdraw
+                permission by writing to us, we will assume the named escort is authorised to
+                take your child/children on all claimed assisted prison visits.</p>
+
+            <p>The escort is required to complete an application form.</p>
+
+
+            <h4 class="heading-small">3. Authorised person</h4>
+            <p>Before any application can be assessed we require a letter of authority and
+                certain information as outlined above from the parent or partner or carer.
+                You do not need to meet the income qualifying rules.</p>
+
+
+            <h3 class="heading-medium" id="escort-to-a-qualifying-adult">Escort to a qualifying adult</h3>
+
+            <p>Adult visitors may qualify for an escort. See Section 6.1d.
+
+            <p>The escort must complete an application form and wherever possible it should
+                be sent to us at the same time as the visitors form.</p>
+
+            <p>A return journey between the home of the escort and qualifying visitor is payable
+                subject to a maximum rate.</p>
+
+            <p>Where a car journey is being claimed, the total mileage allowance will normally
+                be paid to the qualifying visitor unless advised otherwise. The volunteer driver
+                rate only applies if the escort isn’t going into the visit. </p>
+
+            <h3 class="heading-medium" id="income-support">Income Support/Income-based Jobseeker's
+                Allowance/Employment and Support Allowance (Income Related)</h3>
+
+            <p>We confirm with the Department for Work and Pensions which benefit you receive and carry out
+                regular checks. </p>
+
+
+            <h3 class="heading-medium" id="universal-credit">Universal Credit (and you earn less than £6,000 a
+                year)</h3>
+            <p>An original award notice must be sent to us when you first claim and you must send us a new award
+                notice every four months after that. An income limit applies.</p>
+
+            <h3 class="heading-medium" id="tax-credits">Working and Child Tax Credit</h3>
+            <p>To qualify you must be in receipt of one of the following:</p>
+
+
+            <ul class="list list-bullet">
+                <li>Child Tax Credit</li>
+                <li>The disability element in Working Tax Credit</li>
+                <li>Working Tax Credit with Child Tax Credit</li>
+            </ul>
+
+            <p>In each case the gross household income as shown on the tax credit award
+                notice must not exceed a published limit.</p>
+
+            <p>The original award notice must be sent to us when first applying and thereafter when a when a new
+                or amended award notice is issued.</p>
+
+
+            <h3 class="heading-medium" id="pension-credit">Pension Credit</h3>
+            <p>Recipients of Pension Credit are entitled to assisted prison visits subject to
+                meeting the relationship criteria.</p>
+
+            <p>The original award notice must be sent to us when first applying and thereafter when a when a new
+                or amended award notice is issued.</p>
+
+            <h3 class="heading-medium" id="health-certificate">Health Certificate (2 or 3)</h3>
+            The original certificate must be sent to us when first applying and thereafter when a when a new or
+            amended certificate is issued.
+
+            Assisted prison visits may be backdated up to three months prior to the commencement of the health
+            certificate, subject to meeting all other conditions.
+
+
+            The contribution shown on the HC3 certificate for travel to receive NHS treatment is deducted from
+            the assisted prison visit payment. The application form for a HC certificate is available from APVU.
+
+        </div>
+
+    </div>
+
+</main>
+
+{% endblock %}
+
+
