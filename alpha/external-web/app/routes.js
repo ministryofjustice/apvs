@@ -15,7 +15,10 @@ router.get('/', function (req, res) {
 var MongoClient = require('mongodb').MongoClient
 var db
 
-MongoClient.connect('mongodb://localhost:27017/apvs', function (err, database) {
+var MONGO_URL = 'mongodb://mongo:27017/apvs'
+// 'mongodb://localhost:27017/apvs'
+
+MongoClient.connect(MONGO_URL, function (err, database) {
   if (!err) {
     db = database
     console.log('Connected to MongoDB')
