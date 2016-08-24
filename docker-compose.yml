@@ -1,0 +1,23 @@
+# Brings together the two web application and the Mongo DB and runs each of them in linked Docker containers.
+version: '2'
+services:
+
+  # Build the external facing node application and expose it on port 3000.
+  node-external-apvs:
+    build: ./alpha/external-web
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+
+  # Build the internal facing node application and expose it on port 3001.
+  node-internal-apvs:
+    build: ./alpha/internal-web
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mongo
+
+  # Build a mongo contianer that will serve as the database for the internal and external node applications.
+  mongo:
+    image: mongo
