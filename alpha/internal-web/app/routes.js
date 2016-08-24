@@ -18,11 +18,10 @@ MongoClient.connect('mongodb://localhost:27017/apvs', function (err, database) {
 
 // Render the landing page with the claimants currently stored in the database.
 router.get('/', function (req, res) {
-
   db.collection('claimants').find().toArray(function (err, results) {
-
-    console.log(results)
-    res.render('index', { 'claimants': JSON.stringify(results) })
+    if (!err) {
+      console.log(results)
+      res.render('index', { 'claimants': JSON.stringify(results) })
+    }
   })
-
 })
