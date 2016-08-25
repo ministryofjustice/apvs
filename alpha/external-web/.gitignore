@@ -8,3 +8,6 @@ lib/govuk_template.html
 govuk_modules
 node_modules/*
 .tmuxp.*
+
+# Ignores for APVS
+eligibility-uploads

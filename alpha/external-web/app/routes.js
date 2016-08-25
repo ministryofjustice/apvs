@@ -1,5 +1,8 @@
 var express = require('express')
 var router = express.Router()
+var multer = require('multer')
+
+var upload = multer({ dest: 'eligibility-uploads/' })
 
 module.exports = router
 
@@ -25,6 +28,14 @@ MongoClient.connect(MONGO_URL, function (err, database) {
   }
 })
 
+var addEligibilityDocumentMetadata = function (db, metadata, callback) {
+  db.collection('supporting-document').insertOne(metadata, function (err, result) {
+    if (!err) {
+      callback(result)
+    }
+  })
+}
+
 // Route to save a claimant to the system.
 router.post('/application_form', function (req, res) {
   // Test save of a claimant.
@@ -41,4 +52,36 @@ router.post('/application_form', function (req, res) {
       console.log(results)
     }
   })
+})
+
+router.get('/about-your-income', function (req, res) {
+  res.render('about-your-income')
+})
+
+router.post('/about-your-income', upload.single('evidence'), function (req, res, next) {
+  if (req.file) {
+    var metadata = {
+      eligibilityId: req.file.filename, // using filename guild for temp id
+      claimId: null,
+      originalFilename: req.file.originalname,
+      path: req.file.path
+    }
+
+    MongoClient.connect(MONGO_URL, function (err, db) {
+      if (!err) {
+        addEligibilityDocumentMetadata(db, metadata, function () {
+          console.log('Persisted file metadata')
+          db.close()
+        })
+      }
+    })
+  }
+
+  // TODO: validation
+
+  res.redirect('/application-submitted')
+})
+
+router.get('/application-submitted', function (req, res) {
+  res.render('application-submitted')
 })

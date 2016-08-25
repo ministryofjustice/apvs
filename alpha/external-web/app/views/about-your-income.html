@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+  About your income
+{% endblock %}
+
+{% block content %}
+<main id="content" role="main">
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <form action="/about-your-income" method="post" class="form" enctype="multipart/form-data">
+
+        <h1 class="heading-xlarge">
+          About your income
+        </h1>
+
+        <p>
+          Enter details about the benefits which you claim for or a person claims for you.
+        </p>
+
+        <h2 class="heading-large">
+          What benefits do you receive?
+        </h2>
+
+        <!-- Benefits -->
+        <div class="form-group">
+          <fieldset>
+
+            <legend class="visuallyhidden">
+              What benefits do you receive?
+            </legend>
+
+            <label for="income-support" class="block-label">
+              <input id="income-support" type="checkbox" name="income-support" value="income-support">
+              <span class="heading-small">Income support</span>
+            </label>
+
+            <label for="jobseekers-allowance" class="block-label">
+              <input id="jobseekers-allowance" type="checkbox" name="jobseekers-allowance" value="jobseekers-allowance">
+              <span class="heading-small">Jobseekers allowance (income based)</span>
+            </label>
+
+            <label for="universal-credit" class="block-label">
+              <input id="universal-credit" type="checkbox" name="universal-credit" value="universal-credit">
+              <span class="heading-small">Universal Credit</span><br>
+              You must submit a photograph of the original Universal Credit award notice in the evidence field below
+            </label>
+
+          </fieldset>
+        </div>
+
+        <!-- Evidence -->
+        <div class="form-group">
+          <label class="form-label-bold" for="evidence">
+            Evidence for benefits
+            <span class="form-hint">
+              Submit a photograph of the document relating to your benefit.
+            </span>
+          </label>
+          <input id="evidence" type="file" name="evidence">
+        </div>
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Continue">
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</main>
+{% endblock %}
