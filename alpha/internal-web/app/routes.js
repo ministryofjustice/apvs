@@ -21,11 +21,14 @@ router.get('/', function (req, res) {
   res.render('index')
 })
 
+// Return json object containing array of claimants
 router.get('/claimants', function (req, res) {
   db.collection('claimants').find().toArray(function (err, results) {
     if (!err) {
       console.log(results)
-      res.json(results)
+      // 'data' property needed for DataTable used to display claimants
+      var response = { data: results }
+      res.json(response)
     }
   })
 })

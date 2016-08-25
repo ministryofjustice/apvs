@@ -99,21 +99,6 @@ function ShowHideContent () {
   }
 }
 
-var dataSet = [
-  [
-    'Tiger',
-    'Nixon'
-  ],
-  [
-    'Garrett',
-    'Winters'
-  ],
-  [
-    'Ashton',
-    'Cox'
-  ]
-]
-
 $(document).ready(function () {
   // Use GOV.UK selection-buttons.js to set selected
   // and focused states for block labels
@@ -126,12 +111,20 @@ $(document).ready(function () {
   toggleContent.showHideRadioToggledContent()
   toggleContent.showHideCheckboxToggledContent()
 
-  // Initialise datatable used for dispaying list of claimants
-  $('#claimants-table').dataTable({
-    data: dataSet,
+  var dataUrl = 'http://localhost:3001/claimants'
+  $('#claimants-table').DataTable({
+    ajax: dataUrl,
     columns: [
-      { title: 'First Name' },
-      { title: 'Last Name' }
+      { 'data': '_id' },
+      { 'data': 'first_name' },
+      { 'data': 'last_name' }
+    ],
+    columnDefs: [
+      {
+        'targets': [ 0 ],
+        'visible': false,
+        'searchable': false
+      }
     ]
   })
 })
