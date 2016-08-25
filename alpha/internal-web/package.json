@@ -1,6 +1,6 @@
 {
-  "name": "express-prototype",
-  "description": "GOVUK prototyping app in Express",
+  "name": "APVS_Internal",
+  "description": "APVS internal facing prototype.",
   "version": "3.0.0",
   "private": true,
   "engines": {
