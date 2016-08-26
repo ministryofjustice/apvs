@@ -5,7 +5,7 @@
 var client = require('mongodb')
 exports.client = client
 
-client.connect('mongodb://localhost:27017/apvs', function (error, database) {
+client.connect('mongodb://mongo:27017/apvs', function (error, database) {
   if (!error) {
     exports.db = database
     console.log('Successfully connected to MongoDB')

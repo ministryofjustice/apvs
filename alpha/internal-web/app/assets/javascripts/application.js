@@ -112,5 +112,20 @@ $(document).ready(function () {
   toggleContent.showHideCheckboxToggledContent()
 
   // Initialise datatable used for dispaying list of claimants
-  $('#claimants-table').DataTable()
+  var dataUrl = 'http://localhost:3001/claimants'
+  $('#claimants-table').DataTable({
+    ajax: dataUrl,
+    columns: [
+      { 'data': '_id' },
+      { 'data': 'first-name' },
+      { 'data': 'last-name' }
+    ],
+    columnDefs: [
+      {
+        'targets': [ 0 ],
+        'visible': false,
+        'searchable': false
+      }
+    ]
+  })
 })
