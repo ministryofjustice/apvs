@@ -1,0 +1,114 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+APVS Application Form
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+    {% include "includes/phase_banner_alpha.html" %}
+    <div class="grid-row">
+        <div class="column-two-thirds">
+
+            <h1 class="heading-xlarge">
+                Apply for APVS
+            </h1>
+            <p>
+                Please enter the details of the claimant's escort.
+            </p>
+
+            <form action="escorts" method="post" class="form">
+                <div class="form-group">
+
+                    <label class="block-label">
+                        <input type="radio" name="escort-adult">
+                        I am escorting an adult
+                    </label>
+
+                    <label class="block-label">
+                        <input type="radio" name="escort-someones-children">
+                        Someone else's child/children
+                    </label>
+
+                    <!-- TODO: We should have a brnach here in that the form completed changes if the person is escorting their own children. -->
+
+                    <label class="block-label">
+                        <input type="radio" name="escort-my-children">
+                        My child/children
+                    </label>
+
+                    <br>
+
+                    <fieldset>
+
+                        <p>
+                            Give details of the <strong>adult</strong> you are escorting or details of the <strong>parent/carer</strong>
+                            of the child/children
+                            you are escorting.
+                        </p>
+
+                        <div class="form-group">
+                            <label class="form-label-bold" for="escort-name">Their Name</label>
+                            <input type="text" class="form-control" id="escort-name" name="escort-name">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label-bold" for="escort-address">Their Address</label>
+                            <input type="text" class="form-control" id="escort-address" name="escort-address">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label-bold" for="escort-postcode">Their Postcode</label>
+                            <input type="text" class="form-control" id="escort-postcode" name="escort-postcode">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label-bold" for="escort-NIN">Their National Insurance Number</label>
+                            <input type="text" class="form-control" id="escort-NIN" name="escort-NIN">
+                        </div>
+
+                        <div class="form-date">
+                            <p class="form-hint">For example, 31 3 1980</p>
+
+                            <div class="form-group form-group-day">
+                                <label for="escort-dob-day">Day</label>
+                                <input class="form-control" id="escort-dob-day" name="escort-dob-day" type="number"
+                                       pattern="[0-9]*"
+                                       min="0" max="31">
+                            </div>
+
+                            <div class="form-group form-group-month">
+                                <label for="escort-dob-month">Month</label>
+                                <input class="form-control" id="escort-dob-month" name="escort-dob-month" type="number"
+                                       pattern="[0-9]*" min="0" max="12">
+                            </div>
+
+                            <div class="form-group form-group-year">
+                                <label for="escort-dob-year">Year</label>
+                                <input class="form-control" id="escort-dob-year" name="escort-dob-year" type="number"
+                                       pattern="[0-9]*"
+                                       min="0" max="2014">
+                            </div>
+
+                        </div>
+
+                    </fieldset>
+
+                    <br>
+
+                    <div class="form-group">
+                        <input type="submit" name="commit" value="Continue" class="button">
+                    </div>
+
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</main>
+
+{% endblock %}
+
+

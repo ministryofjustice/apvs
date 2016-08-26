@@ -17,9 +17,7 @@ router.get('/', function (request, response) {
 router.get('/claimants', function (request, response) {
   mongo.db.collection('claimants').find().toArray(function (error, results) {
     if (!error) {
-      console.log('Returning all claimants:')
-      console.log(results)
-
+      console.log('Returning all claimants.')
       // Append 'data' to the JSON object. Required by the DataTable library.
       var claimants = { data: results }
       response.json(claimants)
