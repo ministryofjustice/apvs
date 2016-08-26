@@ -5,7 +5,7 @@ module.exports = function (env) {
    * gov.uk core filters by creating filter methods of the same name.
    * @type {Object}
    */
-  var filters = {};
+  var filters = {}
 
   /* ------------------------------------------------------------------
     add your methods to the filters obj below this comment block:
@@ -42,4 +42,4 @@ module.exports = function (env) {
     keep the following line to return your filters to the app
   ------------------------------------------------------------------ */
   return filters
-};
+}

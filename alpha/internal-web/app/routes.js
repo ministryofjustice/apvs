@@ -1,6 +1,6 @@
 var express = require('express')
 var router = express.Router()
-var mongo = require('./database');
+var mongo = require('./database')
 
 module.exports = router
 
@@ -31,8 +31,8 @@ router.get('/claimants', function (request, response) {
  * Retrieve a single claimant by their claimant ID.
  */
 router.get('/claimant/:claimant_id', function (request, response) {
-  var id = new mongo.client.ObjectID(request.params.claimant_id);
-  console.log('Retrieving claimant with ID: ' + id);
+  var id = new mongo.client.ObjectID(request.params.claimant_id)
+  console.log('Retrieving claimant with ID: ' + id)
 
   mongo.db.collection('claimants').find({ _id: id }).toArray(function (error, results) {
     if (!error) {
