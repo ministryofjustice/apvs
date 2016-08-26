@@ -27,3 +27,5 @@ services:
   # Build a mongo contianer that will serve as the database for the internal and external node applications.
   mongo:
     image: mongo
+    ports:
+      - "27017:27017"

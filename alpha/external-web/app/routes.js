@@ -31,7 +31,7 @@ router.get('/application-submitted', function (request, response) {
 /**
  * Save a single claimant to the system.
  */
-router.post('/application-form', function (request, response) {
+router.post('/about-you', function (request, response) {
   mongo.db.collection('claimants').insertOne(request.body, function (error, result) {
     if (!error) {
       response.render('add-user-success')
