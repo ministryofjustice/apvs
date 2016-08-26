@@ -24,73 +24,118 @@ APVS Application Form
             </p>
 
             <form action="relationship" method="post" class="form">
+
                 <div class="form-group">
+
                     <fieldset>
-                        <label for="nationality_other" class="block-label" data-target="example_nationality_other">
-                        <input type="radio" name="relationship" value="Wales" id="nationality_other">
-                        Close Relative
+
+                        <label for="close-relative" class="block-label" data-target="close-relative-relationship">
+                            <input type="radio" name="relationship" value="close-relative" id="close-relative">
+                            Close Relative
                         </label>
-                        <div class="panel panel-border-narrow js-hidden" id="example_nationality_other">
-                            <label for="nationality_other_countries" class="form-label">
-                            What is your relationship to the person you are visiting?
+
+                        <div class="panel panel-border-narrow js-hidden" id="close-relative-relationship">
+                            <label for="relationship-to-prisoner" class="form-label">
+                                What is your relationship to the person you are visiting?
                             </label>
-                            <input class="form-control" type="text" id="nationality_other_countries">
+                            <input class="form-control" type="text" name="relationship-to-prisoner"
+                                   id="relationship-to-prisoner">
                         </div>
+
                     </fieldset>
+
                     <fieldset>
-                        <label for="partner" class="block-label" data-target="example_partner">
-                        <input type="radio" name="relationship" value="Wales" id="partner">
-                        Partner 
+
+                        <label for="partner" class="block-label" data-target="partner-established-relationship">
+                            <input type="radio" name="relationship" value="partner" id="partner">
+                            Partner
                         </label>
-                        <div class="panel panel-border-narrow js-hidden" id="example_partner">
-                            <label for="nationality_other_countries" class="form-label">
-                            Were you living as a couple, in an established relationship, immediately before the period of prison custody was imposed
+
+                        <div class="panel panel-border-narrow js-hidden" id="partner-established-relationship">
+
+                            <label for="partner-established-relationship" class="form-label">
+                                Were you living as a couple, in an established relationship, immediately before the
+                                period of prison custody was imposed
                             </label>
+
                             <label class="block-label">
-                            <input type="radio" type="radio" name="question" value="Yes" id="Yes">
-                            Yes 
+                                <input type="radio" name="question" value="partner-established-relationship-yes"
+                                       id="partner-established-relationship-yes">
+                                Yes
                             </label>
+
                             <label class="block-label">
-                            <input type="radio" type="radio" name="question" value="No" id="No">
-                            No 
+                                <input type="radio" name="question" value="partner-established-relationship-no"
+                                       id="partner-established-relationship-yes-no">
+                                No
                             </label>
+
                         </div>
+
                     </fieldset>
-                    <label class="block-label">
-                    <input type="radio" name="relationship">
-                    Sole Visitor
+
+                    <label for="sole-visitor" class="block-label">
+                        <input type="radio" name="relationship" value="sole-visitor" id='sole-visitor'>
+                        Sole Visitor
                     </label>
+
                     <br>
                     <br>
                     <br>
                     <br>
-                    If you are a close relative, partner or a sole visitor, do you need someone to help you during the journey 
+
+                    If you are a close relative, partner or a sole visitor, do you need someone to help you during the
+                    journey
                     <fieldset>
+
                         <label class="block-label" data-target="example_help">
-                        <input type="radio" name="help" value="yes2" id="yes2">
-                        Yes
+                            <input type="radio" name="close-relative-yes" value="yes" id="close-relative-yes">
+                            Yes
                         </label>
+
                         <div class="panel panel-border-narrow js-hidden" id="example_help">
-                            <label for="nationality_other_countries" class="form-label">
-                            </label>
+
                             <label class="block-label">
-                            <input type="checkbox" type="radio" type="radio" name="question2" value="Yes" id="Yes">
-                            Medical
+                                <input type="radio" name="question2" value="Yes" id="close-relative-medical">
+                                Medical
                             </label>
+
                             <label class="block-label">
-                            <input type="checkbox" type="radio" type="radio" name="question2" value="No" id="No">
-                            Aged 75 years or over
+                                <input type="radio" name="question2" value="No" id="close-relative-75">
+                                Aged 75 years or over
                             </label>
+
                         </div>
+
                         <label class="block-label">
-                        <input type="radio" name="help" value="Wales" id="partner">
-                        No
+                            <input type="radio" name="close-relative-no" value="No" id="close-relative-no">
+                            No
                         </label>
+
                     </fieldset>
+
+                    <br>
+
+                    <!-- Escorts -->
+                    <fieldset>
+
+                        <legend>
+                            Are you escorting someone to the prison?
+                        </legend>
+
+                        <label for="escort" class="block-label">
+                            <input type="checkbox" id="escort" name="escort" value="Yes">
+                            Escort
+                        </label>
+
+                    </fieldset>
+
                 </div>
+
                 <div class="form-group"><input type="submit" name="commit" value="Continue" class="button"></div>
+
             </form>
-            
+
         </div>
     </div>
 </main>

@@ -1,6 +1,7 @@
 # Exclude all IntelliJ configuration files.
 **.idea/
 **.iml
+run-docker.sh
 
 # Exclude all VSCode configuration files.
 **.vscode/
