@@ -7,6 +7,9 @@ var upload = multer({ dest: 'eligibility-uploads/' })
 
 module.exports = router
 
+// Include custom route files.
+require('./relationship');
+
 /**
  * Render the landing page.
  */
