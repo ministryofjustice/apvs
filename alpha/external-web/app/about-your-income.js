@@ -1,7 +1,7 @@
 /**
  * This file defines all routes for the about-your-income page.
  */
-var router = require('./routes');
+var router = require('./routes')
 
 // Require file upload library.
 var multer = require('multer')

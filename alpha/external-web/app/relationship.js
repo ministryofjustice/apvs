@@ -1,7 +1,7 @@
 /**
  * This file defines all routes for the relationship page.
  */
-var router = require('./routes');
+var router = require('./routes')
 
 /**
  * Renders the relationship page.
@@ -16,5 +16,12 @@ router.get('/relationship', function (request, response) {
  */
 router.post('/relationship', function (request, response) {
   console.log('POST /relationship called.')
-  response.redirect('/about-your-income');
+
+  console.log('request: ' + request)
+  console.log('response: ' + response)
+
+  // Branch between showing the user the about-your-income or escorts form.
+  // if ()
+
+  response.redirect('/about-your-income')
 })

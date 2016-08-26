@@ -1,7 +1,7 @@
 /**
  * This file defines all routes for the escorts page.
  */
-var router = require('./routes');
+var router = require('./routes')
 
 /**
  * Renders the escorts page.
@@ -16,5 +16,5 @@ router.get('/escorts', function (request, response) {
  */
 router.post('/escorts', function (request, response) {
   console.log('POST /escorts called.')
-  response.redirect('/about-your-income');
+  response.redirect('/about-your-income')
 })
