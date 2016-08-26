@@ -13,15 +13,15 @@ router.get('/relationship', function (request, response) {
 
 /**
  * Save the contents of the relationship form.
+ * Redirect the user to either:
+ *  - escorts           :: If they have indicated they ARE escorting a visitor.
+ *  - about-your-income :: If the have indicated they are NOT escorting someone.
  */
 router.post('/relationship', function (request, response) {
-  console.log('POST /relationship called.')
-
-  console.log('request: ' + request)
-  console.log('response: ' + response)
-
-  // Branch between showing the user the about-your-income or escorts form.
-  // if ()
-
-  response.redirect('/about-your-income')
+  // Redirect the user based on the response to the escort question.
+  if (request.body.escort === 'Yes') {
+    response.redirect('/escorts')
+  } else {
+    response.redirect('/about-your-income')
+  }
 })
