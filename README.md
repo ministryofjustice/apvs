@@ -1,5 +1,7 @@
 # Assisted Prison Visits Scheme (APVS)
 
+[![Build Status](https://travis-ci.org/ministryofjustice/apvs.svg?branch=develop)](https://travis-ci.org/ministryofjustice/apvs?branch=develop)
+
 Prototype implementation of the Assisted Prison Visits Scheme alpha. A bare bones implementation of the system intended to assist with technical spikes.
 
 ## Requirements
