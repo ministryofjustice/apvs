@@ -12,7 +12,7 @@ var mongo = require('../database')
 router.post('/about-you', function (request, response) {
   mongo.db.collection('claimants').insertOne(request.body, function (error, result) {
     if (!error) {
-      response.render('relationship')
+      response.redirect('relationship')
     }
   })
 })
