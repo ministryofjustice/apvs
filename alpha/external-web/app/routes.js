@@ -9,6 +9,7 @@ module.exports = router
 
 // Include custom route files.
 require('./relationship');
+require('./escorts');
 
 /**
  * Render the landing page.
