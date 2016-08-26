@@ -110,4 +110,21 @@ $(document).ready(function () {
   var toggleContent = new ShowHideContent()
   toggleContent.showHideRadioToggledContent()
   toggleContent.showHideCheckboxToggledContent()
+
+  var dataUrl = 'http://localhost:3001/claimants'
+  $('#claimants-table').DataTable({
+    ajax: dataUrl,
+    columns: [
+      { 'data': '_id' },
+      { 'data': 'first_name' },
+      { 'data': 'last_name' }
+    ],
+    columnDefs: [
+      {
+        'targets': [ 0 ],
+        'visible': false,
+        'searchable': false
+      }
+    ]
+  })
 })

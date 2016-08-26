@@ -1,4 +1,5 @@
 var express = require('express')
+var mongo = require('./database')
 var router = express.Router()
 var multer = require('multer')
 
@@ -6,82 +7,59 @@ var upload = multer({ dest: 'eligibility-uploads/' })
 
 module.exports = router
 
-// Render the landing page.
-router.get('/', function (req, res) {
-  res.render('index')
+/**
+ * Render the landing page.
+ */
+router.get('/', function (request, response) {
+  response.render('index')
 })
 
-// TODO: Split out the elements here such that only the route is defined in this file.
-// TODO: Extract the database connection into another file.
-
-// Connect to a local Mongo DB
-var MongoClient = require('mongodb').MongoClient
-var db
-
-var MONGO_URL = 'mongodb://mongo:27017/apvs'
-// 'mongodb://localhost:27017/apvs'
-
-MongoClient.connect(MONGO_URL, function (err, database) {
-  if (!err) {
-    db = database
-    console.log('Connected to MongoDB')
-  }
+/**
+ * Render the about you income page.
+ */
+router.get('/about-your-income', function (request, response) {
+  response.render('about-your-income')
 })
 
-var addEligibilityDocumentMetadata = function (db, metadata, callback) {
-  db.collection('supporting-document').insertOne(metadata, function (err, result) {
-    if (!err) {
-      callback(result)
-    }
-  })
-}
+/**
+ * Render the application submitted page. Displayed after a successful file upload.
+ */
+router.get('/application-submitted', function (request, response) {
+  response.render('application-submitted')
+})
 
-// Route to save a claimant to the system.
-router.post('/about-you', function (req, res) {
-  // Test save of a claimant.
-  db.collection('claimants').save(req.body, function (err, result) {
-    if (!err) {
-      res.render('add_user_success')
-    }
-  })
-
-  // Print out the current stored claimants of the database.
-  db.collection('claimants').find().toArray(function (err, results) {
-    if (!err) {
-      console.log('Database contents:')
-      console.log(results)
+/**
+ * Save a single claimant to the system.
+ */
+router.post('/about-you', function (request, response) {
+  mongo.db.collection('claimants').insertOne(request.body, function (error, result) {
+    if (!error) {
+      response.render('add-user-success')
     }
   })
 })
 
-router.get('/about-your-income', function (req, res) {
-  res.render('about-your-income')
-})
-
-router.post('/about-your-income', upload.single('evidence'), function (req, res, next) {
-  if (req.file) {
+/**
+ * Upload a single file to the system and it's meta data to the database.
+ */
+router.post('/about-your-income', upload.single('evidence'), function (request, response) {
+  if (request.file) {
     var metadata = {
-      eligibilityId: req.file.filename, // using filename guild for temp id
-      claimId: null,
-      originalFilename: req.file.originalname,
-      path: req.file.path
+      eligibilityId: request.file.filename, // using filename guild for temp id
+      claimantID: null, // TODO: This should tie to a real claimant id.
+      originalFilename: request.file.originalname,
+      path: request.file.path
     }
 
-    MongoClient.connect(MONGO_URL, function (err, db) {
-      if (!err) {
-        addEligibilityDocumentMetadata(db, metadata, function () {
-          console.log('Persisted file metadata')
-          db.close()
-        })
+    // Save the uploaded files meta data to the database.
+    mongo.db.collection('supporting-document').insertOne(metadata, function (error, result) {
+      if (!error) {
+        console.log('Successfully saved file meta data.')
       }
     })
   }
 
   // TODO: validation
 
-  res.redirect('/application-submitted')
-})
-
-router.get('/application-submitted', function (req, res) {
-  res.render('application-submitted')
+  response.redirect('/application-submitted')
 })
