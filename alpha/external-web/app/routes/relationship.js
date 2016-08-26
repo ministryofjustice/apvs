@@ -1,7 +1,7 @@
 /**
  * This file defines all routes for the relationship page.
  */
-var router = require('./routes')
+var router = require('../routes')
 
 /**
  * Renders the relationship page.

@@ -1,7 +1,7 @@
 /**
  * This file defines all routes for the escorts page.
  */
-var router = require('./routes')
+var router = require('../routes')
 
 /**
  * Renders the escorts page.
