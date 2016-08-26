@@ -1,0 +1,100 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+APVS Application Form
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+    {% include "includes/phase_banner_alpha.html" %}
+    <div class="grid-row">
+        <div class="column-two-thirds">
+
+            <h1 class="heading-xlarge">
+                Apply for APVS
+            </h1>
+            <p>
+                This form lets you apply for the Assisted Prison Visits Scheme.
+            </p>
+
+            <p>
+                You may be eligible to receive support for costs associated with visiting a relative or friend in
+                prison.
+            </p>
+
+            <form action="relationship" method="post" class="form">
+                <div class="form-group">
+                    <fieldset>
+                        <label for="nationality_other" class="block-label" data-target="example_nationality_other">
+                        <input type="radio" name="relationship" value="Wales" id="nationality_other">
+                        Close Relative
+                        </label>
+                        <div class="panel panel-border-narrow js-hidden" id="example_nationality_other">
+                            <label for="nationality_other_countries" class="form-label">
+                            What is your relationship to the person you are visiting?
+                            </label>
+                            <input class="form-control" type="text" id="nationality_other_countries">
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label for="partner" class="block-label" data-target="example_partner">
+                        <input type="radio" name="relationship" value="Wales" id="partner">
+                        Partner 
+                        </label>
+                        <div class="panel panel-border-narrow js-hidden" id="example_partner">
+                            <label for="nationality_other_countries" class="form-label">
+                            Were you living as a couple, in an established relationship, immediately before the period of prison custody was imposed
+                            </label>
+                            <label class="block-label">
+                            <input type="radio" type="radio" name="question" value="Yes" id="Yes">
+                            Yes 
+                            </label>
+                            <label class="block-label">
+                            <input type="radio" type="radio" name="question" value="No" id="No">
+                            No 
+                            </label>
+                        </div>
+                    </fieldset>
+                    <label class="block-label">
+                    <input type="radio" name="relationship">
+                    Sole Visitor
+                    </label>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    If you are a close relative, partner or a sole visitor, do you need someone to help you during the journey 
+                    <fieldset>
+                        <label class="block-label" data-target="example_help">
+                        <input type="radio" name="help" value="yes2" id="yes2">
+                        Yes
+                        </label>
+                        <div class="panel panel-border-narrow js-hidden" id="example_help">
+                            <label for="nationality_other_countries" class="form-label">
+                            </label>
+                            <label class="block-label">
+                            <input type="checkbox" type="radio" type="radio" name="question2" value="Yes" id="Yes">
+                            Medical
+                            </label>
+                            <label class="block-label">
+                            <input type="checkbox" type="radio" type="radio" name="question2" value="No" id="No">
+                            Aged 75 years or over
+                            </label>
+                        </div>
+                        <label class="block-label">
+                        <input type="radio" name="help" value="Wales" id="partner">
+                        No
+                        </label>
+                    </fieldset>
+                </div>
+                <div class="form-group"><input type="submit" name="commit" value="Continue" class="button"></div>
+            </form>
+            
+        </div>
+    </div>
+</main>
+
+{% endblock %}
+
+

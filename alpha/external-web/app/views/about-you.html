@@ -23,21 +23,21 @@ APVS Application Form
                 prison.
             </p>
 
-            <form action="apply-2" method="get" class="form">
+            <form action="about-you/" method="post" class="form">
                 <div class="form-group">
-                    <label class="form-label-bold" for="full-name">Title</label>
+                    <label class="form-label-bold" for="title">Title</label>
                     <p class="form-hint">(Mr/Mrs/Miss/Ms)</p>
-                    <input type="text" class="form-control" id="full-name">
+                    <input type="text" class="form-control" id="title" name="title">
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label-bold" for="full-name">First name</label>
-                    <input type="text" class="form-control" id="full-name">
+                    <label class="form-label-bold" for="first-name">First name</label>
+                    <input type="text" class="form-control" id="first-name" name="first-name">
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label-bold" for="full-name">Last name</label>
-                    <input type="text" class="form-control" id="full-name">
+                    <label class="form-label-bold" for="last-name">Last name</label>
+                    <input type="text" class="form-control" id="last-name" name="last-name">
                 </div>
 
                 <div class="form-group">
@@ -49,17 +49,17 @@ APVS Application Form
 
                         <div class="form-group form-group-day">
                             <label for="dob-day">Day</label>
-                            <input class="form-control" id="dob-day" type="number" pattern="[0-9]*" min="0" max="31">
+                            <input class="form-control" id="dob-day" name="dob-day" type="number" pattern="[0-9]*" min="0" max="31">
                         </div>
 
                         <div class="form-group form-group-month">
                             <label for="dob-month">Month</label>
-                            <input class="form-control" id="dob-month" type="number" pattern="[0-9]*" min="0" max="12">
+                            <input class="form-control" id="dob-month" name="dob-month" type="number" pattern="[0-9]*" min="0" max="12">
                         </div>
 
                         <div class="form-group form-group-year">
                             <label for="dob-year">Year</label>
-                            <input class="form-control" id="dob-year" type="number" pattern="[0-9]*" min="0" max="2014">
+                            <input class="form-control" id="dob-year" name="dob-year" type="number" pattern="[0-9]*" min="0" max="2014">
                         </div>
                     </div>
 
@@ -67,30 +67,28 @@ APVS Application Form
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label-bold" for="full-name">National Insurance</label>
-                    <input type="text" class="form-control" id="full-name">
+                    <label class="form-label-bold" for="national-insurance">National Insurance</label>
+                    <input type="text" class="form-control" id="national-insurance" name="national-insurance">
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label-bold" for="full-name">Home address</label>
-                    <input type="text" class="form-control" id="full-name"><br><br>
-                    <input type="text" class="form-control" id="full-name"><br><br>
-                    <input type="text" class="form-control" id="full-name">
+                    <label class="form-label-bold" for="address">Home address</label>
+                    <input type="text" class="form-control" id="address" name="address">
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label-bold" for="full-name">Post Code</label>
-                    <input type="text" class="form-control" id="full-name">
+                    <label class="form-label-bold" for="postcode">Post Code</label>
+                    <input type="text" class="form-control" id="postcode" name="postcode">
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label-bold" for="full-name">Email address</label>
-                    <input type="text" class="form-control" id="full-name">
+                    <label class="form-label-bold" for="email">Email address</label>
+                    <input type="text" class="form-control" id="email" name="email">
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label-bold" for="full-name">Phone Number</label>
-                    <input type="text" class="form-control" id="full-name">
+                    <label class="form-label-bold" for="phone-number">Phone Number</label>
+                    <input type="text" class="form-control" id="phone-number" name="phone-number">
                 </div>
 
                 <div class="form-group">

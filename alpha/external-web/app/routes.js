@@ -37,7 +37,7 @@ var addEligibilityDocumentMetadata = function (db, metadata, callback) {
 }
 
 // Route to save a claimant to the system.
-router.post('/application-form', function (req, res) {
+router.post('/about-you', function (req, res) {
   // Test save of a claimant.
   db.collection('claimants').save(req.body, function (err, result) {
     if (!err) {
