@@ -10,6 +10,7 @@ module.exports = router
 // Include custom route files.
 require('./relationship');
 require('./escorts');
+require('./application-submitted');
 
 /**
  * Render the landing page.
@@ -23,13 +24,6 @@ router.get('/', function (request, response) {
  */
 router.get('/about-your-income', function (request, response) {
   response.render('about-your-income')
-})
-
-/**
- * Render the application submitted page. Displayed after a successful file upload.
- */
-router.get('/application-submitted', function (request, response) {
-  response.render('application-submitted')
 })
 
 /**
