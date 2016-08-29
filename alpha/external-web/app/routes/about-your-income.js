@@ -58,7 +58,7 @@ router.post('/about-your-income/:claimant_id', upload.single('evidence'), functi
       }
     })
 
-    // Save the uploaded files meta data to the claimant.
+    // Save the claimants form selection.
     client.update(id, request.body, function (error, claimant) {
       if (!error) {
         console.log('Successfully updated claimant with id: ' + id)
