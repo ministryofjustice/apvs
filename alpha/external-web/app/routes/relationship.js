@@ -37,7 +37,6 @@ router.post('/relationship/:claimant_id', function (request, response) {
 
   // Update the claimants details.
   mongo.db.collection('claimants').updateOne({ _id: id }, { $set: request.body }, function (error, result) {
-    console.log(result)
     if (!error) {
       // Redirect the user based on the response to the escort question.
       if (request.body.escort === 'Yes') {
