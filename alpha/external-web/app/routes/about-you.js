@@ -3,11 +3,13 @@
  */
 var router = require('../routes')
 
-// TODO: Should be included in a controller file rather than by each routes file.
-var mongo = require('../database')
+// A client used to make database calls.
+var client = require('../eligibility-client')
 
 /**
  * Render the about you page.
+ *
+ * Example call: http://localhost:3000/about-you
  */
 router.get('/about-you', function (request, response) {
   console.log('GET /about-you called.')
@@ -20,24 +22,35 @@ router.get('/about-you', function (request, response) {
  * Example call: http://localhost:3000/about-you/57c3f1139e03be003bfac1aa
  */
 router.get('/about-you/:claimant_id', function (request, response) {
-  var id = new mongo.client.ObjectID(request.params.claimant_id)
+  var id = request.params.claimant_id
   console.log('GET /about-you/' + id + ' called.')
 
-  mongo.db.collection('claimants').findOne({ _id: id }, function (error, claimant) {
+  client.get(id, function (error, claimant) {
     if (!error) {
+      console.log('Successfully retrieved claimant with id: ' + id)
       response.render('about-you', { 'claimant': claimant })
+    } else {
+      console.log('Failed to retrieve claimant with id: ' + id)
+      response.status(500).render('error', { message: error.message, error: error })
     }
   })
 })
 
 /**
  * Save a single claimant to the system.
+ *
+ * Example call: http://localhost:3000/about-you
  */
 router.post('/about-you', function (request, response) {
   console.log('POST /about-you called.')
-  mongo.db.collection('claimants').insertOne(request.body, function (error, result) {
+
+  client.save(request.body, function (error, claimant) {
     if (!error) {
+      console.log('Successfully saved new claimant: ' + claimant)
       response.redirect('/relationship/' + request.body._id)
+    } else {
+      console.log('Failed to save new claimant.')
+      response.status(500).render('error', { message: error.message, error: error })
     }
   })
 })
@@ -48,12 +61,16 @@ router.post('/about-you', function (request, response) {
  * Example call: http://localhost:3000/about-you/57c3f1139e03be003bfac1aa
  */
 router.post('/about-you/:claimant_id', function (request, response) {
-  var id = new mongo.client.ObjectID(request.params.claimant_id)
+  var id = request.params.claimant_id
   console.log('POST /about-you/' + id + ' called.')
 
-  mongo.db.collection('claimants').updateOne({ _id: id }, { $set: request.body }, function (error, result) {
+  client.update(id, request.body, function (error, claimant) {
     if (!error) {
+      console.log('Successfully updated claimant with id: ' + id + 'with details: ' + claimant)
       response.redirect('/relationship/' + id)
+    } else {
+      console.log('Failed to update claimant with id: ' + id + 'and details: ' + claimant)
+      response.status(500).render('error', { message: error.message, error: error })
     }
   })
 })
