@@ -34,7 +34,7 @@ module.exports = {
   },
 
   /**
-   *
+   * Update an existing claimant.
    * @param id The id of the claimant to update.
    * @param claimant The claimant details to use for the update.
    * @param callback A callback defining what to do after a successful and failed update.
