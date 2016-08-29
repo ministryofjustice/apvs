@@ -37,7 +37,7 @@ router.post('/about-you', function (request, response) {
   console.log('POST /about-you called.')
   mongo.db.collection('claimants').insertOne(request.body, function (error, result) {
     if (!error) {
-      response.redirect('/relationship')
+      response.redirect('/relationship/' + request.body._id)
     }
   })
 })
@@ -51,7 +51,7 @@ router.post('/about-you/:claimant_id', function (request, response) {
   var id = new mongo.client.ObjectID(request.params.claimant_id)
   console.log('POST /about-you/' + id + ' called.')
 
-  mongo.db.collection('claimants').updateOne({ _id: id }, request.body, function (error, result) {
+  mongo.db.collection('claimants').updateOne({ _id: id }, { $set: request.body }, function (error, result) {
     if (!error) {
       response.redirect('/relationship/' + id)
     }
