@@ -10,7 +10,7 @@
   <div class="grid-row">
     <div class="column-two-thirds">
 
-      <form action="/about-your-income" method="post" class="form" enctype="multipart/form-data">
+      <form action="/about-your-income/{{ claimant['_id'] }}" method="post" class="form" enctype="multipart/form-data">
 
         <h1 class="heading-xlarge">
           About your income
@@ -26,6 +26,8 @@
 
         <!-- Benefits -->
         <div class="form-group">
+
+          <!-- Benefits -->
           <fieldset>
 
             <legend class="visuallyhidden">
@@ -33,17 +35,20 @@
             </legend>
 
             <label for="income-support" class="block-label">
-              <input id="income-support" type="checkbox" name="income-support" value="income-support">
+              <input type="checkbox" id="income-support"  name="income-support" value="Yes"
+                     {% if claimant['income-support'] == 'Yes' %} checked {% endif %}>
               <span class="heading-small">Income support</span>
             </label>
 
             <label for="jobseekers-allowance" class="block-label">
-              <input id="jobseekers-allowance" type="checkbox" name="jobseekers-allowance" value="jobseekers-allowance">
+              <input type="checkbox" id="jobseekers-allowance" name="jobseekers-allowance" value="Yes"
+                     {% if claimant['jobseekers-allowance'] == 'Yes' %} checked {% endif %}>
               <span class="heading-small">Jobseekers allowance (income based)</span>
             </label>
 
             <label for="universal-credit" class="block-label">
-              <input id="universal-credit" type="checkbox" name="universal-credit" value="universal-credit">
+              <input type="checkbox" id="universal-credit" name="universal-credit" value="Yes"
+                     {% if claimant['universal-credit'] == 'Yes' %} checked {% endif %}>
               <span class="heading-small">Universal Credit</span><br>
               You must submit a photograph of the original Universal Credit award notice in the evidence field below
             </label>
