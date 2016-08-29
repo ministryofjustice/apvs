@@ -23,14 +23,16 @@ APVS Application Form
                 prison.
             </p>
 
-            <form action="relationship" method="post" class="form">
+            <form action="/relationship/{{ claimant['_id'] }}" method="post" class="form">
 
                 <div class="form-group">
 
+                    <!-- Relationship -->
                     <fieldset>
 
                         <label for="close-relative" class="block-label" data-target="close-relative-relationship">
-                            <input type="radio" name="relationship" value="close-relative" id="close-relative">
+                            <input type="radio" id="close-relative" name="relationship" value="Close Relative"
+                                   {% if claimant['relationship'] == 'Close Relative' %} checked {% endif %} >
                             Close Relative
                         </label>
 
@@ -38,16 +40,19 @@ APVS Application Form
                             <label for="relationship-to-prisoner" class="form-label">
                                 What is your relationship to the person you are visiting?
                             </label>
-                            <input class="form-control" type="text" name="relationship-to-prisoner"
-                                   id="relationship-to-prisoner">
+                            <input class="form-control" type="text" id="relationship-to-prisoner"
+                                   name="relationship-to-prisoner" value="{{ claimant['relationship-to-prisoner'] }}">
+
                         </div>
 
                     </fieldset>
 
+                    <!-- Assistance -->
                     <fieldset>
 
                         <label for="partner" class="block-label" data-target="partner-established-relationship">
-                            <input type="radio" name="relationship" value="partner" id="partner">
+                            <input type="radio" id="partner" name="relationship" value="Partner"
+                                   {% if claimant['relationship'] == 'Partner' %} checked {% endif %} >
                             Partner
                         </label>
 
@@ -59,14 +64,16 @@ APVS Application Form
                             </label>
 
                             <label class="block-label">
-                                <input type="radio" name="question" value="partner-established-relationship-yes"
-                                       id="partner-established-relationship-yes">
+                                <input type="radio" id="partner-established-relationship-yes"
+                                       name="established-relationship" value="Yes"
+                                       {% if claimant['established-relationship'] == 'Yes' %} checked {% endif %}>
                                 Yes
                             </label>
 
                             <label class="block-label">
-                                <input type="radio" name="question" value="partner-established-relationship-no"
-                                       id="partner-established-relationship-yes-no">
+                                <input type="radio" id="partner-established-relationship-no"
+                                       name="established-relationship" value="No"
+                                       {% if claimant['established-relationship'] == 'No' %} checked {% endif %}>
                                 No
                             </label>
 
@@ -75,7 +82,8 @@ APVS Application Form
                     </fieldset>
 
                     <label for="sole-visitor" class="block-label">
-                        <input type="radio" name="relationship" value="sole-visitor" id='sole-visitor'>
+                        <input type="radio" id='sole-visitor' name="relationship" value="Sole Visitor"
+                               {% if claimant['relationship'] == 'Sole Visitor' %} checked {% endif %} >
                         Sole Visitor
                     </label>
 
@@ -89,26 +97,30 @@ APVS Application Form
                     <fieldset>
 
                         <label class="block-label" data-target="example_help">
-                            <input type="radio" name="close-relative-yes" value="yes" id="close-relative-yes">
+                            <input type="radio" id="close-relative-yes" name="close-relative" value="Yes"
+                                   {% if claimant['close-relative'] == 'Yes' %} checked {% endif %}>
                             Yes
                         </label>
 
                         <div class="panel panel-border-narrow js-hidden" id="example_help">
 
                             <label class="block-label">
-                                <input type="radio" name="question2" value="Yes" id="close-relative-medical">
+                                <input type="radio" id="close-relative-medical" name="assistance-reason" value="Medical"
+                                       {% if claimant['assistance-reason'] == 'Medical' %} checked {% endif %}>
                                 Medical
                             </label>
 
                             <label class="block-label">
-                                <input type="radio" name="question2" value="No" id="close-relative-75">
+                                <input type="radio" id="close-relative-75" name="assistance-reason" value="75 Plus"
+                                       {% if claimant['assistance-reason'] == '75 Plus' %} checked {% endif %}>
                                 Aged 75 years or over
                             </label>
 
                         </div>
 
                         <label class="block-label">
-                            <input type="radio" name="close-relative-no" value="No" id="close-relative-no">
+                            <input type="radio" id="close-relative-no" name="close-relative" value="No"
+                                   {% if claimant['close-relative'] == 'No' %} checked {% endif %}>
                             No
                         </label>
 
@@ -123,9 +135,16 @@ APVS Application Form
                             Are you escorting someone to the prison?
                         </legend>
 
-                        <label for="escort" class="block-label">
-                            <input type="checkbox" id="escort" name="escort" value="Yes">
-                            Escort
+                        <label class="block-label">
+                            <input type="radio" id="escort-yes" name="escort" value="Yes"
+                                   {% if claimant['escort'] == 'Yes' %} checked {% endif %}>
+                            Yes
+                        </label>
+
+                        <label class="block-label">
+                            <input type="radio" id="escort-no" name="escort" value="No"
+                                   {% if claimant['escort'] == 'No' %} checked {% endif %}>
+                            No
                         </label>
 
                     </fieldset>
