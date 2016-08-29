@@ -18,28 +18,37 @@ APVS Application Form
                 Please enter the details of the claimant's escort.
             </p>
 
-            <form action="escorts" method="post" class="form">
+            <form action="/escorts/{{ claimant['_id'] }}" method="post" class="form">
                 <div class="form-group">
 
-                    <label class="block-label">
-                        <input type="radio" name="escort-adult">
-                        I am escorting an adult
-                    </label>
+                    <!-- Escort Type -->
+                    <fieldset>
 
-                    <label class="block-label">
-                        <input type="radio" name="escort-someones-children">
-                        Someone else's child/children
-                    </label>
+                        <label class="block-label">
+                            <input type="radio" id="escort-adult" name="escort" value="Adult Escort"
+                                   {% if claimant['escort'] == 'Adult Escort' %} checked {% endif %}>
+                            I am escorting an adult
+                        </label>
 
-                    <!-- TODO: We should have a brnach here in that the form completed changes if the person is escorting their own children. -->
+                        <label class="block-label">
+                            <input type="radio" id="escort-someones-children" name="escort" value="Someones Children"
+                                   {% if claimant['escort'] == 'Someones Children' %} checked {% endif %}>
+                            Someone else's child/children
+                        </label>
 
-                    <label class="block-label">
-                        <input type="radio" name="escort-my-children">
-                        My child/children
-                    </label>
+                        <!-- TODO: We should have a brnach here in that the form completed changes if the person is escorting their own children. -->
+
+                        <label class="block-label">
+                            <input type="radio" id="escort-my-children" name="escort" value="My Children"
+                                   {% if claimant['escort'] == 'My Children' %} checked {% endif %}>
+                            My child/children
+                        </label>
+
+                    </fieldset>
 
                     <br>
 
+                    <!-- Escorted Persons Details -->
                     <fieldset>
 
                         <p>
@@ -50,22 +59,26 @@ APVS Application Form
 
                         <div class="form-group">
                             <label class="form-label-bold" for="escort-name">Their Name</label>
-                            <input type="text" class="form-control" id="escort-name" name="escort-name">
+                            <input type="text" id="escort-name" class="form-control" name="escort-name"
+                                   value="{{ claimant['escort-name'] }}">
                         </div>
 
                         <div class="form-group">
                             <label class="form-label-bold" for="escort-address">Their Address</label>
-                            <input type="text" class="form-control" id="escort-address" name="escort-address">
+                            <input type="text" id="escort-address" class="form-control" name="escort-address"
+                                   value="{{ claimant['escort-address'] }}">
                         </div>
 
                         <div class="form-group">
                             <label class="form-label-bold" for="escort-postcode">Their Postcode</label>
-                            <input type="text" class="form-control" id="escort-postcode" name="escort-postcode">
+                            <input type="text" id="escort-postcode" class="form-control" name="escort-postcode"
+                                   value="{{ claimant['escort-postcode'] }}">
                         </div>
 
                         <div class="form-group">
                             <label class="form-label-bold" for="escort-NIN">Their National Insurance Number</label>
-                            <input type="text" class="form-control" id="escort-NIN" name="escort-NIN">
+                            <input type="text" id="escort-NIN" class="form-control" name="escort-NIN"
+                                   value="{{ claimant['escort-NIN'] }}">
                         </div>
 
                         <div class="form-date">
@@ -74,21 +87,19 @@ APVS Application Form
                             <div class="form-group form-group-day">
                                 <label for="escort-dob-day">Day</label>
                                 <input class="form-control" id="escort-dob-day" name="escort-dob-day" type="number"
-                                       pattern="[0-9]*"
-                                       min="0" max="31">
+                                       pattern="[0-9]*" min="0" max="31" value="{{ claimant['escort-dob-day'] }}">
                             </div>
 
                             <div class="form-group form-group-month">
                                 <label for="escort-dob-month">Month</label>
                                 <input class="form-control" id="escort-dob-month" name="escort-dob-month" type="number"
-                                       pattern="[0-9]*" min="0" max="12">
+                                       pattern="[0-9]*" min="0" max="12" value="{{ claimant['escort-dob-month'] }}">
                             </div>
 
                             <div class="form-group form-group-year">
                                 <label for="escort-dob-year">Year</label>
                                 <input class="form-control" id="escort-dob-year" name="escort-dob-year" type="number"
-                                       pattern="[0-9]*"
-                                       min="0" max="2014">
+                                       pattern="[0-9]*" min="0" max="2014" value="{{ claimant['escort-dob-year'] }}">
                             </div>
 
                         </div>
