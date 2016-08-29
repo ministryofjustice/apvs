@@ -3,7 +3,6 @@
  */
 var router = require('../routes')
 
-// TODO: Should be included bu a controller file.
 // Require file upload library.
 var multer = require('multer')
 var upload = multer({ dest: 'eligibility-uploads/' })
