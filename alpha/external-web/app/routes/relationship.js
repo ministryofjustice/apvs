@@ -40,7 +40,7 @@ router.post('/relationship/:claimant_id', function (request, response) {
 
   client.update(id, request.body, function (error, claimant) {
     if (!error) {
-      console.log('Successfully updated claimant with id: ' + id + 'with details: ' + claimant)
+      console.log('Successfully updated claimant with id: ' + id)
 
       // Redirect the user based on the response to the escort question.
       if (request.body.escort === 'Yes') {
@@ -49,7 +49,7 @@ router.post('/relationship/:claimant_id', function (request, response) {
         response.redirect('/about-your-income/' + id)
       }
     } else {
-      console.log('Failed to update claimant with id: ' + id + 'and details: ' + claimant)
+      console.log('Failed to update claimant with id: ' + id)
       response.status(500).render('error', { message: error.message, error: error })
     }
   })
