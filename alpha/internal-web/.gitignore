@@ -1,5 +1,7 @@
 # Ignores for Gov Prototype elements.
 .sass-cache
+typings
+typings.json
 .DS_Store
 .start.pid
 .port.tmp
