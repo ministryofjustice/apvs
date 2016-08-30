@@ -20,6 +20,10 @@
 
     </div>
 
+    {% block income_eligibility %}
+        {% include "claimant-income-check.html" %}
+    {% endblock %}
+
 </main>
 
 {% endblock %}
