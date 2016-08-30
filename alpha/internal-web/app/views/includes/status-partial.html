@@ -1,0 +1,53 @@
+<!-- This partial defines the status controlling elements of the claimant-details page. -->
+<div>
+
+    <h1 class="heading-large">Status</h1>
+
+    <!-- Display claimants current status. -->
+    <table>
+        <tr>
+            <th>Application Status</th>
+            <th>Income Verification Status</th>
+            <th>Relationship Verification Status</th>
+        </tr>
+        <tr>
+            <td>{{ claimant['applicationStatus'] }}</td>
+            <td>{{ claimant['incomeVerificationStatus'] }}</td>
+            <td>{{ claimant['relationshipVerificationStatus'] }}</td>
+        </tr>
+
+    </table>
+
+    <br>
+
+    <!-- Manually update eligibility status. -->
+    <div>
+
+        <!-- Approve Eligibility. -->
+        <div>
+            <form action="/claimant-details/{{ claimant['_id'] }}/approve" method="post">
+                <input type="submit" value="Approve" class="button"/>
+            </form>
+        </div>
+
+        <br>
+
+        <!-- Reject Eligibility. -->
+        <div>
+            <form action="/claimant-details/{{ claimant['_id'] }}/reject" method="post">
+                <input type="submit" value="Reject" class="button"/>
+            </form>
+        </div>
+
+        <br>
+
+        <!-- Escalate Eligibility. -->
+        <div>
+            <form action="/claimant-details/{{ claimant['_id'] }}/escalate" method="post">
+                <input type="submit" value="Escalate" class="button"/>
+            </form>
+        </div>
+
+    </div>
+
+</div>

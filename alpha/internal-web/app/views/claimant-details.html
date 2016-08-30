@@ -10,7 +10,8 @@
     {% include "includes/phase_banner_alpha.html" %}
 
     <div class="grid-row">
-        <div class="column-two-thirds">
+
+        <div>
 
             <p>First Name: {{ claimant['first-name'] }}</p>
             <p>Last Name: {{ claimant['last-name'] }}</p>
@@ -18,11 +19,16 @@
 
         </div>
 
-    </div>
+        <div>
+            {% include "claimant-income-check.html" %}
+        </div>
 
-    {% block income_eligibility %}
-        {% include "claimant-income-check.html" %}
-    {% endblock %}
+        <!-- Status -->
+        <div>
+            {% include 'includes/status-partial.html' %}
+        </div>
+
+    </div>
 
 </main>
 
