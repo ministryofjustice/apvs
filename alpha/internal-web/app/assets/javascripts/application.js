@@ -120,7 +120,8 @@ $(document).ready(function () {
     columns: [
       { 'data': '_id' },
       { 'data': 'first-name' },
-      { 'data': 'last-name' }
+      { 'data': 'last-name' },
+      { 'data': 'applicationStatus' }
     ],
 
     columnDefs: [

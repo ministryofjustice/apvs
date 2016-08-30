@@ -69,9 +69,9 @@ router.post('/about-your-income/:claimant_id', upload.single('evidence'), functi
 
     // Set statuses for claimant application.
     var statuses = {
-      applicationStatus: 'pending',
-      incomeVerificationStatus: 'pending',
-      relationshipVerificationStatus: 'pending'
+      applicationStatus: 'PENDING',
+      incomeVerificationStatus: 'PENDING',
+      relationshipVerificationStatus: 'PENDING'
     }
 
     // Save the statues for the application, NOMIS, and DWP checks.
