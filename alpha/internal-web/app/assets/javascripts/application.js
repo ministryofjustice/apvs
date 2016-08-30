@@ -133,7 +133,7 @@ $(document).ready(function () {
 
     'rowCallback': function (row, data, index) {
       $(row).click(function () {
-        document.location.href = 'claimant-details'
+        document.location.href = 'claimant-details/' + data._id
       })
     }
   })
