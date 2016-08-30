@@ -10,8 +10,7 @@ var client = require('../eligibility-client')
  * Retrieve all claimants in the system.
  */
 router.get('/claimants', function (request, response) {
-  var id = request.params.claimant_id
-  console.log('GET /claimants/' + id + ' called.')
+  console.log('GET /claimants/ called.')
 
   client.getAll(function (error, claimants) {
     if (!error) {
