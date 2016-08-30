@@ -35,7 +35,7 @@ router.post('/escorts/:claimant_id', function (request, response) {
   var id = request.params.claimant_id
   console.log('POST /about-you/' + id + ' called.')
 
-  client.update(id, request.body, function (error, claimant) {
+  client.update(id, 'escorts', request.body, function (error, claimant) {
     if (!error) {
       console.log('Successfully updated claimant with id: ' + id)
       response.redirect('/about-your-income/' + id)
