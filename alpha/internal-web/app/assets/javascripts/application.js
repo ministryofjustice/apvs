@@ -114,18 +114,27 @@ $(document).ready(function () {
   // Initialise DataTable used for displaying list of claimants.
   var dataUrl = 'http://localhost:3001/claimants'
   $('#claimants-table').DataTable({
+
     ajax: dataUrl,
+
     columns: [
       { 'data': '_id' },
       { 'data': 'first-name' },
       { 'data': 'last-name' }
     ],
+
     columnDefs: [
       {
         'targets': [ 0 ],
         'visible': false,
         'searchable': false
       }
-    ]
+    ],
+
+    'rowCallback': function (row, data, index) {
+      $(row).click(function () {
+        document.location.href = 'claimant-details'
+      })
+    }
   })
 })
