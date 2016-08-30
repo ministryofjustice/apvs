@@ -10,12 +10,18 @@
     {% include "includes/phase_banner_alpha.html" %}
 
     <div class="grid-row">
-        <div class="column-two-thirds">
+
+        <div>
 
             <p>First Name: {{ claimant['first-name'] }}</p>
             <p>Last Name: {{ claimant['last-name'] }}</p>
             <p>Date of Birth: {{ claimant['dob-day'] }}/{{claimant['dob-month'] }}/{{claimant['dob-year']}}</p>
 
+        </div>
+
+        <!-- Status -->
+        <div>
+            {% include 'includes/status-partial.html' %}
         </div>
 
     </div>
