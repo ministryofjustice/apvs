@@ -1,4 +1,12 @@
 
-<div>
-  <h2>Income Eligibility Check </h2>
+<h2>Income Eligibility </h2>
+
+<div class='grid-row'>
+  <div class='column-two-thirds'>
+    <label for='income-verification-status'>Check Status:</label>
+    <input id='income-verification-status' type='text'' value='{{ claimant.income-verification-status }}' readonly=true>
+  </div>
+  <div class='column-one-third'>
+    <input id='income-check-submit' class='button' value='Check Eligibity'>
+  </div>
 </div>
