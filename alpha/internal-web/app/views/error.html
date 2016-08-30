@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+{% if serviceName %} {{ serviceName }} {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+    {% include "includes/phase_banner_alpha.html" %}
+
+    <br>
+
+    <!-- Display error. -->
+    <h2>{{ error }}</h2>
+
+</main>
+
+{% endblock %}
