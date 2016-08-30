@@ -66,6 +66,23 @@ router.post('/about-your-income/:claimant_id', upload.single('evidence'), functi
         response.status(500).render('error', { message: error.message, error: error })
       }
     })
+
+    // Set statuses for claimant application.
+    var statuses = {
+      applicationStatus: 'pending',
+      incomeVerificationStatus: 'pending',
+      relationshipVerificationStatus: 'pending'
+    }
+
+    // Save the statues for the application, NOMIS, and DWP checks.
+    client.update(id, statuses, function (error, claimant) {
+      if (!error) {
+        console.log('Successfully saved status for claimant with id: ' + id)
+      } else {
+        console.log('Failed to update claimant with id: ' + id)
+        response.status(500).render('error', { message: error.message, error: error })
+      }
+    })
   } else {
     console.log('Failed to update claimant with id: ' + id + '. No file was uploaded.')
   }
