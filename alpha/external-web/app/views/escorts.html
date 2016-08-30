@@ -25,22 +25,22 @@ APVS Application Form
                     <fieldset>
 
                         <label class="block-label">
-                            <input type="radio" id="escort-adult" name="escort" value="Adult Escort"
-                                   {% if claimant['escort'] == 'Adult Escort' %} checked {% endif %}>
+                            <input type="radio" id="escort-adult" name="escort-type" value="Adult Escort"
+                                   {% if claimant['escort-type'] == 'Adult Escort' %} checked {% endif %}>
                             I am escorting an adult
                         </label>
 
                         <label class="block-label">
-                            <input type="radio" id="escort-someones-children" name="escort" value="Someones Children"
-                                   {% if claimant['escort'] == 'Someones Children' %} checked {% endif %}>
+                            <input type="radio" id="escort-someones-children" name="escort-type" value="Someones Children"
+                                   {% if claimant['escort-type'] == 'Someones Children' %} checked {% endif %}>
                             Someone else's child/children
                         </label>
 
                         <!-- TODO: We should have a brnach here in that the form completed changes if the person is escorting their own children. -->
 
                         <label class="block-label">
-                            <input type="radio" id="escort-my-children" name="escort" value="My Children"
-                                   {% if claimant['escort'] == 'My Children' %} checked {% endif %}>
+                            <input type="radio" id="escort-my-children" name="escort-type" value="My Children"
+                                   {% if claimant['escort-type'] == 'My Children' %} checked {% endif %}>
                             My child/children
                         </label>
 
