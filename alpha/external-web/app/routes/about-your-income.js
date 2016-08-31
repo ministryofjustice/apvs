@@ -48,7 +48,7 @@ router.post('/about-your-income/:claimant_id', upload.single('evidence'), functi
     }
 
     // Save the uploaded files meta data to the claimant.
-    client.embeddedUpdate(id, 'eligibility-file', metadata, function (error, claimant) {
+    client.updateField(id, 'eligibility-file', metadata, function (error, claimant) {
       if (!error) {
         console.log('Successfully updated claimant with id: ' + id)
       } else {
@@ -58,7 +58,7 @@ router.post('/about-your-income/:claimant_id', upload.single('evidence'), functi
     })
 
     // Save the claimants benefits form selection.
-    client.embeddedUpdate(id, 'benefits', request.body, function (error, claimant) {
+    client.updateField(id, 'benefits', request.body, function (error, claimant) {
       if (!error) {
         console.log('Successfully updated claimant with id: ' + id)
       } else {
