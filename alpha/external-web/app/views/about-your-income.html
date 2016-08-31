@@ -36,19 +36,19 @@
 
             <label for="income-support" class="block-label">
               <input type="checkbox" id="income-support"  name="income-support" value="Yes"
-                     {% if claimant['income-support'] == 'Yes' %} checked {% endif %}>
+                     {% if claimant['benefits']['income-support'] == 'Yes' %} checked {% endif %}>
               <span class="heading-small">Income support</span>
             </label>
 
             <label for="jobseekers-allowance" class="block-label">
               <input type="checkbox" id="jobseekers-allowance" name="jobseekers-allowance" value="Yes"
-                     {% if claimant['jobseekers-allowance'] == 'Yes' %} checked {% endif %}>
+                     {% if claimant['benefits']['jobseekers-allowance'] == 'Yes' %} checked {% endif %}>
               <span class="heading-small">Jobseekers allowance (income based)</span>
             </label>
 
             <label for="universal-credit" class="block-label">
               <input type="checkbox" id="universal-credit" name="universal-credit" value="Yes"
-                     {% if claimant['universal-credit'] == 'Yes' %} checked {% endif %}>
+                     {% if claimant['benefits']['universal-credit'] == 'Yes' %} checked {% endif %}>
               <span class="heading-small">Universal Credit</span><br>
               You must submit a photograph of the original Universal Credit award notice in the evidence field below
             </label>
