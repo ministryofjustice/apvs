@@ -30,7 +30,7 @@ router.post('/claimant-details/:claimant_id/approve', function (request, respons
   console.log('GET /claimant-details/' + id + '/approve called.')
 
   var status = {
-    applicationStatus: 'APPROVED'
+    'status.applicationStatus': 'APPROVED'
   }
 
   client.update(id, status, function (error, claimant) {
@@ -49,7 +49,7 @@ router.post('/claimant-details/:claimant_id/reject', function (request, response
   console.log('GET /claimant-details/' + id + '/reject called.')
 
   var status = {
-    applicationStatus: 'REJECTED'
+    'status.applicationStatus': 'REJECTED'
   }
 
   client.update(id, status, function (error, claimant) {
@@ -68,7 +68,7 @@ router.post('/claimant-details/:claimant_id/escalate', function (request, respon
   console.log('GET /claimant-details/' + id + '/escalate called.')
 
   var status = {
-    applicationStatus: 'ESCALATED'
+    'status.applicationStatus': 'ESCALATED'
   }
 
   client.update(id, status, function (error, claimant) {
