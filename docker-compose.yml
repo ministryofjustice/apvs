@@ -8,6 +8,7 @@ services:
     volumes:
      - "./alpha/external-web/app:/usr/src/app/app"
      - "./alpha/external-web/public:/usr/src/app/public"
+     - "./alpha/external-web/node_modules:/usr/src/app/node_modules"
      - "./alpha/uploads/eligibility-uploads:/usr/src/app/eligibility-uploads"
     ports:
       - "3000:3000"
@@ -19,7 +20,8 @@ services:
     build: ./alpha/internal-web
     volumes:
      - "./alpha/internal-web/app:/usr/src/app/app"
-     - "./alpha/external-web/public:/usr/src/app/public"
+     - "./alpha/internal-web/public:/usr/src/app/public"
+     - "./alpha/internal-web/node_modules:/usr/src/app/node_modules"
      - "./alpha/uploads/eligibility-uploads:/usr/src/app/eligibility-uploads/"
     ports:
       - "3001:3001"
