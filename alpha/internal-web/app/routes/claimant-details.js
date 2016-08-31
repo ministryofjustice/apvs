@@ -85,3 +85,22 @@ router.post('/claimant-details/:claimant_id/escalate', function (request, respon
     }
   })
 })
+
+/**
+ * Return download response for evidence file
+ */
+router.get('/claimant-details/:claimant_id/evidence/:eligibility_id', function (request, response) {
+  var id = request.params.claimant_id
+  var eligibilityId = request.params.eligibility_id
+  console.log('GET /claimant-details/' + id + '/evidence/' + eligibilityId + ' called.')
+
+  client.get(id, function (error, claimant) {
+    if (!error) {
+      console.log('Successfully retrieved details for claimant with id: ' + id)
+      response.download('./eligibility-uploads/' + eligibilityId, claimant['eligibility-file']['originalFilename'])
+    } else {
+      console.log('Failed to retrieve claimant with id: ' + id)
+      response.status(500).render('error', { message: error.message, error: error })
+    }
+  })
+})
