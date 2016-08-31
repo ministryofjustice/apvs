@@ -61,6 +61,20 @@ module.exports = {
         callback(error, null)
       }
     })
+  },
+
+  /**
+   * Cleans the persistence store.
+   * @param callback A callback defining what to do after a successful and failed update.
+   */
+  drop: function (callback) {
+    mongo.db.dropCollection('claimants', function (error, updatedClaimant) {
+      if (!error) {
+        callback(null)
+      } else {
+        callback(error)
+      }
+    })
   }
 
 }
