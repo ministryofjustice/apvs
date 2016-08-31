@@ -6,6 +6,9 @@ var router = require('../routes')
 // A client used to make database calls.
 var client = require('../eligibility-client')
 
+//
+var PENDING = 'PENDING'
+
 /**
  * Render the about you page.
  *
@@ -56,9 +59,9 @@ router.post('/about-you', function (request, response) {
 
   // Set statuses for claimant application.
   var statuses = {
-    applicationStatus: 'PENDING',
-    incomeVerificationStatus: 'PENDING',
-    relationshipVerificationStatus: 'PENDING'
+    applicationStatus: PENDING,
+    incomeVerificationStatus: PENDING,
+    relationshipVerificationStatus: PENDING
   }
 
   // Save the statues for the application, NOMIS, and DWP checks.
