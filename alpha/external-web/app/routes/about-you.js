@@ -6,7 +6,6 @@ var router = require('../routes')
 // A client used to make database calls.
 var client = require('../eligibility-client')
 
-//
 var PENDING = 'PENDING'
 
 /**
