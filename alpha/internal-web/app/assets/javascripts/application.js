@@ -121,7 +121,7 @@ $(document).ready(function () {
       { 'data': '_id' },
       { 'data': 'first-name' },
       { 'data': 'last-name' },
-      { 'data': 'applicationStatus' }
+      { 'data': 'status.applicationStatus' }
     ],
 
     columnDefs: [
