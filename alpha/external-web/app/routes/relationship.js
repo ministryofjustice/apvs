@@ -13,7 +13,7 @@ var client = require('../eligibility-client')
  */
 router.get('/relationship/:claimant_id', function (request, response) {
   var id = request.params.claimant_id
-  console.log('GET /about-you/' + id + ' called.')
+  console.log('GET /relationship/' + id + ' called.')
 
   client.get(id, function (error, claimant) {
     if (!error) {
@@ -36,9 +36,9 @@ router.get('/relationship/:claimant_id', function (request, response) {
  */
 router.post('/relationship/:claimant_id', function (request, response) {
   var id = request.params.claimant_id
-  console.log('POST /about-you/' + id + ' called.')
+  console.log('POST /relationship/' + id + ' called.')
 
-  client.update(id, request.body, function (error, claimant) {
+  client.embeddedUpdate(id, 'relationship', request.body, function (error, claimant) {
     if (!error) {
       console.log('Successfully updated claimant with id: ' + id)
 

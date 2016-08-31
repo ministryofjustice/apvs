@@ -6,6 +6,8 @@ var router = require('../routes')
 // A client used to make database calls.
 var client = require('../eligibility-client')
 
+var PENDING = 'PENDING'
+
 /**
  * Render the about you page.
  *
@@ -50,6 +52,24 @@ router.post('/about-you', function (request, response) {
       response.redirect('/relationship/' + request.body._id)
     } else {
       console.log('Failed to save new claimant.')
+      response.status(500).render('error', { message: error.message, error: error })
+    }
+  })
+
+  // Set statuses for claimant application.
+  var statuses = {
+    applicationStatus: PENDING,
+    incomeVerificationStatus: PENDING,
+    relationshipVerificationStatus: PENDING
+  }
+
+  // Save the statues for the application, NOMIS, and DWP checks.
+  var id = request.body._id
+  client.embeddedUpdate(id, 'status', statuses, function (error, claimant) {
+    if (!error) {
+      console.log('Successfully saved status for claimant with id: ' + id)
+    } else {
+      console.log('Failed to update claimant with id: ' + id)
       response.status(500).render('error', { message: error.message, error: error })
     }
   })
