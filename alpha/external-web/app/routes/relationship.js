@@ -38,7 +38,7 @@ router.post('/relationship/:claimant_id', function (request, response) {
   var id = request.params.claimant_id
   console.log('POST /relationship/' + id + ' called.')
 
-  client.embeddedUpdate(id, 'relationship', request.body, function (error, claimant) {
+  client.updateField(id, 'relationship', request.body, function (error, claimant) {
     if (!error) {
       console.log('Successfully updated claimant with id: ' + id)
 
