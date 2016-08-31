@@ -1,9 +1,7 @@
 {% extends "layout.html" %}
 
-<!-- TODO: Add claimant id or name in the title. -->
-
 {% block page_title %}
-Claimant Details
+{{ claimant['first-name'] }} {{ claimant['last-name'] }} Claimant Details
 {% endblock %}
 
 {% block content %}
@@ -11,12 +9,19 @@ Claimant Details
 <main id="content" role="main">
     {% include "includes/phase_banner_alpha.html" %}
 
-
     <div class="grid-row">
-        <div class="column-two-thirds">
 
-            <h1>Placeholder Details Page.</h1>
+        <div>
 
+            <p>First Name: {{ claimant['first-name'] }}</p>
+            <p>Last Name: {{ claimant['last-name'] }}</p>
+            <p>Date of Birth: {{ claimant['dob-day'] }}/{{claimant['dob-month'] }}/{{claimant['dob-year']}}</p>
+
+        </div>
+
+        <!-- Status -->
+        <div>
+            {% include 'includes/status-partial.html' %}
         </div>
 
     </div>
@@ -24,5 +29,3 @@ Claimant Details
 </main>
 
 {% endblock %}
-
-

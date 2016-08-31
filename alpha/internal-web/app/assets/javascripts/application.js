@@ -120,7 +120,8 @@ $(document).ready(function () {
     columns: [
       { 'data': '_id' },
       { 'data': 'first-name' },
-      { 'data': 'last-name' }
+      { 'data': 'last-name' },
+      { 'data': 'applicationStatus' }
     ],
 
     columnDefs: [
@@ -133,7 +134,7 @@ $(document).ready(function () {
 
     'rowCallback': function (row, data, index) {
       $(row).click(function () {
-        document.location.href = 'claimant-details'
+        document.location.href = 'claimant-details/' + data._id
       })
     }
   })

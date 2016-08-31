@@ -1,0 +1,30 @@
+<!-- This partial defines the status controlling elements of the claimant-details page. -->
+<div>
+
+    <!-- Display claimants current status. -->
+    <h1 class="heading-large">Application Status</h1>
+
+    <p>{{ claimant['applicationStatus'] }}</p>
+
+    <!-- Approve Eligibility. -->
+    <div class="column-one-third">
+        <form action="/claimant-details/{{ claimant['_id'] }}/approve" method="post">
+            <input type="submit" value="Approve" class="button"/>
+        </form>
+    </div>
+
+    <!-- Reject Eligibility. -->
+    <div class="column-one-third">
+        <form action="/claimant-details/{{ claimant['_id'] }}/reject" method="post">
+            <input type="submit" value="Reject" class="button"/>
+        </form>
+    </div>
+
+    <!-- Escalate Eligibility. -->
+    <div class="column-one-third">
+        <form action="/claimant-details/{{ claimant['_id'] }}/escalate" method="post">
+            <input type="submit" value="Escalate" class="button"/>
+        </form>
+    </div>
+
+</div>

@@ -9,27 +9,20 @@ Assisted Prison Visit Service (Internal)
 <main id="content" role="main">
     {% include "includes/phase_banner_alpha.html" %}
 
-    <div class="breadcrumbs">
-        <ol>
-            <li><a href="https://www.gov.uk">Home</a></li>
-            <li><a href="">Section</a></li>
-            <li>Subsection</li>
-        </ol>
-    </div>
-
     <div class="grid-row">
-        <div class="column-two-thirds">
+        <div>
 
-            <h1 class="heading-xlarge">
+            <h1 class="heading-large">
                 {% if serviceName %} {{ serviceName }} {% endif %}
             </h1>
 
-            <table id="claimants-table" class="display">
+            <table id="claimants-table">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>First Name</th>
                         <th>Last Name</th>
+                        <th>Application Status</th>
                     </tr>
                 </thead>
                 
