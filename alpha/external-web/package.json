@@ -37,6 +37,7 @@
     "grunt-sass": "^1.1.0",
     "grunt-sync": "^0.5.1",
     "hogan.js": "3.0.2",
+    "log4js": "^0.6.38",
     "minimist": "0.0.8",
     "mongodb": "^2.2.8",
     "multer": "^1.2.0",

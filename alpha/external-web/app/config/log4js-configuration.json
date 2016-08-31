@@ -1,0 +1,13 @@
+{
+  "appenders": [
+    {
+      "type": "file",
+      "filename": "/usr/src/app/logs/external-web.log",
+      "maxLogSize": 10485760,
+      "backups": 3
+    },
+    {
+      "type": "console"
+    }
+  ]
+}
