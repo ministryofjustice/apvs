@@ -36,11 +36,27 @@ module.exports = {
   /**
    * Update an existing claimant.
    * @param id The id of the claimant to update.
+   * @param claimant The claimant details to use for the update.
+   * @param callback A callback defining what to do after a successful and failed update.
+   */
+  update: function (id, claimant, callback) {
+    mongo.db.collection('claimants').updateOne({ _id: mongoId(id) }, { $set: claimant }, function (error, updatedClaimant) {
+      if (!error) {
+        callback(null, updatedClaimant)
+      } else {
+        callback(error, null)
+      }
+    })
+  },
+
+  /**
+   * Update an existing claimant.
+   * @param id The id of the claimant to update.
    * @param sectionName The name of the embedded section to update.
    * @param section The section details to use for the update.
    * @param callback A callback defining what to do after a successful and failed update.
    */
-  update: function (id, sectionName, section, callback) {
+  embeddedUpdate: function (id, sectionName, section, callback) {
     var embeddedSection = {}
     embeddedSection[sectionName] = section
     mongo.db.collection('claimants').updateOne({ _id: mongoId(id) }, { $set: embeddedSection }, function (error, updatedClaimant) {

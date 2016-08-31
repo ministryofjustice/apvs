@@ -48,7 +48,7 @@ router.post('/about-your-income/:claimant_id', upload.single('evidence'), functi
     }
 
     // Save the uploaded files meta data to the claimant.
-    client.update(id, 'file-metadata', metadata, function (error, claimant) {
+    client.embeddedUpdate(id, 'eligibility-file', metadata, function (error, claimant) {
       if (!error) {
         console.log('Successfully updated claimant with id: ' + id)
       } else {
@@ -57,8 +57,8 @@ router.post('/about-your-income/:claimant_id', upload.single('evidence'), functi
       }
     })
 
-    // Save the claimants form selection.
-    client.update(id, 'about-your-income', request.body, function (error, claimant) {
+    // Save the claimants benefits form selection.
+    client.embeddedUpdate(id, 'benefits', request.body, function (error, claimant) {
       if (!error) {
         console.log('Successfully updated claimant with id: ' + id)
       } else {
@@ -75,7 +75,7 @@ router.post('/about-your-income/:claimant_id', upload.single('evidence'), functi
     }
 
     // Save the statues for the application, NOMIS, and DWP checks.
-    client.update(id, 'statuses', statuses, function (error, claimant) {
+    client.embeddedUpdate(id, 'status', statuses, function (error, claimant) {
       if (!error) {
         console.log('Successfully saved status for claimant with id: ' + id)
       } else {
