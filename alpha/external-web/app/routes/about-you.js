@@ -65,7 +65,7 @@ router.post('/about-you', function (request, response) {
 
   // Save the statues for the application, NOMIS, and DWP checks.
   var id = request.body._id
-  client.embeddedUpdate(id, 'status', statuses, function (error, claimant) {
+  client.updateField(id, 'status', statuses, function (error, claimant) {
     if (!error) {
       console.log('Successfully saved status for claimant with id: ' + id)
     } else {
