@@ -13,13 +13,12 @@ router.post('/api/income-check', function (request, response) {
   var status = getIncomeStatus()
 
   client.update(id, status, function (error, claimant) {
-    if (!error) {
-      console.log('Successfully changed claimants income verification status to ' + status.incomeVerificationStatus + '. ID: ' + id)
-      response.redirect('/claimant-details/' + id)
-    } else {
+    if (error) {
       console.log('Failed to change claimants income verification status to ' + status.incomeVerificationStatus + '. ID: ' + id)
       response.status(500).render('error', { message: error.message, error: error })
     }
+
+    response.json(status)
   })
 })
 

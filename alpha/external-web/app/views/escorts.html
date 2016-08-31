@@ -25,22 +25,22 @@ APVS Application Form
                     <fieldset>
 
                         <label class="block-label">
-                            <input type="radio" id="escort-adult" name="escort" value="Adult Escort"
-                                   {% if claimant['escort'] == 'Adult Escort' %} checked {% endif %}>
+                            <input type="radio" id="escort-adult" name="escort-type" value="Adult Escort"
+                                   {% if claimant['escorts']['escort-type'] == 'Adult Escort' %} checked {% endif %}>
                             I am escorting an adult
                         </label>
 
                         <label class="block-label">
-                            <input type="radio" id="escort-someones-children" name="escort" value="Someones Children"
-                                   {% if claimant['escort'] == 'Someones Children' %} checked {% endif %}>
+                            <input type="radio" id="escort-someones-children" name="escort-type" value="Someones Children"
+                                   {% if claimant['escorts']['escort-type'] == 'Someones Children' %} checked {% endif %}>
                             Someone else's child/children
                         </label>
 
                         <!-- TODO: We should have a brnach here in that the form completed changes if the person is escorting their own children. -->
 
                         <label class="block-label">
-                            <input type="radio" id="escort-my-children" name="escort" value="My Children"
-                                   {% if claimant['escort'] == 'My Children' %} checked {% endif %}>
+                            <input type="radio" id="escort-my-children" name="escort-type" value="My Children"
+                                   {% if claimant['escorts']['escort-type'] == 'My Children' %} checked {% endif %}>
                             My child/children
                         </label>
 
@@ -60,25 +60,25 @@ APVS Application Form
                         <div class="form-group">
                             <label class="form-label-bold" for="escort-name">Their Name</label>
                             <input type="text" id="escort-name" class="form-control" name="escort-name"
-                                   value="{{ claimant['escort-name'] }}">
+                                   value="{{ claimant['escorts']['escort-name'] }}">
                         </div>
 
                         <div class="form-group">
                             <label class="form-label-bold" for="escort-address">Their Address</label>
                             <input type="text" id="escort-address" class="form-control" name="escort-address"
-                                   value="{{ claimant['escort-address'] }}">
+                                   value="{{ claimant['escorts']['escort-address'] }}">
                         </div>
 
                         <div class="form-group">
                             <label class="form-label-bold" for="escort-postcode">Their Postcode</label>
                             <input type="text" id="escort-postcode" class="form-control" name="escort-postcode"
-                                   value="{{ claimant['escort-postcode'] }}">
+                                   value="{{ claimant['escorts']['escort-postcode'] }}">
                         </div>
 
                         <div class="form-group">
                             <label class="form-label-bold" for="escort-NIN">Their National Insurance Number</label>
                             <input type="text" id="escort-NIN" class="form-control" name="escort-NIN"
-                                   value="{{ claimant['escort-NIN'] }}">
+                                   value="{{ claimant['escorts']['escort-NIN'] }}">
                         </div>
 
                         <div class="form-date">
@@ -87,19 +87,19 @@ APVS Application Form
                             <div class="form-group form-group-day">
                                 <label for="escort-dob-day">Day</label>
                                 <input class="form-control" id="escort-dob-day" name="escort-dob-day" type="number"
-                                       pattern="[0-9]*" min="0" max="31" value="{{ claimant['escort-dob-day'] }}">
+                                       pattern="[0-9]*" min="0" max="31" value="{{ claimant['escorts']['escort-dob-day'] }}">
                             </div>
 
                             <div class="form-group form-group-month">
                                 <label for="escort-dob-month">Month</label>
                                 <input class="form-control" id="escort-dob-month" name="escort-dob-month" type="number"
-                                       pattern="[0-9]*" min="0" max="12" value="{{ claimant['escort-dob-month'] }}">
+                                       pattern="[0-9]*" min="0" max="12" value="{{ claimant['escorts']['escort-dob-month'] }}">
                             </div>
 
                             <div class="form-group form-group-year">
                                 <label for="escort-dob-year">Year</label>
                                 <input class="form-control" id="escort-dob-year" name="escort-dob-year" type="number"
-                                       pattern="[0-9]*" min="0" max="2014" value="{{ claimant['escort-dob-year'] }}">
+                                       pattern="[0-9]*" min="0" max="2014" value="{{ claimant['escorts']['escort-dob-year'] }}">
                             </div>
 
                         </div>
@@ -109,7 +109,7 @@ APVS Application Form
                     <br>
 
                     <div class="form-group">
-                        <input type="submit" name="commit" value="Continue" class="button">
+                        <input type="submit" value="Continue" class="button">
                     </div>
 
                 </div>
