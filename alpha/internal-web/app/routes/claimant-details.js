@@ -28,63 +28,54 @@ router.get('/claimant-details/:claimant_id', function (request, response) {
   })
 })
 
-// TODO: These three methods should call a third as they all simply change a status.
+/**
+ * Set the application status of the claimant with the given ID to APPROVED.
+ */
 router.post('/claimant-details/:claimant_id/approve', function (request, response) {
   var id = request.params.claimant_id
   console.log('GET /claimant-details/' + id + '/approve called.')
-
-  var status = {
-    'status.applicationStatus': APPROVED
-  }
-
-  client.update(id, status, function (error, claimant) {
-    if (!error) {
-      console.log('Successfully changed claimants application status to APPROVED. ID: ' + id)
-      response.redirect('/claimant-details/' + id)
-    } else {
-      console.log('Failed to change claimants application status to APPROVED. ID: ' + id)
-      response.status(500).render('error', { message: error.message, error: error })
-    }
-  })
+  updateApplicationStatus(id, APPROVED, response)
 })
 
+/**
+ * Set the application status of the claimant with the given ID to REJECTED.
+ */
 router.post('/claimant-details/:claimant_id/reject', function (request, response) {
   var id = request.params.claimant_id
   console.log('GET /claimant-details/' + id + '/reject called.')
-
-  var status = {
-    'status.applicationStatus': REJECTED
-  }
-
-  client.update(id, status, function (error, claimant) {
-    if (!error) {
-      console.log('Successfully changed claimants application status to REJECTED. ID: ' + id)
-      response.redirect('/claimant-details/' + id)
-    } else {
-      console.log('Failed to change claimants application status to REJECTED. ID: ' + id)
-      response.status(500).render('error', { message: error.message, error: error })
-    }
-  })
+  updateApplicationStatus(id, REJECTED, response)
 })
 
+/**
+ * Set the application status of the claimant with the given ID to ESCALATED.
+ */
 router.post('/claimant-details/:claimant_id/escalate', function (request, response) {
   var id = request.params.claimant_id
   console.log('GET /claimant-details/' + id + '/escalate called.')
+  updateApplicationStatus(id, ESCALATED, response)
+})
 
-  var status = {
-    'status.applicationStatus': ESCALATED
+/**
+ * Update the application status of the claimant with the given ID to the given status.
+ * @param id The ID of the claimant to update.
+ * @param status The application status to apply to the request claimant.
+ * @param response The HTML response object to be used for responding to the request.
+ */
+function updateApplicationStatus (id, status, response) {
+  var updatedStatus = {
+    'status.applicationStatus': status
   }
 
-  client.update(id, status, function (error, claimant) {
+  client.update(id, updatedStatus, function (error, claimant) {
     if (!error) {
-      console.log('Successfully changed claimants application status to ESCALATED. ID: ' + id)
+      console.log('Successfully changed claimants application status to ' + updatedStatus + '. ID: ' + id)
       response.redirect('/claimant-details/' + id)
     } else {
-      console.log('Failed to change claimants application to ESCALATED. ID: ' + id)
+      console.log('Failed to change claimants application status to ' + updatedStatus + '. ID: ' + id)
       response.status(500).render('error', { message: error.message, error: error })
     }
   })
-})
+}
 
 /**
  * Return download response for evidence file
@@ -97,7 +88,7 @@ router.get('/claimant-details/:claimant_id/evidence/:eligibility_id', function (
   client.get(id, function (error, claimant) {
     if (!error) {
       console.log('Successfully retrieved details for claimant with id: ' + id)
-      response.download('./eligibility-uploads/' + eligibilityId, claimant['eligibility-file']['originalFilename'])
+      response.download('./eligibility-uploads/' + eligibilityId, claimant[ 'eligibility-file' ][ 'originalFilename' ])
     } else {
       console.log('Failed to retrieve claimant with id: ' + id)
       response.status(500).render('error', { message: error.message, error: error })
