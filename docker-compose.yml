@@ -8,6 +8,7 @@ services:
     volumes:
      - "./alpha/external-web/app:/usr/src/app/app"
      - "./alpha/external-web/public:/usr/src/app/public"
+     - "./alpha/uploads/eligibility-uploads:/usr/src/app/eligibility-uploads"
     ports:
       - "3000:3000"
     depends_on:
@@ -19,6 +20,7 @@ services:
     volumes:
      - "./alpha/internal-web/app:/usr/src/app/app"
      - "./alpha/external-web/public:/usr/src/app/public"
+     - "./alpha/uploads/eligibility-uploads:/usr/src/app/eligibility-uploads/"
     ports:
       - "3001:3001"
     depends_on:

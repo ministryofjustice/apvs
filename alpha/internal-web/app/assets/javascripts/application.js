@@ -151,7 +151,7 @@ $(document).ready(function () {
       contentType: 'application/json',
       data: JSON.stringify({ id: id }),
       success: function (data) {
-        $('#income-status').text(data.incomeVerificationStatus)
+        $('#income-status').text(data[ 'status.incomeVerificationStatus' ])
       },
       error: function (err) {
         console.log(err)

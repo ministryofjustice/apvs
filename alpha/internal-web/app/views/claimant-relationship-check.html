@@ -1,0 +1,15 @@
+<!-- This partial defines the relationship status section of the claimant-details page. -->
+<h1 class="heading-large">Relationship Status</h1>
+<div class='grid-row'>
+
+    <div class='column-one-quarter'>
+        <p id='relationship-status'>{{ claimant.status.relationshipVerificationStatus }}</p>
+    </div>
+
+    <div class="column-one-quarter">
+        <form action="/api/relationship-check/{{ claimant['_id'] }}" method="post">
+            <input type="submit" value="Check Relationship" class="button"/>
+        </form>
+    </div>
+
+</div>
