@@ -6,9 +6,12 @@ var router = require('../routes')
 // A client used to make database calls.
 var client = require('../eligibility-client')
 
-var APPROVED = 'APPROVED'
-var REJECTED = 'REJECTED'
-var ESCALATED = 'ESCALATED'
+// Valid Statuses for a claimant application.
+var APPLICATION_STATUS = {
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  ESCALATED: 'ESCALATED'
+}
 
 /**
  * Retrieve all claimants in the system.
@@ -34,7 +37,7 @@ router.get('/claimant-details/:claimant_id', function (request, response) {
 router.post('/claimant-details/:claimant_id/approve', function (request, response) {
   var id = request.params.claimant_id
   console.log('GET /claimant-details/' + id + '/approve called.')
-  updateApplicationStatus(id, APPROVED, response)
+  updateApplicationStatus(id, APPLICATION_STATUS.APPROVED, response)
 })
 
 /**
@@ -43,7 +46,7 @@ router.post('/claimant-details/:claimant_id/approve', function (request, respons
 router.post('/claimant-details/:claimant_id/reject', function (request, response) {
   var id = request.params.claimant_id
   console.log('GET /claimant-details/' + id + '/reject called.')
-  updateApplicationStatus(id, REJECTED, response)
+  updateApplicationStatus(id, APPLICATION_STATUS.REJECTED, response)
 })
 
 /**
@@ -52,7 +55,7 @@ router.post('/claimant-details/:claimant_id/reject', function (request, response
 router.post('/claimant-details/:claimant_id/escalate', function (request, response) {
   var id = request.params.claimant_id
   console.log('GET /claimant-details/' + id + '/escalate called.')
-  updateApplicationStatus(id, ESCALATED, response)
+  updateApplicationStatus(id, APPLICATION_STATUS.ESCALATED, response)
 })
 
 /**
