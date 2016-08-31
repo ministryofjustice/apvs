@@ -1,0 +1,12 @@
+<!-- This partial defines the about-you section of the claimant-details page. -->
+<div>
+
+    <h1 class="heading-large">{{ claimant['title'] }} {{ claimant['first-name'] }} {{ claimant['last-name'] }}</h1>
+    <p>Date of Birth: {{ claimant['dob-day'] }}/{{claimant['dob-month'] }}/{{claimant['dob-year']}}</p>
+    <p>NI Number: {{ claimant['national-insurance'] }}</p>
+    <p>Address: {{ claimant['address'] }}</p>
+    <p>Postcode: {{ claimant['postcode'] }}</p>
+    <p>Email: {{ claimant['email'] }}</p>
+    <p>Phone Number: {{ claimant['phone-number'] }}</p>
+
+</div>

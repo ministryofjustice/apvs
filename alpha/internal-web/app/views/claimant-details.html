@@ -12,11 +12,7 @@
     <div class="grid-row">
 
         <div>
-
-            <p>First Name: {{ claimant['first-name'] }}</p>
-            <p>Last Name: {{ claimant['last-name'] }}</p>
-            <p>Date of Birth: {{ claimant['dob-day'] }}/{{claimant['dob-month'] }}/{{claimant['dob-year']}}</p>
-
+            {% include "claimant-application-details.html" %}
         </div>
 
         <!-- Income Eligibility Status -->
