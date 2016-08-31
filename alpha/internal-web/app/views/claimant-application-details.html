@@ -32,14 +32,12 @@
     {% endif %}
 
     <h2 class="heading-medium">Benefits</h2>
-    {% if claimant['benefits'] %}
-        {% for benefit, value in claimant['benefits'] %}
-            <ul class="list list-bullet">
-            <li>{{benefit}}</li>
-            </ul>
-        {% else %}
-            No benefits have been selected
-        {% endfor %}
-    {% endif %}
+    {% for benefit, value in claimant['benefits'] %}
+        <ul class="list list-bullet">
+        <li>{{benefit}}</li>
+        </ul>
+    {% else %}
+        No benefits have been selected
+    {% endfor %}
 
 </div>
