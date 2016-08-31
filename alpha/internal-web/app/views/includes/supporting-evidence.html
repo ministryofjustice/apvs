@@ -1,0 +1,13 @@
+<div>
+
+    <h2 class="heading-large">Supporting Evidence</h2>
+
+    {% if claimant['eligibility-file'] %}
+    <ul class="list list-bullet">
+      <li><a href="/claimant-details/{{ claimant['_id'] }}/evidence/{{ claimant['eligibility-file']['eligibilityId']}}" target="_blank">Eligibility Document</a></li>
+    </ul>
+    {% else %}
+    <p>No supporting evidence found</p>
+    {% endif %}
+
+</div>
