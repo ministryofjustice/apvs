@@ -12,12 +12,12 @@
 
     <h2 class="heading-medium">Relationship</h2>
     <p>Relationship: {{ claimant['relationship']['relationship'] }}
-        {% if claimant['relationship']['close-relative'] %}
+        {% if claimant['relationship']['relationship'] == 'Close Relative' %}
             [{{ claimant['relationship']['relationship-to-prisoner'] }}]
         {% endif %}
     </p>
     
-    {% if claimant['relationship']['assistance-reason'] %}<p>Travel assistance needed [{{ claimant['relationship']['assistance-reason']}}]</p>{% endif %}
+    {% if claimant['relationship']['journey-assistance'] == 'Yes' %}<p>Travel assistance needed [{{ claimant['relationship']['journey-assistance-reason']}}]</p>{% endif %}
     
     <h2 class="heading-medium">Escorts</h2>
     {% if claimant['relationship']['escort'] == 'Yes' %}

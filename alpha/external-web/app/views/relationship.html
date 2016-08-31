@@ -96,30 +96,30 @@ APVS Application Form
                     <fieldset>
 
                         <label class="block-label" data-target="example_help">
-                            <input type="radio" id="close-relative-yes" name="close-relative" value="Yes"
-                                   {% if claimant['relationship']['close-relative'] == 'Yes' %} checked {% endif %}>
+                            <input type="radio" id="journey-assistance-yes" name="journey-assistance" value="Yes"
+                                   {% if claimant['relationship']['journey-assistance'] == 'Yes' %} checked {% endif %}>
                             Yes
                         </label>
 
                         <div class="panel panel-border-narrow js-hidden" id="example_help">
 
                             <label class="block-label">
-                                <input type="radio" id="close-relative-medical" name="assistance-reason" value="Medical"
-                                       {% if claimant['relationship']['assistance-reason'] == 'Medical' %} checked {% endif %}>
+                                <input type="radio" id="journey-assistance-reason-medical" name="journey-assistance-reason" value="Medical"
+                                       {% if claimant['relationship']['journey-assistance-reason'] == 'Medical' %} checked {% endif %}>
                                 Medical
                             </label>
 
                             <label class="block-label">
-                                <input type="radio" id="close-relative-75" name="assistance-reason" value="75 Plus"
-                                       {% if claimant['relationship']['assistance-reason'] == '75 Plus' %} checked {% endif %}>
+                                <input type="radio" id="journey-assistance-reason-75" name="journey-assistance-reason" value="75 Plus"
+                                       {% if claimant['relationship']['journey-assistance-reason'] == '75 Plus' %} checked {% endif %}>
                                 Aged 75 years or over
                             </label>
 
                         </div>
 
                         <label class="block-label">
-                            <input type="radio" id="close-relative-no" name="close-relative" value="No"
-                                   {% if claimant['relationship']['close-relative'] == 'No' %} checked {% endif %}>
+                            <input type="radio" id="journey-assistance-no" name="journey-assistance" value="No"
+                                   {% if claimant['relationship']['journey-assistance'] == 'No' %} checked {% endif %}>
                             No
                         </label>
 
