@@ -17,7 +17,7 @@ router.post('/api/income-check', function (request, response) {
 
   client.update(id, status, function (error, claimant) {
     if (error) {
-      console.log('Failed to change claimants income verification status to ' + status.incomeVerificationStatus + '. ID: ' + id)
+      console.log('Failed to change claimants income verification status to ' + status['status.relationshipVerificationStatus'] + '. ID: ' + id)
       response.status(500).render('error', { message: error.message, error: error })
     }
 
@@ -46,10 +46,10 @@ router.post('/api/relationship-check/:claimant_id', function (request, response)
 
   client.update(id, status, function (error, claimant) {
     if (!error) {
-      console.log('Successfully changed claimants relationship verification status to ' + status.relationshipVerificationStatus + '. ID: ' + id)
+      console.log('Successfully changed claimants relationship verification status to ' + status['status.relationshipVerificationStatus'] + '. ID: ' + id)
       response.redirect('/claimant-details/' + id)
     } else {
-      console.log('Failed to change claimants relationship verification status to ' + status.relationshipVerificationStatus + '. ID: ' + id)
+      console.log('Failed to change claimants relationship verification status to ' + status['status.relationshipVerificationStatus'] + '. ID: ' + id)
       response.status(500).render('error', { message: error.message, error: error })
     }
   })
