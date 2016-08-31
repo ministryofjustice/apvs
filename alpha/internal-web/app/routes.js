@@ -7,3 +7,4 @@ module.exports = router
 require('./routes/index')
 require('./routes/claimants')
 require('./routes/claimant-details')
+require('./routes/api')

@@ -120,7 +120,8 @@ $(document).ready(function () {
     columns: [
       { 'data': '_id' },
       { 'data': 'first-name' },
-      { 'data': 'last-name' }
+      { 'data': 'last-name' },
+      { 'data': 'applicationStatus' }
     ],
 
     columnDefs: [
@@ -135,6 +136,21 @@ $(document).ready(function () {
       $(row).click(function () {
         document.location.href = 'claimant-details/' + data._id
       })
+    }
+  })
+})
+
+$('#income-check-submit').click(function () {
+  $.ajax({
+    url: '/api/income-check',
+    type: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify({ _id: claimant._id }),
+    success: function (data) {
+      $('#income-status').text(data.status)
+    },
+    error: function (err) {
+      console.log(err)
     }
   })
 })
