@@ -8,7 +8,7 @@ var client = require('../eligibility-client')
 
 router.post('/api/income-check', function (request, response) {
   var id = request.body.id
-  console.log(id)
+  console.log('POST /api/income-check called.')
 
   var status = getIncomeStatus()
 
