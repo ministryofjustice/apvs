@@ -1,0 +1,43 @@
+<div>
+
+    <h1 class="heading-large">{{ claimant['title'] }} 
+        {{ claimant['first-name'] }} {{ claimant['last-name'] }}</h1>
+    <p>ID: {{ claimant['_id'] }}</p>
+    <p>Date of Birth: {{ claimant['dob-day'] }}/{{claimant['dob-month'] }}/{{claimant['dob-year']}}</p>
+    <p>NI Number: {{ claimant['national-insurance'] }}</p>
+    <p>Address: {{ claimant['address'] }}</p>
+    <p>Postcode: {{ claimant['postcode'] }}</p>
+    <p>Email: {{ claimant['email'] }}</p>
+    <p>Phone Number: {{ claimant['phone-number'] }}</p>
+
+    <h2 class="heading-medium">Relationship</h2>
+    <p>Relationship: {{ claimant['relationship']['relationship'] }}
+        {% if claimant['relationship']['relationship'] == 'Close Relative' %}
+            [{{ claimant['relationship']['relationship-to-prisoner'] }}]
+        {% endif %}
+    </p>
+    
+    {% if claimant['relationship']['journey-assistance'] == 'Yes' %}<p>Travel assistance needed [{{ claimant['relationship']['journey-assistance-reason']}}]</p>{% endif %}
+    
+    <h2 class="heading-medium">Escorts</h2>
+    {% if claimant['relationship']['escort'] == 'Yes' %}
+        <p>Escort type: {{ claimant['escorts']['escort-type'] }}</p>
+        <p>Escort name: {{ claimant['escorts']['escort-name'] }}</p>
+        <p>Escort address: {{ claimant['escorts']['escort-address'] }}</p>
+        <p>Escort postcode: {{ claimant['escorts']['escort-postcode'] }}</p>
+        <p>Escort NI Number: {{ claimant['escorts']['escort-NIN'] }}</p>
+        <p>Escort Date of Birth: {{ claimant['escorts']['escort-dob-day'] }}/{{ claimant['escorts']['escort-dob-month'] }}/{{ claimant['escorts']['escort-dob-year'] }}</p>
+    {% else %}
+        <p>No escort information</p>
+    {% endif %}
+
+    <h2 class="heading-medium">Benefits</h2>
+    {% for benefit, value in claimant['benefits'] %}
+        <ul class="list list-bullet">
+        <li>{{benefit}}</li>
+        </ul>
+    {% else %}
+        No benefits have been selected
+    {% endfor %}
+
+</div>
