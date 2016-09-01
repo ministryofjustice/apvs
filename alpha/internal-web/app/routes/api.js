@@ -2,26 +2,27 @@
  * This file defines all routes for external API dependencies
  */
 var router = require('../routes')
-
-// A client used to make database calls.
 var client = require('../eligibility-client')
+var log4js = require('../log4js')
+var LOGGER = log4js.getLogger('api')
 
 /**
  * Retrieve and update the verification status for the claimant with the given ID.
  */
 router.post('/api/income-check', function (request, response) {
   var id = request.body.id
-  console.log('POST /api/income-check called.')
+  LOGGER.debug('POST /api/income-check called.')
 
   var status = getIncomeStatus()
 
   client.update(id, status, function (error, claimant) {
-    if (error) {
-      console.log('Failed to change claimants income verification status to ' + status['status.relationshipVerificationStatus'] + '. ID: ' + id)
+    if (!error) {
+      LOGGER.info('Successfully changed claimants income verification status to ' + status['status.relationshipVerificationStatus'] + '. ID: ' + id)
+      response.json(status)
+    } else {
+      LOGGER.error('Failed to change claimants income verification status to ' + status['status.relationshipVerificationStatus'] + '. ID: ' + id)
       response.status(500).render('error', { message: error.message, error: error })
     }
-
-    response.json(status)
   })
 })
 
@@ -40,16 +41,16 @@ function getIncomeStatus () {
  */
 router.post('/api/relationship-check/:claimant_id', function (request, response) {
   var id = request.params.claimant_id
-  console.log('GET /api/relationship-check called.')
+  LOGGER.debug('GET /api/relationship-check called.')
 
   var status = getRelationshipStatus()
 
   client.update(id, status, function (error, claimant) {
     if (!error) {
-      console.log('Successfully changed claimants relationship verification status to ' + status['status.relationshipVerificationStatus'] + '. ID: ' + id)
+      LOGGER.info('Successfully changed claimants relationship verification status to ' + status['status.relationshipVerificationStatus'] + '. ID: ' + id)
       response.redirect('/claimant-details/' + id)
     } else {
-      console.log('Failed to change claimants relationship verification status to ' + status['status.relationshipVerificationStatus'] + '. ID: ' + id)
+      LOGGER.error('Failed to change claimants relationship verification status to ' + status['status.relationshipVerificationStatus'] + '. ID: ' + id)
       response.status(500).render('error', { message: error.message, error: error })
     }
   })

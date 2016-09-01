@@ -1,0 +1,14 @@
+{
+  "appenders": [
+    {
+      "type": "dateFile",
+      "filename": "/usr/src/app/logs/internal-web.log",
+      "pattern": "-yyyy-MM-dd",
+      "maxLogSize": 10485760,
+      "backups": 3
+    },
+    {
+      "type": "console"
+    }
+  ]
+}
