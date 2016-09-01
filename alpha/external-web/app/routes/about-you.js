@@ -61,7 +61,7 @@ router.post('/about-you', function (request, response) {
 
   client.save(claimant, function (error, claimant) {
     if (!error) {
-      LOGGER.info('Successfully saved new claimant: ' + claimant.ops[0])
+      LOGGER.info('Successfully saved new claimant.')
       response.redirect('/relationship/' + claimant.ops[0]._id)
     } else {
       LOGGER.error('Failed to save new claimant.')
