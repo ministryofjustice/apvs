@@ -70,7 +70,6 @@ router.post('/about-you', function (request, response) {
   })
 })
 
-
 /**
  * Update a single existing claimant.
  *
