@@ -39,37 +39,29 @@ router.get('/about-you/:claimant_id', function (request, response) {
 })
 
 /**
- * Save a single claimant to the system.
+ * Save a single claimant to the system. Include their statuses at this point to ensure they always exist for every
+ * claimant.
  *
  * Example call: http://localhost:3000/about-you
  */
 router.post('/about-you', function (request, response) {
-  console.log('POST /about-you called.')
+  console.log('POST route: /about-you')
 
-  client.save(request.body, function (error, claimant) {
-    if (!error) {
-      console.log('Successfully saved new claimant: ' + claimant)
-      response.redirect('/relationship/' + request.body._id)
-    } else {
-      console.log('Failed to save new claimant.')
-      response.status(500).render('error', { message: error.message, error: error })
+  var claimant = {
+    personal: request.body,
+    status: {
+      applicationStatus: PENDING,
+      incomeVerificationStatus: PENDING,
+      relationshipVerificationStatus: PENDING
     }
-  })
-
-  // Set statuses for claimant application.
-  var statuses = {
-    applicationStatus: PENDING,
-    incomeVerificationStatus: PENDING,
-    relationshipVerificationStatus: PENDING
   }
 
-  // Save the statues for the application, NOMIS, and DWP checks.
-  var id = request.body._id
-  client.updateField(id, 'status', statuses, function (error, claimant) {
+  client.save(claimant, function (error, claimant) {
     if (!error) {
-      console.log('Successfully saved status for claimant with id: ' + id)
+      console.log('Successfully saved new claimant: ' + claimant.ops[0])
+      response.redirect('/relationship/' + claimant.ops[0]._id)
     } else {
-      console.log('Failed to update claimant with id: ' + id)
+      console.log('Failed to save new claimant.')
       response.status(500).render('error', { message: error.message, error: error })
     }
   })
