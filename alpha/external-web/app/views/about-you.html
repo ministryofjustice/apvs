@@ -27,79 +27,90 @@ APVS Application Form
                 <div class="form-group">
                     <label class="form-label-bold" for="title">Title</label>
                     <p class="form-hint">(Mr/Mrs/Miss/Ms)</p>
-                    <input type="text" class="form-control" id="title" name="title" value="{{ claimant['title'] }}">
+                    <input type="text" class="form-control" id="title" name="title"
+                           value="{{ claimant['personal']['title'] }}">
                 </div>
 
                 <div class="form-group">
                     <label class="form-label-bold" for="first-name">First name</label>
-                    <input type="text" class="form-control" id="first-name" name="first-name" value="{{ claimant['first-name'] }}">
+                    <input type="text" class="form-control" id="first-name" name="first-name"
+                           value="{{ claimant['personal']['first-name'] }}">
                 </div>
 
                 <div class="form-group">
                     <label class="form-label-bold" for="last-name">Last name</label>
-                    <input type="text" class="form-control" id="last-name" name="last-name" value="{{ claimant['last-name'] }}">
+                    <input type="text" class="form-control" id="last-name" name="last-name"
+                           value="{{ claimant['personal']['last-name'] }}">
                 </div>
 
                 <div class="form-group">
                     <fieldset>
-                    <legend class="form-label-bold">Date of birth</legend>
+                        <legend class="form-label-bold">Date of birth</legend>
 
-                    <div class="form-date">
-                        <p class="form-hint">For example, 31 3 1980</p>
+                        <div class="form-date">
+                            <p class="form-hint">For example, 31 3 1980</p>
 
-                        <div class="form-group form-group-day">
-                            <label for="dob-day">Day</label>
-                            <input class="form-control" id="dob-day" name="dob-day" value="{{ claimant['dob-day'] }}" type="number" pattern="[0-9]*" min="0" max="31">
+                            <div class="form-group form-group-day">
+                                <label for="dob-day">Day</label>
+                                <input class="form-control" id="dob-day" name="dob-day"
+                                       value="{{ claimant['personal']['dob-day'] }}" type="number" pattern="[0-9]*"
+                                       min="0" max="31">
+                            </div>
+
+                            <div class="form-group form-group-month">
+                                <label for="dob-month">Month</label>
+                                <input class="form-control" id="dob-month" name="dob-month"
+                                       value="{{ claimant['personal']['dob-month'] }}" type="number" pattern="[0-9]*"
+                                       min="0" max="12">
+                            </div>
+
+                            <div class="form-group form-group-year">
+                                <label for="dob-year">Year</label>
+                                <input class="form-control" id="dob-year" name="dob-year"
+                                       value="{{ claimant['personal']['dob-year'] }}" type="number" pattern="[0-9]*"
+                                       min="0" max="2014">
+                            </div>
                         </div>
-
-                        <div class="form-group form-group-month">
-                            <label for="dob-month">Month</label>
-                            <input class="form-control" id="dob-month" name="dob-month" value="{{ claimant['dob-month'] }}" type="number" pattern="[0-9]*" min="0" max="12">
-                        </div>
-
-                        <div class="form-group form-group-year">
-                            <label for="dob-year">Year</label>
-                            <input class="form-control" id="dob-year" name="dob-year" value="{{ claimant['dob-year'] }}" type="number" pattern="[0-9]*" min="0" max="2014">
-                        </div>
-                    </div>
 
                     </fieldset>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label-bold" for="national-insurance">National Insurance</label>
-                    <input type="text" class="form-control" id="national-insurance" name="national-insurance" value="{{ claimant['national-insurance'] }}">
+                    <input type="text" class="form-control" id="national-insurance" name="national-insurance"
+                           value="{{ claimant['personal']['national-insurance'] }}">
                 </div>
 
                 <div class="form-group">
                     <label class="form-label-bold" for="address">Home address</label>
-                    <input type="text" class="form-control" id="address" name="address" value="{{ claimant['address'] }}">
+                    <input type="text" class="form-control" id="address" name="address"
+                           value="{{ claimant['personal']['address'] }}">
                 </div>
 
                 <div class="form-group">
                     <label class="form-label-bold" for="postcode">Post Code</label>
-                    <input type="text" class="form-control" id="postcode" name="postcode" value="{{ claimant['postcode'] }}">
+                    <input type="text" class="form-control" id="postcode" name="postcode"
+                           value="{{ claimant['personal']['postcode'] }}">
                 </div>
 
                 <div class="form-group">
                     <label class="form-label-bold" for="email">Email address</label>
-                    <input type="text" class="form-control" id="email" name="email" value="{{ claimant['email'] }}">
+                    <input type="text" class="form-control" id="email" name="email" value="{{ claimant['personal']['email'] }}">
                 </div>
 
                 <div class="form-group">
                     <label class="form-label-bold" for="phone-number">Phone Number</label>
-                    <input type="text" class="form-control" id="phone-number" name="phone-number" value="{{ claimant['phone-number'] }}">
+                    <input type="text" class="form-control" id="phone-number" name="phone-number"
+                           value="{{ claimant['personal']['phone-number'] }}">
                 </div>
 
                 <div class="form-group">
                     <input type="submit" value="Continue" class="button">
-                </div> 
+                </div>
             </form>
-            
+
         </div>
     </div>
 </main>
 
 {% endblock %}
-
-

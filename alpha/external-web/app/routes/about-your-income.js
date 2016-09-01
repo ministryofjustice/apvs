@@ -39,35 +39,27 @@ router.post('/about-your-income/:claimant_id', upload.single('evidence'), functi
   var id = request.params.claimant_id
   console.log('POST /about-your-income/' + id + ' called.')
 
-  // Bundle the file meta data into an object.
-  if (request.file) {
-    var metadata = {
-      eligibilityId: request.file.filename,
-      originalFilename: request.file.originalname,
-      path: request.file.path
+  if (!request.file) {
+    console.log('Failed to update claimant with id: ' + id + '. No file was uploaded.')
+    response.status(500).render('error', { error: 'Failed to update claimant with id: ' + id + '. No file was uploaded.' })
+  } else {
+    var incomeDetails = {
+      'eligibility-file': {
+        eligibilityId: request.file.filename,
+        originalFilename: request.file.originalname,
+        path: request.file.path
+      },
+      'benefits': request.body
     }
 
-    // Save the uploaded files meta data to the claimant.
-    client.updateField(id, 'eligibility-file', metadata, function (error, claimant) {
+    client.update(id, incomeDetails, function (error, claimant) {
       if (!error) {
         console.log('Successfully updated claimant with id: ' + id)
+        response.redirect('/application-submitted')
       } else {
         console.log('Failed to update claimant with id: ' + id)
         response.status(500).render('error', { message: error.message, error: error })
       }
     })
-
-    // Save the claimants benefits form selection.
-    client.updateField(id, 'benefits', request.body, function (error, claimant) {
-      if (!error) {
-        console.log('Successfully updated claimant with id: ' + id)
-      } else {
-        console.log('Failed to update claimant with id: ' + id)
-        response.status(500).render('error', { message: error.message, error: error })
-      }
-    })
-  } else {
-    console.log('Failed to update claimant with id: ' + id + '. No file was uploaded.')
   }
-  response.redirect('/application-submitted')
 })
