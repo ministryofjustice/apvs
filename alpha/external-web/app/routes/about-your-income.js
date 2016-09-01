@@ -43,7 +43,7 @@ router.post('/about-your-income/:claimant_id', upload.single('evidence'), functi
     console.log('Failed to update claimant with id: ' + id + '. No file was uploaded.')
     response.status(500).render('error', { error: 'Failed to update claimant with id: ' + id + '. No file was uploaded.' })
   } else {
-    var claimant = {
+    var incomeDetails = {
       'eligibility-file': {
         eligibilityId: request.file.filename,
         originalFilename: request.file.originalname,
@@ -52,7 +52,7 @@ router.post('/about-your-income/:claimant_id', upload.single('evidence'), functi
       'benefits': request.body
     }
 
-    client.update(id, claimant, function (error, claimant) {
+    client.update(id, incomeDetails, function (error, claimant) {
       if (!error) {
         console.log('Successfully updated claimant with id: ' + id)
         response.redirect('/application-submitted')
