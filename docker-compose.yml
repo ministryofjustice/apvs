@@ -19,7 +19,7 @@ services:
     build: ./alpha/internal-web
     volumes:
      - "./alpha/internal-web/app:/usr/src/app/app"
-     - "./alpha/external-web/public:/usr/src/app/public"
+     - "./alpha/internal-web/public:/usr/src/app/public"
      - "./alpha/uploads/eligibility-uploads:/usr/src/app/eligibility-uploads/"
     ports:
       - "3001:3001"
