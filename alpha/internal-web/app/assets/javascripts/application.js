@@ -119,8 +119,8 @@ $(document).ready(function () {
 
     columns: [
       { 'data': '_id' },
-      { 'data': 'first-name' },
-      { 'data': 'last-name' },
+      { 'data': 'personal.first-name' },
+      { 'data': 'personal.last-name' },
       { 'data': 'status.applicationStatus' }
     ],
 
