@@ -8,4 +8,4 @@ run-docker.sh
 alpha/external-web/node_modules/
 
 # Ignore log files
-**.log
+**.log**
