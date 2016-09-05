@@ -55,9 +55,25 @@ router.post('/about-your-income/:claimant_id', upload.single('evidence'), functi
     client.update(id, incomeDetails, function (error, claimant) {
       if (!error) {
         console.log('Successfully updated claimant with id: ' + id)
-        response.redirect('/application-submitted')
       } else {
         console.log('Failed to update claimant with id: ' + id)
+        response.status(500).render('error', { message: error.message, error: error })
+      }
+    })
+
+    // Redirect to the success page for new claimants, or onto the claims page for eligibility modifications.
+    client.get(id, function (error, claimant) {
+      if (!error) {
+        console.log('Successfully retrieved claimant with id: ' + id)
+
+        if (claimant.isEligibilityModified) {
+          response.redirect('/claim-details/' + id)
+        } else {
+          response.redirect('/application-submitted')
+        }
+
+      } else {
+        console.log('Failed to retrieve claimant with id: ' + id)
         response.status(500).render('error', { message: error.message, error: error })
       }
     })
