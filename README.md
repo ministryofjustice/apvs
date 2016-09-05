@@ -17,9 +17,3 @@ Will build two node.js application containers; The first is an external facing s
 ```
 docker-compose up
 ```
-
-Note: If any new files have been added to the assets directory make sure to run npm start so that they are copied into the public directory. You can then run docker as normal.
-
-```
-npm start
-```
