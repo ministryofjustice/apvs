@@ -47,25 +47,6 @@ module.exports = {
         callback(error, null)
       }
     })
-  },
-
-  /**
-   * Update a field within an existing claimant.
-   * @param id The id of the claimant to update.
-   * @param fieldName The name of the field to update.
-   * @param data The data to use for the update.
-   * @param callback A callback defining what to do after a successful and failed update.
-   */
-  updateField: function (id, fieldName, data, callback) {
-    var field = {}
-    field[fieldName] = data
-    mongo.db.collection('claimants').updateOne({ _id: mongoId(id) }, { $set: field }, function (error, updatedClaimant) {
-      if (!error) {
-        callback(null, updatedClaimant)
-      } else {
-        callback(error, null)
-      }
-    })
   }
 
 }
