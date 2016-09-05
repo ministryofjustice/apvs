@@ -40,9 +40,6 @@ exports.get = function (id, callback) {
     if (!error) {
       console.log('Successfully retrieved claimant with id: ' + id)
       callback(claimant.isEligibilityModified)
-    } else {
-      console.log('Failed to retrieve claimant with id: ' + id)
-      response.status(500).render('error', { message: error.message, error: error })
     }
   })
 }
@@ -56,9 +53,6 @@ exports.update = function (id, eligibility) {
   client.update(id, exports.build(eligibility), function (error, claimant) {
     if (!error) {
       console.log('Successfully modified the isEligibilityModified flag for claimant with id: ' + id)
-    } else {
-      console.log('Failed to modify the isEligibilityModified flag for claimant with id: ' + id)
-      response.status(500).render('error', { message: error.message, error: error })
     }
   })
 }
