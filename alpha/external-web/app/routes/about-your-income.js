@@ -10,6 +10,8 @@ var upload = multer({ dest: 'eligibility-uploads/' })
 // A client used to make database calls.
 var client = require('../eligibility-client')
 
+var eligibilityFlag = require('../services/eligibility-flag')
+
 /**
  * Render the about you about-your-income page and populate with the details of the claimant with the given ID.
  *
@@ -61,20 +63,11 @@ router.post('/about-your-income/:claimant_id', upload.single('evidence'), functi
       }
     })
 
-    // Redirect to the success page for new claimants, or onto the claims page for eligibility modifications.
-    client.get(id, function (error, claimant) {
-      if (!error) {
-        console.log('Successfully retrieved claimant with id: ' + id)
-
-        if (claimant.isEligibilityModified) {
-          response.redirect('/claim-details/' + id)
-        } else {
-          response.redirect('/application-submitted')
-        }
-
+    eligibilityFlag.get(id, function (isEligibilityModified) {
+      if (isEligibilityModified) {
+        response.redirect('/claim-details/' + id)
       } else {
-        console.log('Failed to retrieve claimant with id: ' + id)
-        response.status(500).render('error', { message: error.message, error: error })
+        response.redirect('/application-submitted')
       }
     })
   }

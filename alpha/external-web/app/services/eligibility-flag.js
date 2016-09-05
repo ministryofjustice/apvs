@@ -31,6 +31,23 @@ exports.build = function (eligibility) {
 }
 
 /**
+ * Retrieves the value of isEligibilityModified flag for the claimant with the given id.
+ * @param id The id of the claimant to retrieve the isEligibilityModified for.
+ * @param callback A function that can be used to access the isEligibilityModified value returned by this function.
+ */
+exports.get = function (id, callback) {
+  client.get(id, function (error, claimant) {
+    if (!error) {
+      console.log('Successfully retrieved claimant with id: ' + id)
+      callback(claimant.isEligibilityModified)
+    } else {
+      console.log('Failed to retrieve claimant with id: ' + id)
+      response.status(500).render('error', { message: error.message, error: error })
+    }
+  })
+}
+
+/**
  * Adds or updates the isEligibilityModified flag of the claimant with the given id.
  * @param id The id of the claimant that this flag is associated with.
  * @param eligibility {String} A String that is expected to be either 'Yes' or 'No'
