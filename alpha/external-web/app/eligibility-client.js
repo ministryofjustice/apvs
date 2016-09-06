@@ -32,5 +32,14 @@ exports.update = function (id, claimant, callback) {
 
 // Takes a string and wraps it as a Mongo ObjectID.
 exports.mongoId = function (id) {
-  return new mongo.client.ObjectID(id)
+  if (exports.isValidMongoId(id)) {
+    return new mongo.client.ObjectID(id)
+  }
+  throw new Error({
+    error: 'Invalid Mongo ID'
+  })
+}
+
+exports.isValidMongoId = function (id) {
+  return mongo.client.ObjectID.isValid(id)
 }

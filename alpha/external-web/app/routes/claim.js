@@ -1,5 +1,6 @@
 var router = require('../routes')
 var eligibilityFlag = require('../services/eligibility-flag')
+var reference = require('../services/reference-checker')
 
 router.get('/claim', function (request, response) {
   console.log('GET /claim')
@@ -12,18 +13,21 @@ router.post('/claim', function (request, response) {
   var id = request.body.reference
   var eligibility = request.body.isEligibilityModified
 
-  // If the form was not completed display an error message.
-  if (!id || !eligibility) {
-    console.log('Request Failed! Please fully complete the form.')
-    response.status(500).render('error', { error: 'Request Failed! Please fully complete the form.' })
-  } else {
+  if (!eligibility) {
+    console.log('Claim Submit Failed! Form was not complete.')
+    return response.status(500).render('error', { error: 'Request Failed! Please fully complete the form.' })
+  }
+
+  reference.isValid(id, function (isValid) {
+    if (!isValid) {
+      console.log('Claim Submit Failed! Reference ' + id + ' was not valid.')
+      return response.redirect('/index')
+    }
     eligibilityFlag.update(id, eligibility)
 
-    // Redirect the user based on the response to the details changed question.
     if (eligibilityFlag.isModified(eligibility)) {
-      response.redirect('/about-you/' + id)
-    } else {
-      response.redirect('/claim-details/' + id)
+      return response.redirect('/about-you/' + id)
     }
-  }
+    return response.redirect('/claim-details/' + id)
+  })
 })
