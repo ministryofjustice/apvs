@@ -13,7 +13,7 @@ exports.get = function (id, callback) {
 exports.save = function (claimant, callback) {
   mongo.db.collection('claimants').insertOne(claimant, function (error, savedClaimant) {
     if (!error) {
-      callback(null, savedClaimant)
+      callback(null, savedClaimant.ops[0])
     } else {
       callback(error, null)
     }

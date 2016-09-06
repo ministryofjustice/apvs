@@ -26,7 +26,7 @@ router.get('/about-you/:claimant_id', function (request, response) {
 
 router.post('/about-you', function (request, response) {
   console.log('POST route: /about-you')
-  save(request, response)
+  save(null, request, response)
 })
 
 router.post('/about-you/:claimant_id', function (request, response) {
@@ -56,19 +56,21 @@ function save (id, request, response) {
 
   client.save(claimant, function (error, claimant) {
     if (!error) {
-      console.log('Successfully saved new claimant: ' + claimant.ops[ 0 ])
-      response.redirect('/relationship/' + claimant.ops[ 0 ]._id)
+      console.log('Successfully saved new claimant: ' + claimant)
+      response.redirect('/relationship/' + claimant._id)
     } else {
       console.log('Failed to save new claimant.')
       response.status(500).render('error', { message: error.message, error: error })
     }
 
     // If we were directed here from the claim page mark the new eligibility claim as being a modification.
-    eligibilityFlag.get(id, function (isEligibilityModified) {
-      if (isEligibilityModified) {
-        eligibilityFlag.update(claimant.ops[ 0 ]._id, 'Yes')
-      }
-    })
+    if (id) {
+      eligibilityFlag.get(id, function (isEligibilityModified) {
+        if (isEligibilityModified) {
+          eligibilityFlag.update(claimant._id, 'Yes')
+        }
+      })
+    }
   })
 }
 
