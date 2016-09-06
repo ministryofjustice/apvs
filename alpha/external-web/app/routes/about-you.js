@@ -1,5 +1,6 @@
 var router = require('../routes')
 var client = require('../eligibility-client')
+var eligibilityFlag = require('../services/eligibility-flag')
 
 var PENDING = 'PENDING'
 
@@ -25,7 +26,25 @@ router.get('/about-you/:claimant_id', function (request, response) {
 
 router.post('/about-you', function (request, response) {
   console.log('POST route: /about-you')
+  save(request, response)
+})
 
+router.post('/about-you/:claimant_id', function (request, response) {
+  var id = request.params.claimant_id
+  console.log('POST /about-you/' + id + ' called.')
+
+  eligibilityFlag.get(id, function (isEligibilityModified) {
+    if (isEligibilityModified) {
+      console.log('This is a modification of an eligibility application. Saving new record.')
+      save(id, request, response)
+    } else {
+      console.log('This is a brand new eligibility application.')
+      update(id, request, response)
+    }
+  })
+})
+
+function save (id, request, response) {
   var claimant = {
     personal: request.body,
     status: {
@@ -37,19 +56,23 @@ router.post('/about-you', function (request, response) {
 
   client.save(claimant, function (error, claimant) {
     if (!error) {
-      console.log('Successfully saved new claimant: ' + claimant.ops[0])
-      response.redirect('/relationship/' + claimant.ops[0]._id)
+      console.log('Successfully saved new claimant: ' + claimant.ops[ 0 ])
+      response.redirect('/relationship/' + claimant.ops[ 0 ]._id)
     } else {
       console.log('Failed to save new claimant.')
       response.status(500).render('error', { message: error.message, error: error })
     }
+
+    // If we were directed here from the claim page mark the new eligibility claim as being a modification.
+    eligibilityFlag.get(id, function (isEligibilityModified) {
+      if (isEligibilityModified) {
+        eligibilityFlag.update(claimant.ops[ 0 ]._id, 'Yes')
+      }
+    })
   })
-})
+}
 
-router.post('/about-you/:claimant_id', function (request, response) {
-  var id = request.params.claimant_id
-  console.log('POST /about-you/' + id + ' called.')
-
+function update (id, request, response) {
   var claimant = {
     personal: request.body
   }
@@ -63,4 +86,4 @@ router.post('/about-you/:claimant_id', function (request, response) {
       response.status(500).render('error', { message: error.message, error: error })
     }
   })
-})
+}
