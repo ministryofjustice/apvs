@@ -2,8 +2,6 @@
  * This file defines all routes for the relationship page.
  */
 var router = require('../routes')
-
-// A client used to make database calls.
 var client = require('../eligibility-client')
 
 /**
@@ -38,7 +36,11 @@ router.post('/relationship/:claimant_id', function (request, response) {
   var id = request.params.claimant_id
   console.log('POST /relationship/' + id + ' called.')
 
-  client.updateField(id, 'relationship', request.body, function (error, claimant) {
+  var relationship = {
+    'relationship': request.body
+  }
+
+  client.update(id, relationship, function (error, claimant) {
     if (!error) {
       console.log('Successfully updated claimant with id: ' + id)
 

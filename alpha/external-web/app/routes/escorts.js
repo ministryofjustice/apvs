@@ -2,8 +2,6 @@
  * This file defines all routes for the escorts page.
  */
 var router = require('../routes')
-
-// A client used to make database calls.
 var client = require('../eligibility-client')
 
 /**
@@ -35,7 +33,11 @@ router.post('/escorts/:claimant_id', function (request, response) {
   var id = request.params.claimant_id
   console.log('POST /escorts/' + id + ' called.')
 
-  client.updateField(id, 'escorts', request.body, function (error, claimant) {
+  var escorts = {
+    'escorts': request.body
+  }
+
+  client.update(id, escorts, function (error, claimant) {
     if (!error) {
       console.log('Successfully updated claimant with id: ' + id)
       response.redirect('/about-your-income/' + id)
