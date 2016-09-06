@@ -1,5 +1,3 @@
-/* global $ */
-
 // Initialise DataTable used for displaying list of claimants.
 var dataUrl = 'http://localhost:3001/claimants'
 $('#claimants-table').DataTable({
