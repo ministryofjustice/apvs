@@ -10,6 +10,8 @@ var upload = multer({ dest: 'eligibility-uploads/' })
 // A client used to make database calls.
 var client = require('../eligibility-client')
 
+var eligibilityFlag = require('../services/eligibility-flag')
+
 /**
  * Render the about you about-your-income page and populate with the details of the claimant with the given ID.
  *
@@ -55,10 +57,17 @@ router.post('/about-your-income/:claimant_id', upload.single('evidence'), functi
     client.update(id, incomeDetails, function (error, claimant) {
       if (!error) {
         console.log('Successfully updated claimant with id: ' + id)
-        response.redirect('/application-submitted')
       } else {
         console.log('Failed to update claimant with id: ' + id)
         response.status(500).render('error', { message: error.message, error: error })
+      }
+    })
+
+    eligibilityFlag.get(id, function (isEligibilityModified) {
+      if (isEligibilityModified) {
+        response.redirect('/claim-details/' + id)
+      } else {
+        response.redirect('/application-submitted')
       }
     })
   }
