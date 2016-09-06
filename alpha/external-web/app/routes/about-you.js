@@ -1,28 +1,13 @@
-/**
- * This file defines all routes for the about-you page.
- */
 var router = require('../routes')
-
-// A client used to make database calls.
 var client = require('../eligibility-client')
 
 var PENDING = 'PENDING'
 
-/**
- * Render the about you page.
- *
- * Example call: http://localhost:3000/about-you
- */
 router.get('/about-you', function (request, response) {
   console.log('GET /about-you called.')
   response.render('about-you')
 })
 
-/**
- * Render the about you page with an existing claimant's details if they exist.
- *
- * Example call: http://localhost:3000/about-you/57c3f1139e03be003bfac1aa
- */
 router.get('/about-you/:claimant_id', function (request, response) {
   var id = request.params.claimant_id
   console.log('GET /about-you/' + id + ' called.')
@@ -38,12 +23,6 @@ router.get('/about-you/:claimant_id', function (request, response) {
   })
 })
 
-/**
- * Save a single claimant to the system. Include their statuses at this point to ensure they always exist for every
- * claimant.
- *
- * Example call: http://localhost:3000/about-you
- */
 router.post('/about-you', function (request, response) {
   console.log('POST route: /about-you')
 
@@ -67,11 +46,6 @@ router.post('/about-you', function (request, response) {
   })
 })
 
-/**
- * Update a single existing claimant.
- *
- * Example call: http://localhost:3000/about-you/57c3f1139e03be003bfac1aa
- */
 router.post('/about-you/:claimant_id', function (request, response) {
   var id = request.params.claimant_id
   console.log('POST /about-you/' + id + ' called.')

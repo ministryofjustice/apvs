@@ -8,33 +8,16 @@
  */
 var client = require('../eligibility-client')
 
-/**
- * Determine if the given eligibility value equates to true or false.
- * @param eligibility {String} A String that is expected to be either 'Yes' or 'No'
- * @returns {boolean} True if eligibility is equal to 'Yes', false otherwise.
- */
 exports.isModified = function (eligibility) {
   return eligibility === 'Yes'
 }
 
-/**
- * Builds the object to persist to the database that holds the flag indicating if the claimants eligibility is new or
- * old.
- * @param eligibility {String} A String that is expected to be either 'Yes' or 'No'
- * @returns {{isEligibilityModified: boolean}} An object who's value indicates if the claimants eligibility is new or
- *          old.
- */
 exports.build = function (eligibility) {
   return {
     'isEligibilityModified': exports.isModified(eligibility)
   }
 }
 
-/**
- * Retrieves the value of isEligibilityModified flag for the claimant with the given id.
- * @param id The id of the claimant to retrieve the isEligibilityModified for.
- * @param callback A function that can be used to access the isEligibilityModified value returned by this function.
- */
 exports.get = function (id, callback) {
   client.get(id, function (error, claimant) {
     if (!error) {
@@ -44,11 +27,6 @@ exports.get = function (id, callback) {
   })
 }
 
-/**
- * Adds or updates the isEligibilityModified flag of the claimant with the given id.
- * @param id The id of the claimant that this flag is associated with.
- * @param eligibility {String} A String that is expected to be either 'Yes' or 'No'
- */
 exports.update = function (id, eligibility) {
   client.update(id, exports.build(eligibility), function (error, claimant) {
     if (!error) {

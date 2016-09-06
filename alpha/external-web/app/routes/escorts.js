@@ -1,14 +1,6 @@
-/**
- * This file defines all routes for the escorts page.
- */
 var router = require('../routes')
 var client = require('../eligibility-client')
 
-/**
- * Renders the escorts page with the details of the claimant with the given claimant id.
- *
- * Example call: http://localhost:3000/escorts/57c3f1139e03be003bfac1aa
- */
 router.get('/escorts/:claimant_id', function (request, response) {
   var id = request.params.claimant_id
   console.log('GET /escorts/' + id + ' called.')
@@ -24,11 +16,6 @@ router.get('/escorts/:claimant_id', function (request, response) {
   })
 })
 
-/**
- * Save the contents of the relationship form to the document for the claimant with the given id.
- *
- * Example call: http://localhost:3000/escorts/57c3f1139e03be003bfac1aa
- */
 router.post('/escorts/:claimant_id', function (request, response) {
   var id = request.params.claimant_id
   console.log('POST /escorts/' + id + ' called.')
