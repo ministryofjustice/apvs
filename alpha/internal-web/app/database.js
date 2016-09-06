@@ -1,6 +1,5 @@
 /**
- * This file defines the database connection to Mongo and can be included in files that require database access with:
- * var mongo = require('./database')
+ * This file defines the database connection to Mongodb.
  */
 var client = require('mongodb')
 exports.client = client
