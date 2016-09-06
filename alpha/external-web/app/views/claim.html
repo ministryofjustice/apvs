@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+APVS Application Form
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+    {% include "includes/phase_banner_alpha.html" %}
+
+    <div class="grid-row">
+
+        <h1 class="heading-xlarge">
+            Make A Claim
+        </h1>
+
+        <form action="/claim" method="post" class="form">
+
+            <div class="form-group">
+
+                <label class="form-label-bold" for="reference">Your Unique Reference:</label>
+                <input type="text" class="form-control" id="reference" name="reference">
+                <p class="form-hint">(Example: 57c81bf935f4b507f711f271)</p>
+
+                <br>
+
+                <fieldset>
+
+                    <legend>
+                        Have your eligibility details changed?
+                    </legend>
+
+                    <label class="block-label">
+                        <input type="radio" id="eligibility-modified-yes" name="isEligibilityModified" value="Yes">
+                        Yes
+                    </label>
+
+                    <label class="block-label">
+                        <input type="radio" id="eligibility-modified-no" name="isEligibilityModified" value="No">
+                        No
+                    </label>
+
+                </fieldset>
+
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Submit" class="button">
+            </div>
+
+        </form>
+
+    </div>
+</main>
+
+{% endblock %}
