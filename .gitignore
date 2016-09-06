@@ -6,3 +6,6 @@ run-docker.sh
 # Exclude all VSCode configuration files.
 **.vscode/
 alpha/external-web/node_modules/
+
+# Ignore log files
+**.log**

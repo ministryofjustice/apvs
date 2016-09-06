@@ -143,8 +143,6 @@ $(document).ready(function () {
     var url = window.location.pathname
     var id = url.substring(url.lastIndexOf('/') + 1)
 
-    console.log(id.toString())
-
     $.ajax({
       url: '/api/income-check',
       type: 'POST',

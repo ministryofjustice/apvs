@@ -6,6 +6,9 @@ var router = require('../routes')
 // A client used to make database calls.
 var client = require('../eligibility-client')
 
+var log4js = require('../log4js')
+var LOGGER = log4js.getLogger('about-you')
+
 var PENDING = 'PENDING'
 
 /**
@@ -14,7 +17,7 @@ var PENDING = 'PENDING'
  * Example call: http://localhost:3000/about-you
  */
 router.get('/about-you', function (request, response) {
-  console.log('GET /about-you called.')
+  LOGGER.debug('GET route: /about-you')
   response.render('about-you')
 })
 
@@ -25,14 +28,14 @@ router.get('/about-you', function (request, response) {
  */
 router.get('/about-you/:claimant_id', function (request, response) {
   var id = request.params.claimant_id
-  console.log('GET /about-you/' + id + ' called.')
+  LOGGER.debug('GET route: /about-you/' + id)
 
   client.get(id, function (error, claimant) {
     if (!error) {
-      console.log('Successfully retrieved claimant with id: ' + id)
+      LOGGER.info('Successfully retrieved claimant with id: ' + id)
       response.render('about-you', { 'claimant': claimant })
     } else {
-      console.log('Failed to retrieve claimant with id: ' + id)
+      LOGGER.error('Failed to retrieve claimant with id: ' + id)
       response.status(500).render('error', { message: error.message, error: error })
     }
   })
@@ -45,7 +48,7 @@ router.get('/about-you/:claimant_id', function (request, response) {
  * Example call: http://localhost:3000/about-you
  */
 router.post('/about-you', function (request, response) {
-  console.log('POST route: /about-you')
+  LOGGER.debug('POST route: /about-you')
 
   var claimant = {
     personal: request.body,
@@ -58,10 +61,10 @@ router.post('/about-you', function (request, response) {
 
   client.save(claimant, function (error, claimant) {
     if (!error) {
-      console.log('Successfully saved new claimant: ' + claimant.ops[0])
+      LOGGER.info('Successfully saved new claimant.')
       response.redirect('/relationship/' + claimant.ops[0]._id)
     } else {
-      console.log('Failed to save new claimant.')
+      LOGGER.error('Failed to save new claimant.')
       response.status(500).render('error', { message: error.message, error: error })
     }
   })
@@ -74,14 +77,14 @@ router.post('/about-you', function (request, response) {
  */
 router.post('/about-you/:claimant_id', function (request, response) {
   var id = request.params.claimant_id
-  console.log('POST /about-you/' + id + ' called.')
+  LOGGER.debug('POST route: /about-you/' + id)
 
   client.update(id, request.body, function (error, claimant) {
     if (!error) {
-      console.log('Successfully updated claimant with id: ' + id)
+      LOGGER.info('Successfully updated claimant with id: ' + id)
       response.redirect('/relationship/' + id)
     } else {
-      console.log('Failed to update claimant with id: ' + id)
+      LOGGER.error('Failed to update claimant with id: ' + id)
       response.status(500).render('error', { message: error.message, error: error })
     }
   })
