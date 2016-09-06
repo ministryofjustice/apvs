@@ -1,14 +1,6 @@
-/**
- * This file defines generic routes for returning claimant JSON objects.
- */
 var router = require('../routes')
-
-// A client used to make database calls.
 var client = require('../eligibility-client')
 
-/**
- * Retrieve all claimants in the system.
- */
 router.get('/claimants', function (request, response) {
   console.log('GET /claimants/ called.')
 
@@ -26,9 +18,6 @@ router.get('/claimants', function (request, response) {
   })
 })
 
-/**
- * Retrieve a single claimant by their claimant ID.
- */
 router.get('/claimants/:claimant_id', function (request, response) {
   var id = request.params.claimant_id
   console.log('GET /claimants/' + id + ' called.')

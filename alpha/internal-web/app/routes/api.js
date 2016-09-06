@@ -1,14 +1,6 @@
-/**
- * This file defines all routes for external API dependencies
- */
 var router = require('../routes')
-
-// A client used to make database calls.
 var client = require('../eligibility-client')
 
-/**
- * Retrieve and update the verification status for the claimant with the given ID.
- */
 router.post('/api/income-check', function (request, response) {
   var id = request.body.id
   console.log('POST /api/income-check called.')
@@ -25,8 +17,6 @@ router.post('/api/income-check', function (request, response) {
   })
 })
 
-/** Simulate external API by returning a random Income status
- */
 function getIncomeStatus () {
   var statusValues = [ 'YES', 'NO', 'DECEASED' ]
   var status = statusValues[ Math.floor(Math.random() * statusValues.length) ]
@@ -35,9 +25,6 @@ function getIncomeStatus () {
   }
 }
 
-/**
- * Retrieve and update the relationship status for the claimant with the given ID.
- */
 router.post('/api/relationship-check/:claimant_id', function (request, response) {
   var id = request.params.claimant_id
   console.log('GET /api/relationship-check called.')
@@ -55,9 +42,6 @@ router.post('/api/relationship-check/:claimant_id', function (request, response)
   })
 })
 
-/**
- * Simulate external API by returning a random Relationship status from NOMIS.
- */
 function getRelationshipStatus () {
   var statusValues = [ 'YES', 'NO' ]
   var status = statusValues[ Math.floor(Math.random() * statusValues.length) ]
