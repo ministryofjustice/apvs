@@ -5,6 +5,7 @@ var logger = require('../services/bunyan-logger').logger
 router.get('/', function (request, response) {
   logger.info({request: request})
   response.render('index')
+  logger.info({response: response})
 })
 
 router.get('/clean', function (request, response) {
@@ -12,11 +13,11 @@ router.get('/clean', function (request, response) {
 
   client.drop(function (error) {
     if (!error) {
-      logger.info('Cleared all.')
       response.redirect('/')
+      logger.info({response: response}, 'Successfully dropped all claimant details.')
     } else {
-      logger.warn('Failed to clean.')
       response.redirect('/')
+      logger.error({response: response}, 'Failed to drop all claimant details.')
     }
   })
 })

@@ -32,10 +32,10 @@ router.post('/relationship/:claimant_id', function (request, response) {
       // Redirect the user based on the response to the escort question.
       if (request.body.escort === 'Yes') {
         response.redirect('/escorts/' + id)
-        logger.error({response: response}, 'Claimant with id: %s has an escort.', id)
+        logger.info({response: response}, 'Claimant with id: %s has an escort.', id)
       } else {
         response.redirect('/about-your-income/' + id)
-        logger.error({response: response}, 'Claimant with id: %s does not have an escort.', id)
+        logger.info({response: response}, 'Claimant with id: %s does not have an escort.', id)
       }
     } else {
       response.status(500).render('error', { message: error.message, error: error })
