@@ -18,7 +18,8 @@ exports.logger = bunyan.createLogger({
     }
   ],
   serializers: {
-    'request': requestSerializer
+    'request': requestSerializer,
+    'response': responseSerializer
   }
 })
 
@@ -27,5 +28,11 @@ function requestSerializer (request) {
     url: request.url,
     method: request.method,
     params: request.params
+  }
+}
+
+function responseSerializer (response) {
+  return {
+    statusCode: response.statusCode
   }
 }
