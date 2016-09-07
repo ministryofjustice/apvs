@@ -1,6 +1,5 @@
 var router = require('../routes')
 var client = require('../services/eligibility-client')
-var logger = require('../services/bunyan-logger').logger
 
 // Valid Statuses for a claimant application.
 var APPLICATION_STATUS = {
@@ -9,37 +8,32 @@ var APPLICATION_STATUS = {
   ESCALATED: 'ESCALATED'
 }
 
-router.get('/claimant-details/:claimant_id', function (request, response) {
-  logger.info({request: request})
-
+router.get('/claimant-details/:claimant_id', function (request, response, next) {
   var id = request.params.claimant_id
   client.get(id, function (error, claimant) {
     if (!error) {
       response.render('claimant-details', { 'claimant': claimant })
-      logger.info({response: response}, 'Successfully retrieved details for claimant with id: %s', id)
+      next()
     } else {
       response.status(500).render('error', { message: error.message, error: error })
-      logger.error({response: response}, 'Failed to retrieve claimant with id: %s', id)
+      next()
     }
   })
 })
 
-router.post('/claimant-details/:claimant_id/approve', function (request, response) {
-  logger.info({request: request})
-  updateApplicationStatus(APPLICATION_STATUS.APPROVED, request, response)
+router.post('/claimant-details/:claimant_id/approve', function (request, response, next) {
+  updateApplicationStatus(APPLICATION_STATUS.APPROVED, request, response, next)
 })
 
-router.post('/claimant-details/:claimant_id/reject', function (request, response) {
-  logger.info({request: request})
-  updateApplicationStatus(APPLICATION_STATUS.REJECTED, request, response)
+router.post('/claimant-details/:claimant_id/reject', function (request, response, next) {
+  updateApplicationStatus(APPLICATION_STATUS.REJECTED, request, response, next)
 })
 
-router.post('/claimant-details/:claimant_id/escalate', function (request, response) {
-  logger.info({request: request})
-  updateApplicationStatus(APPLICATION_STATUS.ESCALATED, request, response)
+router.post('/claimant-details/:claimant_id/escalate', function (request, response, next) {
+  updateApplicationStatus(APPLICATION_STATUS.ESCALATED, request, response, next)
 })
 
-function updateApplicationStatus (status, request, response) {
+function updateApplicationStatus (status, request, response, next) {
   var updatedStatus = {
     'status.applicationStatus': status
   }
@@ -48,26 +42,25 @@ function updateApplicationStatus (status, request, response) {
   client.update(id, updatedStatus, function (error, claimant) {
     if (!error) {
       response.redirect('/claimant-details/' + id)
-      logger.info({response: response}, 'Successfully changed claimants application status to %s. ID: %s', updatedStatus, id)
+      next()
     } else {
       response.status(500).render('error', { message: error.message, error: error })
-      logger.error({response: response}, 'Failed to change claimants application status to %s. ID: %s', updatedStatus, id)
+      next()
     }
   })
 }
 
-router.get('/claimant-details/:claimant_id/evidence/:eligibility_id', function (request, response) {
-  logger.info({request: request})
-
+router.get('/claimant-details/:claimant_id/evidence/:eligibility_id', function (request, response, next) {
   var id = request.params.claimant_id
   var eligibilityId = request.params.eligibility_id
+
   client.get(id, function (error, claimant) {
     if (!error) {
       response.download('./eligibility-uploads/' + eligibilityId, claimant[ 'eligibility-file' ][ 'originalFilename' ])
-      logger.info({response: response}, 'Successfully retrieved details for claimant with id: %s', id)
+      next()
     } else {
       response.status(500).render('error', { message: error.message, error: error })
-      logger.error({response: response}, 'Failed to retrieve claimant with id: %s', id)
+      next()
     }
   })
 })

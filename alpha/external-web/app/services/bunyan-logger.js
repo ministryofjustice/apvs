@@ -5,7 +5,7 @@ var PrettyStream = require('bunyan-prettystream')
 var prettyStream = new PrettyStream()
 prettyStream.pipe(process.stdout)
 
-exports.logger = bunyan.createLogger({
+var logger = bunyan.createLogger({
   name: 'external',
   streams: [
     {
@@ -36,3 +36,5 @@ function responseSerializer (response) {
     statusCode: response.statusCode
   }
 }
+
+module.exports = logger
