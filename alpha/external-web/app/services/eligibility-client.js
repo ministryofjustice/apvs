@@ -1,4 +1,4 @@
-var mongo = require('../app/database')
+var mongo = require('./database')
 
 exports.get = function (id, callback) {
   mongo.db.collection('claimants').findOne({ _id: exports.mongoId(id) }, function (error, claimant) {
