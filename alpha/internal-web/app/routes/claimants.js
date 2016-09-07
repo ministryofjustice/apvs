@@ -1,5 +1,5 @@
 var router = require('../routes')
-var client = require('../eligibility-client')
+var client = require('../services/eligibility-client')
 var logger = require('../services/bunyan-logger').logger
 
 // Append 'data' to the JSON object as this is required by the DataTable library.
