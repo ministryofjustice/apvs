@@ -1,6 +1,5 @@
 var router = require('../routes')
 var client = require('../eligibility-client')
-var eligibilityFlag = require('../services/eligibility-flag')
 
 // Require file upload library.
 var multer = require('multer')
@@ -47,12 +46,6 @@ router.post('/about-your-income/:claimant_id', upload.single('evidence'), functi
       }
     })
 
-    eligibilityFlag.get(id, function (isEligibilityModified) {
-      if (isEligibilityModified) {
-        response.redirect('/claim-details/' + id)
-      } else {
-        response.redirect('/application-submitted')
-      }
-    })
+    response.redirect('/travel-profile/' + id)
   }
 })

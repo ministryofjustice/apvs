@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+APVS Application Form
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+    {% include "includes/phase_banner_alpha.html" %}
+    <div class="grid-row">
+        <div class="column-two-thirds">
+
+            <h1 class="heading-large">
+                Please select your methods of travel
+            </h1>
+
+            <form action="/travel-profile/{{ claimant['_id'] }}" method="post" class="form">
+                <div class="form-group">
+                    <fieldset>
+                        <label for="train" class="block-label">
+                        <input type="checkbox" id="train" name="train" value="Yes"
+                                {% if claimant['travel-profile']['train'] == 'Yes' %} checked {% endif %}>
+                        <span class="heading-small">Train</span>
+                        </label>
+
+                        <label for="drive" class="block-label">
+                        <input type="checkbox" id="drive" name="drive" value="Yes"
+                                {% if claimant['travel-profile']['drive'] == 'Yes' %} checked {% endif %}>
+                        <span class="heading-small">Drive</span>
+                        </label>
+                    </fieldset>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Continue" class="button">
+                </div>
+            </form>
+
+        </div>
+    </div>
+</main>
+
+{% endblock %}
