@@ -1,44 +1,45 @@
 var router = require('../routes')
 var client = require('../eligibility-client')
 var eligibilityFlag = require('../services/eligibility-flag')
+var logger = require('../services/bunyan-logger').logger
 
 var PENDING = 'PENDING'
 
 router.get('/about-you', function (request, response) {
-  console.log('GET /about-you called.')
+  logger.info({request: request})
   response.render('about-you')
 })
 
 router.get('/about-you/:claimant_id', function (request, response) {
-  var id = request.params.claimant_id
-  console.log('GET /about-you/' + id + ' called.')
+  logger.info({request: request})
 
+  var id = request.params.claimant_id
   client.get(id, function (error, claimant) {
     if (!error) {
-      console.log('Successfully retrieved claimant with id: ' + id)
+      logger.info('Successfully retrieved claimant with id: ' + id)
       response.render('about-you', { 'claimant': claimant })
     } else {
-      console.log('Failed to retrieve claimant with id: ' + id)
+      logger.error('Failed to retrieve claimant with id: ' + id)
       response.status(500).render('error', { message: error.message, error: error })
     }
   })
 })
 
 router.post('/about-you', function (request, response) {
-  console.log('POST route: /about-you')
+  logger.info({request: request})
   save(null, request, response)
 })
 
 router.post('/about-you/:claimant_id', function (request, response) {
-  var id = request.params.claimant_id
-  console.log('POST /about-you/' + id + ' called.')
+  logger.info({request: request})
 
+  var id = request.params.claimant_id
   eligibilityFlag.get(id, function (isEligibilityModified) {
     if (isEligibilityModified) {
-      console.log('This is a modification of an eligibility application. Saving new record.')
+      logger.info('This is a modification of an eligibility application. Saving new record.')
       save(id, request, response)
     } else {
-      console.log('This is a brand new eligibility application.')
+      logger.error('This is a brand new eligibility application.')
       update(id, request, response)
     }
   })
@@ -56,10 +57,10 @@ function save (id, request, response) {
 
   client.save(claimant, function (error, claimant) {
     if (!error) {
-      console.log('Successfully saved new claimant: ' + claimant)
+      logger.info('Successfully saved new claimant: ' + claimant)
       response.redirect('/relationship/' + claimant._id)
     } else {
-      console.log('Failed to save new claimant.')
+      logger.error('Failed to save new claimant.')
       response.status(500).render('error', { message: error.message, error: error })
     }
 
@@ -81,10 +82,10 @@ function update (id, request, response) {
 
   client.update(id, claimant, function (error, claimant) {
     if (!error) {
-      console.log('Successfully updated claimant with id: ' + id)
+      logger.info('Successfully updated claimant with id: ' + id)
       response.redirect('/relationship/' + id)
     } else {
-      console.log('Failed to update claimant with id: ' + id)
+      logger.error('Failed to update claimant with id: ' + id)
       response.status(500).render('error', { message: error.message, error: error })
     }
   })

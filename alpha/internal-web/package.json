@@ -15,13 +15,17 @@
     "ignore": [
       "jquery*.js"
     ],
-    "globals": [ "$" ]
+    "globals": [
+      "$"
+    ]
   },
   "dependencies": {
     "basic-auth": "^1.0.3",
     "basic-auth-connect": "^1.0.0",
     "body-parser": "^1.14.1",
     "browser-sync": "^2.11.1",
+    "bunyan": "^1.8.1",
+    "bunyan-prettystream": "^0.1.3",
     "consolidate": "0.x",
     "express": "4.13.3",
     "express-nunjucks": "^0.9.3",
