@@ -2,6 +2,14 @@
 version: '2'
 services:
 
+  # Build the external api node application and expose it on port 3002.
+  node-external-api-apvs:
+    build: ./alpha/external-api-node # This is where you switch to Java API
+    volumes:
+     - "./alpha/external-api-node/app:/usr/src/app/app"
+    ports:
+      - "3002:3002"
+
   # Build the external facing node application and expose it on port 3000.
   node-external-apvs:
     build: ./alpha/external-web
@@ -14,6 +22,7 @@ services:
       - "3000:3000"
     depends_on:
       - mongo
+      - node-external-api-apvs
 
   # Build the internal facing node application and expose it on port 3001.
   node-internal-apvs:

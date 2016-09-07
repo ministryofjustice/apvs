@@ -1,0 +1,23 @@
+{
+  "name": "external-api-node",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node_modules/.bin/nodemon ./bin/www",
+    "test": "node_modules/.bin/standard && node_modules/.bin/mocha -u exports test/**/*"
+  },
+  "dependencies": {
+    "body-parser": "~1.15.1",
+    "debug": "~2.2.0",
+    "express": "~4.13.4",
+    "morgan": "~1.7.0",
+    "nodemon": "^1.10.2"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.0.2",
+    "proxyquire": "^1.7.10",
+    "standard": "^8.0.0",
+    "supertest": "^2.0.0"
+  }
+}
