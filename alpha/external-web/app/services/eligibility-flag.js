@@ -7,6 +7,7 @@
  *   claim via the 'Claim Now button on the index page'.
  */
 var client = require('../eligibility-client')
+var logger = require('./bunyan-logger').logger
 
 exports.isModified = function (eligibility) {
   return eligibility === 'Yes'
@@ -21,7 +22,7 @@ exports.build = function (eligibility) {
 exports.get = function (id, callback) {
   client.get(id, function (error, claimant) {
     if (!error) {
-      console.log('Successfully retrieved claimant with id: ' + id)
+      logger.info('Successfully retrieved claimant with id: ' + id)
       callback(claimant.isEligibilityModified)
     }
   })
@@ -30,7 +31,7 @@ exports.get = function (id, callback) {
 exports.update = function (id, eligibility) {
   client.update(id, exports.build(eligibility), function (error, claimant) {
     if (!error) {
-      console.log('Successfully modified the isEligibilityModified flag for claimant with id: ' + id)
+      logger.info('Successfully modified the isEligibilityModified flag for claimant with id: ' + id)
     }
   })
 }
