@@ -1,10 +1,6 @@
 var router = require('../routes')
 var client = require('../eligibility-client')
-<<<<<<< HEAD
-=======
-var eligibilityFlag = require('../services/eligibility-flag')
 var logger = require('../services/bunyan-logger').logger
->>>>>>> develop
 
 // Require file upload library.
 var multer = require('multer')
