@@ -1,5 +1,5 @@
 var router = require('../routes')
-var client = require('../eligibility-client')
+var client = require('../services/eligibility-client')
 var logger = require('../services/bunyan-logger')
 
 router.get('/relationship/:claimant_id', function (request, response, next) {

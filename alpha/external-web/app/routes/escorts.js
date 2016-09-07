@@ -1,5 +1,5 @@
 var router = require('../routes')
-var client = require('../eligibility-client')
+var client = require('../services/eligibility-client')
 
 router.get('/escorts/:claimant_id', function (request, response, next) {
   var id = request.params.claimant_id

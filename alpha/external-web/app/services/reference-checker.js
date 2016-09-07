@@ -1,4 +1,4 @@
-var client = require('../eligibility-client')
+var client = require('./eligibility-client')
 var logger = require('./bunyan-logger')
 
 exports.isValid = function (reference, callback) {

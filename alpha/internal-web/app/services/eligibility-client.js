@@ -1,4 +1,4 @@
-var mongo = require('../app/database')
+var mongo = require('./database')
 
 exports.getAll = function (callback) {
   mongo.db.collection('claimants').find().toArray(function (error, claimant) {

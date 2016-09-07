@@ -6,7 +6,7 @@
  * - A modification occurs when a claimant indicates their existing eligibility details have changed when submitting a
  *   claim via the 'Claim Now button on the index page'.
  */
-var client = require('../eligibility-client')
+var client = require('./eligibility-client')
 var logger = require('./bunyan-logger')
 
 exports.isModified = function (eligibility) {
