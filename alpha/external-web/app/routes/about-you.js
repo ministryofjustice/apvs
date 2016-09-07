@@ -8,6 +8,7 @@ var PENDING = 'PENDING'
 router.get('/about-you', function (request, response) {
   logger.info({request: request})
   response.render('about-you')
+  logger.info({response: response})
 })
 
 router.get('/about-you/:claimant_id', function (request, response) {
@@ -16,11 +17,11 @@ router.get('/about-you/:claimant_id', function (request, response) {
   var id = request.params.claimant_id
   client.get(id, function (error, claimant) {
     if (!error) {
-      logger.info('Successfully retrieved claimant with id: ' + id)
       response.render('about-you', { 'claimant': claimant })
+      logger.info({response: response}, 'Successfully retrieved claimant with id: %s', id)
     } else {
-      logger.error('Failed to retrieve claimant with id: ' + id)
       response.status(500).render('error', { message: error.message, error: error })
+      logger.error({response: response}, 'Failed to retrieve claimant with id: %s', id)
     }
   })
 })
@@ -28,6 +29,7 @@ router.get('/about-you/:claimant_id', function (request, response) {
 router.post('/about-you', function (request, response) {
   logger.info({request: request})
   save(null, request, response)
+  logger.info({response: response})
 })
 
 router.post('/about-you/:claimant_id', function (request, response) {
@@ -39,7 +41,7 @@ router.post('/about-you/:claimant_id', function (request, response) {
       logger.info('This is a modification of an eligibility application. Saving new record.')
       save(id, request, response)
     } else {
-      logger.error('This is a brand new eligibility application.')
+      logger.info('This is a brand new eligibility application.')
       update(id, request, response)
     }
   })
@@ -57,11 +59,11 @@ function save (id, request, response) {
 
   client.save(claimant, function (error, claimant) {
     if (!error) {
-      logger.info('Successfully saved new claimant: ' + claimant)
       response.redirect('/relationship/' + claimant._id)
+      logger.info({response: response}, 'Successfully saved new claimant.')
     } else {
-      logger.error('Failed to save new claimant.')
       response.status(500).render('error', { message: error.message, error: error })
+      logger.info({response: response}, 'Failed to save new claimant.')
     }
 
     // If we were directed here from the claim page mark the new eligibility claim as being a modification.
@@ -82,11 +84,11 @@ function update (id, request, response) {
 
   client.update(id, claimant, function (error, claimant) {
     if (!error) {
-      logger.info('Successfully updated claimant with id: ' + id)
       response.redirect('/relationship/' + id)
+      logger.info({response: response}, 'Successfully updated claimant with id: %s', id)
     } else {
-      logger.error('Failed to update claimant with id: ' + id)
       response.status(500).render('error', { message: error.message, error: error })
+      logger.error({response: response}, 'Failed to update claimant with id: %s', id)
     }
   })
 }
