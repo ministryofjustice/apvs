@@ -33,3 +33,17 @@ services:
     image: mongo
     ports:
       - "27017:27017"
+
+  # Build an ELK stack container that will aggregate log messages built by the system.
+  # 5601 :: Kibana - Web Interface.
+  # 9200 :: Elasticsearch - JSON Interface.
+  # 5044 :: Logstash - Beats Interface - Recieves logs from Beats.
+  # 5000 :: Logstash - Lumberjack Interface - Recieves logs from Logstash Forwarders.
+  elk:
+    image: sebp/elk
+    build: ./alpha/elk
+    ports:
+      - "5601:5601"
+      - "9200:9200"
+      - "5044:5044"
+      - "5000:5000"
