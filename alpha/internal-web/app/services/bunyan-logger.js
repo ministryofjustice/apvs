@@ -1,13 +1,19 @@
 var bunyan = require('bunyan')
+var PrettyStream = require('bunyan-prettystream')
+
+// Stream to handle pretty printing of Bunyan logs to stdout.
+var prettyStream = new PrettyStream()
+prettyStream.pipe(process.stdout)
+
 exports.logger = bunyan.createLogger({
   name: 'internal',
   streams: [
     {
-      level: 'INFO',
-      stream: process.stdout
+      level: 'DEBUG',
+      stream: prettyStream
     },
     {
-      level: 'INFO',
+      level: 'DEBUG',
       path: '/usr/src/app/logs/external-web.log'
     }
   ],
