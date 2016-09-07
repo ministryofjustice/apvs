@@ -15,11 +15,11 @@ router.get('/claimant-details/:claimant_id', function (request, response) {
   var id = request.params.claimant_id
   client.get(id, function (error, claimant) {
     if (!error) {
-      logger.info('Successfully retrieved details for claimant with id: ' + id)
       response.render('claimant-details', { 'claimant': claimant })
+      logger.info({response: response}, 'Successfully retrieved details for claimant with id: %s', id)
     } else {
-      logger.error('Failed to retrieve claimant with id: ' + id)
       response.status(500).render('error', { message: error.message, error: error })
+      logger.error({response: response}, 'Failed to retrieve claimant with id: %s', id)
     }
   })
 })
@@ -47,11 +47,11 @@ function updateApplicationStatus (status, request, response) {
   var id = request.params.claimant_id
   client.update(id, updatedStatus, function (error, claimant) {
     if (!error) {
-      logger.info('Successfully changed claimants application status to ' + updatedStatus + '. ID: ' + id)
       response.redirect('/claimant-details/' + id)
+      logger.info({response: response}, 'Successfully changed claimants application status to %s. ID: %s', updatedStatus, id)
     } else {
-      logger.error('Failed to change claimants application status to ' + updatedStatus + '. ID: ' + id)
       response.status(500).render('error', { message: error.message, error: error })
+      logger.error({response: response}, 'Failed to change claimants application status to %s. ID: %s', updatedStatus, id)
     }
   })
 }
@@ -63,11 +63,11 @@ router.get('/claimant-details/:claimant_id/evidence/:eligibility_id', function (
   var eligibilityId = request.params.eligibility_id
   client.get(id, function (error, claimant) {
     if (!error) {
-      logger.info('Successfully retrieved details for claimant with id: ' + id)
       response.download('./eligibility-uploads/' + eligibilityId, claimant[ 'eligibility-file' ][ 'originalFilename' ])
+      logger.info({response: response}, 'Successfully retrieved details for claimant with id: %s', id)
     } else {
-      logger.error('Failed to retrieve claimant with id: ' + id)
       response.status(500).render('error', { message: error.message, error: error })
+      logger.error({response: response}, 'Failed to retrieve claimant with id: %s', id)
     }
   })
 })
