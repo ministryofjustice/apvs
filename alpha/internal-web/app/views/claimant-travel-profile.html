@@ -1,0 +1,23 @@
+<h2 class='heading-medium'>Travel Profile</h1>
+<ul class="list list-bullet">
+    {% if claimant['travel-profile']['public'] == 'Yes' %}
+        <li>Public transport (train/bus)</li>
+        <ul class="list list-bullet">
+        {% if claimant['travel-profile']['taxi'] == 'Yes' %}
+            <li>Taxi</li>
+        {% endif %}
+        {% if claimant['travel-profile']['discount'] == 'Yes' %}
+            <li>Discount card</li>
+        {% endif %}
+        </ul>
+    {% endif %}
+
+    {% if claimant['travel-profile']['car'] == 'Yes' %}
+        <li>Car</li>
+        <ul class="list list-bullet">
+        {% if claimant['travel-profile']['share-lift'] == 'Yes' %}
+            <li>Shares a lift [with {{ claimant['travel-profile']['lift-shared-with'] }}]</li>
+        {% endif %}
+        </ul>
+    {% endif %}
+</ul>
