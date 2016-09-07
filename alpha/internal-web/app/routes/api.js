@@ -1,5 +1,5 @@
 var router = require('../routes')
-var client = require('../eligibility-client')
+var client = require('../services/eligibility-client')
 var logger = require('../services/bunyan-logger').logger
 
 router.post('/api/income-check', function (request, response) {
