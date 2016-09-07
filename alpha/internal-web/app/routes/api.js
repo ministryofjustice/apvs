@@ -1,18 +1,18 @@
 var router = require('../routes')
 var client = require('../eligibility-client')
+var logger = require('../services/bunyan-logger').logger
 
 router.post('/api/income-check', function (request, response) {
-  var id = request.body.id
-  console.log('POST /api/income-check called.')
+  logger.info({request: request})
 
+  var id = request.body.id
   var status = getIncomeStatus()
 
   client.update(id, status, function (error, claimant) {
     if (error) {
-      console.log('Failed to change claimants income verification status to ' + status['status.relationshipVerificationStatus'] + '. ID: ' + id)
       response.status(500).render('error', { message: error.message, error: error })
+      logger.error({response: response}, 'Failed to change claimants income verification status to %s. ID: %s', status['status.relationshipVerificationStatus'], id)
     }
-
     response.json(status)
   })
 })
@@ -26,18 +26,18 @@ function getIncomeStatus () {
 }
 
 router.post('/api/relationship-check/:claimant_id', function (request, response) {
-  var id = request.params.claimant_id
-  console.log('GET /api/relationship-check called.')
+  logger.info({request: request})
 
+  var id = request.params.claimant_id
   var status = getRelationshipStatus()
 
   client.update(id, status, function (error, claimant) {
     if (!error) {
-      console.log('Successfully changed claimants relationship verification status to ' + status['status.relationshipVerificationStatus'] + '. ID: ' + id)
       response.redirect('/claimant-details/' + id)
+      logger.info({response: response}, 'Successfully changed claimants relationship verification status to %s. ID: %s', status['status.relationshipVerificationStatus'], id)
     } else {
-      console.log('Failed to change claimants relationship verification status to ' + status['status.relationshipVerificationStatus'] + '. ID: ' + id)
       response.status(500).render('error', { message: error.message, error: error })
+      logger.error({response: response}, 'Failed to change claimants relationship verification status to %s. ID: %s', status['status.relationshipVerificationStatus'], id)
     }
   })
 })

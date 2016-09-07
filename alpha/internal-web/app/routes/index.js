@@ -1,20 +1,23 @@
 var router = require('../routes')
 var client = require('../eligibility-client')
+var logger = require('../services/bunyan-logger').logger
 
 router.get('/', function (request, response) {
+  logger.info({request: request})
   response.render('index')
+  logger.info({response: response})
 })
 
 router.get('/clean', function (request, response) {
-  console.log('GET /clean called.')
+  logger.info({request: request})
 
   client.drop(function (error) {
     if (!error) {
-      console.log('Cleared all.')
       response.redirect('/')
+      logger.info({response: response}, 'Successfully dropped all claimant details.')
     } else {
-      console.log('Failed to clean.')
       response.redirect('/')
+      logger.error({response: response}, 'Failed to drop all claimant details.')
     }
   })
 })
