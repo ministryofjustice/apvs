@@ -1,5 +1,5 @@
 var client = require('../eligibility-client')
-var logger = require('./bunyan-logger').logger
+var logger = require('./bunyan-logger')
 
 exports.isValid = function (reference, callback) {
   if (client.isValidMongoId(reference)) {

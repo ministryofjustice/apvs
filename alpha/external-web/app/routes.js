@@ -1,6 +1,7 @@
 var express = require('express')
-var router = express.Router()
+var logger = require('./services/bunyan-logger')
 
+var router = express.Router()
 module.exports = router
 
 // Include custom route files.
@@ -12,3 +13,14 @@ require('./routes/about-your-income')
 require('./routes/application-submitted')
 require('./routes/claim')
 require('./routes/claim-details')
+
+// Executed prior to any route being called.
+router.use(function (request, response, next) {
+  logger.info({ request: request }, 'Route Started.')
+  next()
+})
+
+// Executed after any route completes.
+router.use(function (request, response) {
+  logger.info({ response: response }, 'Route Complete.')
+})
