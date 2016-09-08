@@ -1,7 +1,7 @@
 /**
  * This file defines the database connection to Mongodb.
  */
-var logger = require('./bunyan-logger').logger
+var logger = require('./bunyan-logger')
 var client = require('mongodb')
 exports.client = client
 

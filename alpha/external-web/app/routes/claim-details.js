@@ -1,14 +1,11 @@
 var router = require('../routes')
-var logger = require('../services/bunyan-logger').logger
 
-router.get('/claim-details/:claimant_id', function (request, response) {
-  logger.info({request: request})
+router.get('/claim-details/:claimant_id', function (request, response, next) {
   response.render('claim-details')
-  logger.info({response: response})
+  next()
 })
 
 // TODO
-router.post('/claim-details/:claimant_id', function (request, response) {
-  logger.info({request: request})
-  logger.info({response: response})
+router.post('/claim-details/:claimant_id', function (request, response, next) {
+  next()
 })

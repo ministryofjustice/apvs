@@ -7,7 +7,7 @@
  *   claim via the 'Claim Now button on the index page'.
  */
 var client = require('./eligibility-client')
-var logger = require('./bunyan-logger').logger
+var logger = require('./bunyan-logger')
 
 exports.isModified = function (eligibility) {
   return eligibility === 'Yes'
