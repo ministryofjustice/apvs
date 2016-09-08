@@ -15,7 +15,7 @@ APVS Application Form
             Enter Claim Details
         </h1>
 
-        <form action="" method="post" class="form">
+        <form action="/claim-details/{{ id }}" method="post" class="form">
 
             <div class="form-group">
 
@@ -26,6 +26,10 @@ APVS Application Form
                 </div>
 
             </div>
+        </form>
+
+        <form action="/claim-details/{{ id }}/?amount=999" method="post" class="form">
+            <input type="submit" value="Submit MANUAL" class="button">
         </form>
     </div>
 

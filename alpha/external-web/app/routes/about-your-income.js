@@ -1,6 +1,5 @@
 var router = require('../routes')
 var client = require('../services/eligibility-client')
-var eligibilityFlag = require('../services/eligibility-flag')
 var logger = require('../services/bunyan-logger')
 
 // Require file upload library.
@@ -44,14 +43,7 @@ router.post('/about-your-income/:claimant_id', upload.single('evidence'), functi
       }
     })
 
-    eligibilityFlag.get(id, function (isEligibilityModified) {
-      if (isEligibilityModified) {
-        response.redirect('/claim-details/' + id)
-        next()
-      } else {
-        response.redirect('/application-submitted')
-        next()
-      }
-    })
+    response.redirect('/travel-profile/' + id)
+    next()
   }
 })
