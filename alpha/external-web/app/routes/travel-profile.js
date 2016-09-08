@@ -4,8 +4,6 @@ var eligibilityFlag = require('../services/eligibility-flag')
 var logger = require('../services/bunyan-logger')
 
 router.get('/travel-profile/:claimant_id', function (request, response, next) {
-  logger.info({request: request})
-
   var id = request.params.claimant_id
   client.get(id, function (error, claimant) {
     if (!error) {
@@ -19,8 +17,6 @@ router.get('/travel-profile/:claimant_id', function (request, response, next) {
 })
 
 router.post('/travel-profile/:claimant_id', function (request, response, next) {
-  logger.info({response: response})
-
   var id = request.params.claimant_id
   var travelProfile = {
     'travel-profile': request.body
