@@ -13,6 +13,7 @@ require('./routes/about-your-income')
 require('./routes/application-submitted')
 require('./routes/claim')
 require('./routes/claim-details')
+require('./routes/travel-profile')
 
 // Executed prior to any route being called.
 router.use(function (request, response, next) {

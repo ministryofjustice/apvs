@@ -1,0 +1,112 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+APVS Application Form
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+    {% include "includes/phase_banner_alpha.html" %}
+    <div class="grid-row">
+        <div class="column-two-thirds">
+
+            <h1 class="heading-large">
+                Please select what you claim for
+            </h1>
+
+            <form action="/travel-profile/{{ claimant['_id'] }}" method="post" class="form">
+                <div class="form-group">
+                    <fieldset>
+                        <label for="public" class="block-label" data-target="public-transport-questions">
+                        <input type="checkbox" id="public" name="public" value="Yes"
+                                {% if claimant['travel-profile']['public'] == 'Yes' %} checked {% endif %}>
+                        <span class="heading-small">Public transport (Bus/train)</span>
+                        </label>
+
+                        <div id="public-transport-questions" {% if claimant['travel-profile']['public'] != 'Yes' %} class="js-hidden" {% endif %}>
+
+                            <div id="taxi-question" class="panel panel-border-narrow">
+                                <p>Do you get a taxi to/from the bus/train?</p>
+                                <label class="block-label">
+                                    <input type="radio" id="taxi-yes" name="taxi" value="Yes"
+                                        {% if claimant['travel-profile']['taxi'] == 'Yes' %} checked {% endif %}>
+                                    Yes
+                                </label>
+
+                                <label class="block-label">
+                                    <input type="radio" id="taxi-no" name="taxi" value="No"
+                                        {% if claimant['travel-profile']['taxi'] == 'No' %} checked {% endif %}>
+                                    No
+                                </label>
+                            </div>
+
+                            <div id="discount-question" class="panel panel-border-narrow">
+                                <p>Do you have a discount card for using the bus/train?</p>
+                                <label class="block-label">
+                                    <input type="radio" id="discount-yes" name="discount" value="Yes"
+                                        {% if claimant['travel-profile']['discount'] == 'Yes' %} checked {% endif %}>
+                                    Yes
+                                </label>
+
+                                <label class="block-label">
+                                    <input type="radio" id="discount-no" name="discount" value="No"
+                                        {% if claimant['travel-profile']['discount'] == 'No' %} checked {% endif %}>
+                                    No
+                                </label>
+                            </div>
+
+                        </div>
+
+                        <br>
+
+                        <label for="car" class="block-label" data-target="car-questions">
+                        <input type="checkbox" id="car" name="car" value="Yes"
+                                {% if claimant['travel-profile']['car'] == 'Yes' %} checked {% endif %}>
+                        <span class="heading-small">Car</span>
+                        </label>
+
+                        <div id="car-questions" {% if claimant['travel-profile']['car'] != 'Yes' %} class="js-hidden" {% endif %}>
+                            <div id="share-lift-question" class="panel panel-border-narrow">
+                                <p>Do you share a lift with any other claimants?</p>
+                                <label for="share-lift-yes" class="block-label" data-target="enter-lift-shared-with">
+                                    <input type="radio" id="share-lift-yes" name="share-lift" value="Yes"
+                                        {% if claimant['travel-profile']['share-lift'] == 'Yes' %} checked {% endif %}>
+                                    Yes
+                                </label>
+
+                                <div id="enter-lift-shared-with" {% if claimant['travel-profile']['share-lift'] != 'Yes' %} class="js-hidden" {% endif %}>
+                                    <div class="panel panel-border-narrow">
+                                        <p>Please enter the name or ID of the claimant you share a lift with</p>
+                                        <input type="text" id="lift-shared-with" name="lift-shared-with" value="{{ claimant['travel-profile']['lift-shared-with'] }}">
+                                    </div>
+                                </div>
+
+                                <br>
+
+                                <label class="block-label">
+                                    <input type="radio" id="share-lift-no" name="share-lift" value="No"
+                                        {% if claimant['travel-profile']['share-lift'] == 'No' %} checked {% endif %}>
+                                    No
+                                </label>
+                            </div>
+                        </div>
+
+                        <label for="food" class="block-label">
+                        <input type="checkbox" id="food" name="food" value="Yes"
+                                {% if claimant['travel-profile']['food'] == 'Yes' %} checked {% endif %}>
+                        <span class="heading-small">Food or drink</span>
+                        </label>
+                    </fieldset>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Continue" class="button">
+                </div>
+            </form>
+
+        </div>
+    </div>
+</main>
+
+{% endblock %}
