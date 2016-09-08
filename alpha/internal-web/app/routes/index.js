@@ -1,5 +1,5 @@
 var router = require('../routes')
-var client = require('../services/eligibility-client')
+var client = require('../services/db-client')
 
 router.get('/', function (request, response, next) {
   response.render('index')
