@@ -22,7 +22,6 @@ services:
       - "3000:3000"
     depends_on:
       - mongo
-      - elk
       - node-external-api-apvs
     links:
       - elk
@@ -39,7 +38,6 @@ services:
       - "3001:3001"
     depends_on:
       - mongo
-      - elk
     links:
       - elk
 
