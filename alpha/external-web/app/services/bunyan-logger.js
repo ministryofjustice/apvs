@@ -1,15 +1,18 @@
 var bunyan = require('bunyan')
 var PrettyStream = require('bunyan-prettystream')
-var bunyanLogstash = require('bunyan-logstash')
+var bunyanLogstash = require('bunyan-logstash-tcp')
 
 // Stream to handle pretty printing of Bunyan logs to stdout.
 var prettyStream = new PrettyStream()
 prettyStream.pipe(process.stdout)
 
+// Stream to push logs to Logstash for aggregation, reattempt connections indefinitely.
 var logstashStream = bunyanLogstash.createStream({
-  host: '127.0.0.1',
-  port: 5000
-})
+  host: 'elk',
+  port: 9998,
+  max_connect_retries: 10,
+  retry_interval: 1000 * 60
+}).on('error', console.log)
 
 var logger = bunyan.createLogger({
   name: 'external',
