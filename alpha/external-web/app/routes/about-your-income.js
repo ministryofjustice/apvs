@@ -1,33 +1,29 @@
 var router = require('../routes')
 var client = require('../services/eligibility-client')
-var logger = require('../services/bunyan-logger').logger
+var logger = require('../services/bunyan-logger')
 
 // Require file upload library.
 var multer = require('multer')
 var upload = multer({ dest: 'eligibility-uploads/' })
 
-router.get('/about-your-income/:claimant_id', function (request, response) {
-  logger.info({request: request})
-
+router.get('/about-your-income/:claimant_id', function (request, response, next) {
   var id = request.params.claimant_id
   client.get(id, function (error, claimant) {
     if (!error) {
       response.render('about-your-income', { 'claimant': claimant })
-      logger.info({response: response}, 'Successfully retrieved claimant with id: %s', id)
+      next()
     } else {
       response.status(500).render('error', { message: error.message, error: error })
-      logger.error({response: response}, 'Failed to retrieve claimant with id: %s', id)
+      next()
     }
   })
 })
 
-router.post('/about-your-income/:claimant_id', upload.single('evidence'), function (request, response) {
-  logger.info({request: request})
-
+router.post('/about-your-income/:claimant_id', upload.single('evidence'), function (request, response, next) {
   var id = request.params.claimant_id
   if (!request.file) {
     response.status(500).render('error', { error: 'Failed to update claimant with id: ' + id + '. No file was uploaded.' })
-    logger.error({response: response}, 'Failed to update claimant with id: %s. No file was uploaded.', id)
+    next()
   } else {
     var incomeDetails = {
       'eligibility-file': {
@@ -43,11 +39,11 @@ router.post('/about-your-income/:claimant_id', upload.single('evidence'), functi
         logger.info('Successfully updated claimant with id: %s', id)
       } else {
         response.status(500).render('error', { message: error.message, error: error })
-        logger.error({response: response}, 'Failed to update claimant with id: %s', id)
+        next()
       }
     })
 
     response.redirect('/travel-profile/' + id)
-    logger.info({response: response}, 'Redirecting to travel profile')
+    next()
   }
 })

@@ -1,25 +1,20 @@
 var router = require('../routes')
 var client = require('../services/eligibility-client')
-var logger = require('../services/bunyan-logger').logger
 
-router.get('/escorts/:claimant_id', function (request, response) {
-  logger.info({request: request})
-
+router.get('/escorts/:claimant_id', function (request, response, next) {
   var id = request.params.claimant_id
   client.get(id, function (error, claimant) {
     if (!error) {
       response.render('escorts', { 'claimant': claimant })
-      logger.info({response: response}, 'Successfully retrieved claimant with id: %s', id)
+      next()
     } else {
       response.status(500).render('error', { message: error.message, error: error })
-      logger.error({response: response}, 'Failed to retrieve claimant with id: %s', id)
+      next()
     }
   })
 })
 
-router.post('/escorts/:claimant_id', function (request, response) {
-  logger.info({request: request})
-
+router.post('/escorts/:claimant_id', function (request, response, next) {
   var escorts = {
     'escorts': request.body
   }
@@ -28,10 +23,10 @@ router.post('/escorts/:claimant_id', function (request, response) {
   client.update(id, escorts, function (error, claimant) {
     if (!error) {
       response.redirect('/about-your-income/' + id)
-      logger.info({response: response}, 'Successfully updated claimant with id: %s', id)
+      next()
     } else {
       response.status(500).render('error', { message: error.message, error: error })
-      logger.error({response: response}, 'Failed to update claimant with id: %s', id)
+      next()
     }
   })
 })

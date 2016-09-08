@@ -12,7 +12,7 @@ APVS Application Form
         <div class="column-two-thirds">
 
             <h1 class="heading-large">
-                Please select your methods of travel
+                Please select what you claim for
             </h1>
 
             <form action="/travel-profile/{{ claimant['_id'] }}" method="post" class="form">
@@ -91,6 +91,12 @@ APVS Application Form
                                 </label>
                             </div>
                         </div>
+
+                        <label for="food" class="block-label">
+                        <input type="checkbox" id="food" name="food" value="Yes"
+                                {% if claimant['travel-profile']['food'] == 'Yes' %} checked {% endif %}>
+                        <span class="heading-small">Food or drink</span>
+                        </label>
                     </fieldset>
                 </div>
 
