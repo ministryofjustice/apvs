@@ -20,14 +20,14 @@ services:
      - "./alpha/uploads/eligibility-uploads:/usr/src/app/eligibility-uploads"
     ports:
       - "3000:3000"
-    environment:
-      - LOGSTASH_HOST=elk
-      - LOGSTASH_PORT=9998
     depends_on:
       - mongo
       - node-external-api-apvs
-    links:
-      - elk
+    #links:
+    #  - elk
+    #environment:
+    #  - LOGSTASH_HOST=elk
+    #  - LOGSTASH_PORT=9998
 
   # Build the internal facing node application and expose it on port 3001.
   node-internal-apvs:
@@ -39,13 +39,13 @@ services:
      - "./alpha/uploads/eligibility-uploads:/usr/src/app/eligibility-uploads/"
     ports:
       - "3001:3001"
-    environment:
-      - LOGSTASH_HOST=elk
-      - LOGSTASH_PORT=9998
     depends_on:
       - mongo
-    links:
-      - elk
+    #links:
+    #  - elk
+    #environment:
+    #  - LOGSTASH_HOST=elk
+    #  - LOGSTASH_PORT=9998
 
   # Build a mongo contianer that will serve as the database for the internal and external node applications.
   mongo:
@@ -53,20 +53,23 @@ services:
     ports:
       - "27017:27017"
 
-  # Build an ELK stack container that will aggregate log messages built by the system.
+  # Build an ELK stack container that will aggregate log messages built by the system. ELK Ports:
   # 5601 :: Kibana - Web Interface.
   # 9200 :: Elasticsearch - JSON Interface.
   # 5044 :: Logstash - Beats Interface - Recieves logs from Beats.
   # 5000 :: Logstash - Lumberjack Interface - Recieves logs from Logstash Forwarders.
   # 9998 :: TCP port for bunyan logs.
   # 9999 :: UPD port for bunyan logs.
-  elk:
-    image: sebp/elk
-    build: ./alpha/elk
-    ports:
-      - "5601:5601"
-      - "9200:9200"
-      - "5044:5044"
-      - "5000:5000"
-      - "9998:9998"
-      - "9999:9999"
+  #
+  # Uncomment the following configuration, and the links, and the environmental variables above to run the ELK stack
+  # alongside the rest of the application.
+  #elk:
+  #  image: sebp/elk
+  #  build: ./alpha/elk
+  #  ports:
+  #    - "5601:5601"
+  #    - "9200:9200"
+  #    - "5044:5044"
+  #    - "5000:5000"
+  #    - "9998:9998"
+  #    - "9999:9999"

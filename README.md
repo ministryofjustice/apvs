@@ -28,7 +28,7 @@ docker-compose up
 Optional configuration for the prototype.
 
 ## ELK Stack
-The prototype has been configured to stream log messages from the Bunyan logger to an instance of the ELK stack running in a Docker container. By default this is disabled. To enable this functionality uncomment the ELK configuration in the docker-compose.yml file and set the following environment variables:
+The prototype has been configured to stream log messages from the Bunyan logger to an instance of the ELK stack running in a Docker container. By default this is disabled. To enable this functionality uncomment the ELK configuration, ELK links, and the environmental defined below for both the internal and external web in the docker-compose.yml file.
 
 - LOGSTASH_HOST :: The name of the host running Logstash. If using the 'sebp/elk' image set this to 'elk'.
 - LOGSTASH_PORT :: A Logstash TCP port that the Bunyan logger should send log messages to. If using the 'sebp/elk' image set this to '9998'.
