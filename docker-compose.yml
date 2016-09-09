@@ -20,6 +20,9 @@ services:
      - "./alpha/uploads/eligibility-uploads:/usr/src/app/eligibility-uploads"
     ports:
       - "3000:3000"
+    environment:
+      - LOGSTASH_HOST=elk
+      - LOGSTASH_PORT=9998
     depends_on:
       - mongo
       - node-external-api-apvs
@@ -36,6 +39,9 @@ services:
      - "./alpha/uploads/eligibility-uploads:/usr/src/app/eligibility-uploads/"
     ports:
       - "3001:3001"
+    environment:
+      - LOGSTASH_HOST=elk
+      - LOGSTASH_PORT=9998
     depends_on:
       - mongo
     links:
