@@ -24,10 +24,6 @@ logger.addStream({
   stream: prettyStream
 })
 
-// TODO: REMOVE THIS
-console.log('logstashHost: ' + logstashHost)
-console.log('logstashPort: ' + logstashPort)
-
 // Add stream to push logs to Logstash for aggregation, reattempt connections indefinitely.
 if (logstashHost && logstashPort) {
   var logstashStream = bunyanLogstash.createStream({
