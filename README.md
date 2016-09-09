@@ -21,6 +21,7 @@ There are three node.js application containers
 
 The node applications are linked to a mongo database container.
 
+Run the application:
 ```
 docker-compose up
 
@@ -29,3 +30,12 @@ docker-compose up
 ```
 
 When running in development, volumes are mapped from the containers to the host so changes to host files trigger the application to restart ([nodemon](http://nodemon.io/)) and node_modules dependencies are cached so they don't need to be retrieved each time.
+
+## Configuration
+Optional configuration for the prototype.
+
+### ELK Stack
+The prototype has been configured to stream log messages from the Bunyan logger to an instance of the ELK stack running in a Docker container. By default this is disabled. To enable this functionality uncomment the ELK configuration, ELK links, and the environmental defined below for both the internal and external web in the docker-compose.yml file.
+
+- LOGSTASH_HOST :: The name of the host running Logstash. If using the 'sebp/elk' image set this to 'elk'.
+- LOGSTASH_PORT :: A Logstash TCP port that the Bunyan logger should send log messages to. If using the 'sebp/elk' image set this to '9998'.
