@@ -27,8 +27,11 @@ var logger = bunyan.createLogger({
       stream: logstashStream
     },
     {
+      type: 'rotating-file',
       level: 'DEBUG',
-      path: '/usr/src/app/logs/external-web.log'
+      path: '/usr/src/app/logs/internal-web.log',
+      period: '1d',
+      count: 7
     }
   ],
   serializers: {
