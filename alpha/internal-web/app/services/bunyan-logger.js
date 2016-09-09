@@ -16,28 +16,32 @@ var logstashStream = bunyanLogstash.createStream({
 
 var logger = bunyan.createLogger({
   name: 'internal',
-  streams: [
-    {
-      level: 'DEBUG',
-      stream: prettyStream
-    },
-    {
-      type: 'raw',
-      level: 'DEBUG',
-      stream: logstashStream
-    },
-    {
-      type: 'rotating-file',
-      level: 'DEBUG',
-      path: '/usr/src/app/logs/internal-web.log',
-      period: '1d',
-      count: 7
-    }
-  ],
   serializers: {
     'request': requestSerializer,
     'response': responseSerializer
   }
+})
+
+// Add console Stream.
+logger.addStream({
+  level: 'DEBUG',
+  stream: prettyStream
+})
+
+// Add Logstash stream.
+logger.addStream({
+  type: 'raw',
+  level: 'DEBUG',
+  stream: logstashStream
+})
+
+// Add file stream.
+logger.addStream({
+  type: 'rotating-file',
+  level: 'DEBUG',
+  path: '/usr/src/app/logs/internal-web.log',
+  period: '1d',
+  count: 7
 })
 
 function requestSerializer (request) {
