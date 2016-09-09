@@ -12,6 +12,7 @@ prettyStream.pipe(process.stdout)
 // Create a base logger for the application.
 var logger = bunyan.createLogger({
   name: 'external',
+  streams: [],
   serializers: {
     'request': requestSerializer,
     'response': responseSerializer
