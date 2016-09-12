@@ -10,6 +10,8 @@ require('./routes/index')
 require('./routes/claimants')
 require('./routes/claimant-details')
 require('./routes/api')
+require('./routes/claims')
+require('./routes/claim-details')
 
 // Executed prior to any route being called.
 router.use(function (request, response, next) {

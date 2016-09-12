@@ -51,6 +51,16 @@ exports.drop = function (callback) {
   })
 }
 
+exports.dropCollection = function (collectionName, callback) {
+  mongo.db.dropCollection(collectionName, function (error) {
+    if (!error) {
+      callback(null)
+    } else {
+      callback(error)
+    }
+  })
+}
+
 // Takes a string and wraps it as a Mongo ObjectID.
 exports.mongoId = function (id) {
   return new mongo.client.ObjectID(id)
