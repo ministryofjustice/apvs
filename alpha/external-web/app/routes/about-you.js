@@ -28,20 +28,19 @@ router.post('/about-you', function (request, response, next) {
 
 router.post('/about-you/:claimant_id', function (request, response, next) {
   var id = request.params.claimant_id
-  eligibilityFlag.get(id, function (isEligibilityModified) {
-    if (isEligibilityModified) {
-      logger.info('This is a modification of an eligibility application. Saving new record.')
-      save(id, request, response)
-      next()
-    } else {
-      logger.info('This is a brand new eligibility application.')
-      update(id, request, response)
-      next()
-    }
-  })
+  eligibilityFlag.get(id)
+    .then(function (isEligibilityModified) {
+      if (isEligibilityModified) {
+        logger.info('This is a modification of an eligibility application. Saving new record.')
+        save(id, request, response, next)
+      } else {
+        logger.info('This is a brand new eligibility application.')
+        update(id, request, response, next)
+      }
+    })
 })
 
-function save (id, request, response) {
+function save (id, request, response, next) {
   var claimant = {
     personal: request.body,
     status: {
@@ -60,16 +59,18 @@ function save (id, request, response) {
 
     // If we were directed here from the claim page mark the new eligibility claim as being a modification.
     if (id) {
-      eligibilityFlag.get(id, function (isEligibilityModified) {
-        if (isEligibilityModified) {
-          eligibilityFlag.update(claimant._id, 'Yes')
-        }
-      })
+      eligibilityFlag.get(id)
+        .then(function (isEligibilityModified) {
+          if (isEligibilityModified) {
+            eligibilityFlag.update(claimant._id, 'Yes')
+          }
+        })
     }
+    next()
   })
 }
 
-function update (id, request, response) {
+function update (id, request, response, next) {
   var claimant = {
     personal: request.body
   }
@@ -81,4 +82,5 @@ function update (id, request, response) {
       response.status(500).render('error', { message: error.message, error: error })
     }
   })
+  next()
 }
