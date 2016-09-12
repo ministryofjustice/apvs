@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+{{ claim['reference'] }} {{ claim['claimant']['name'] }} Claim Details
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+    {% include "includes/phase_banner_alpha.html" %}
+
+    <div class='grid-row'>
+        <h1 class="heading-large">{{ claim['claimant']['name'] }}
+            <span class="heading-secondary">Claim Application</span>
+        </h1>
+
+        <div class="column-two-thirds">
+        <h2 class="heading-medium">Reference: {{ claim['reference'] }}</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">Prisoner Information</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Prisoner Number</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Prisoner Name</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Eligible for visitation</td>
+                    <td></td>
+                </tr>
+
+            </tbody>
+        </table>
+
+        <h2 class="heading-medium">Submitted: {{ claim['dateSubmitted'] }}</h2>
+
+        <table>
+            <thead>
+                <th>Travel</th>
+                <th>Journey</th>
+                <th>Cost</th>
+                <th>Receipt</th>
+            </thead>
+            <tbody>
+                <tr><td><td><td><td></tr>
+                <tr><td><td><td><td></tr>
+            </tbody>
+        </table>
+        <br>
+        <a href class="button orange">Request Information</a>
+        <a href class="button red">Reject Selected</a>
+        <a href class="button pull-right">Approve Selected</a>
+        </div>
+    </div>
+
+</main>
+
+{% endblock %}

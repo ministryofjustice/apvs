@@ -1,11 +1,13 @@
 var router = require('../routes')
-var client = require('../services/eligibility-client')
+var client = require('../services/db-client')
+
+var claimantsCollection = 'claimants'
 
 router.post('/api/income-check', function (request, response, next) {
   var id = request.body.id
   var status = getIncomeStatus()
 
-  client.update(id, status, function (error, claimant) {
+  client.update(id, status, claimantsCollection, function (error, claimant) {
     if (error) {
       response.status(500).render('error', { message: error.message, error: error })
       next()
@@ -26,7 +28,7 @@ router.post('/api/relationship-check/:claimant_id', function (request, response,
   var id = request.params.claimant_id
   var status = getRelationshipStatus()
 
-  client.update(id, status, function (error, claimant) {
+  client.update(id, status, claimantsCollection, function (error, claimant) {
     if (!error) {
       response.redirect('/claimant-details/' + id)
       next()
