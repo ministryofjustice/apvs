@@ -1,12 +1,15 @@
 var mongo = require('./database')
+var Promise = require('bluebird')
 
-exports.get = function (id, callback) {
-  mongo.db.collection('claimants').findOne({ _id: exports.mongoId(id) }, function (error, claimant) {
-    if (!error) {
-      callback(null, claimant)
-    } else {
-      callback(error, null)
-    }
+exports.get = function (id) {
+  return new Promise(function (resolve, reject) {
+      mongo.db.collection('claimants').findOne({ _id: exports.mongoId(id) }, function (error, claimant) {
+        if (!error) {
+          resolve(claimant)
+        } else {
+          reject(error)
+        }
+      })
   })
 }
 

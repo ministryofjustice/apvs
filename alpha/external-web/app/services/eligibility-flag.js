@@ -8,6 +8,7 @@
  */
 var client = require('./eligibility-client')
 var logger = require('./bunyan-logger')
+var Promise = require('bluebird')
 
 exports.isModified = function (eligibility) {
   return eligibility === 'Yes'
@@ -19,12 +20,12 @@ exports.build = function (eligibility) {
   }
 }
 
-exports.get = function (id, callback) {
-  client.get(id, function (error, claimant) {
-    if (!error) {
-      logger.info('Successfully retrieved claimant with id: ' + id)
-      callback(claimant.isEligibilityModified)
-    }
+exports.get = function (id) {
+  return new Promise(function (resolve) {
+    client.get(id)
+      .then(function (claimant) {
+        resolve(claimant.isEligibilityModified)
+      })
   })
 }
 

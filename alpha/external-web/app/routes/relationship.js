@@ -3,16 +3,14 @@ var client = require('../services/eligibility-client')
 var logger = require('../services/bunyan-logger')
 
 router.get('/relationship/:claimant_id', function (request, response, next) {
-  var id = request.params.claimant_id
-  client.get(id, function (error, claimant) {
-    if (!error) {
+  client.get(request.params.claimant_id)
+    .then(function (claimant) {
       response.render('relationship', { 'claimant': claimant })
-      next()
-    } else {
-      response.status(500).render('error', { message: error.message, error: error })
-      next()
-    }
-  })
+    })
+    .catch(function (error) {
+      response.status(500).render('error', { error: error })
+    })
+  next()
 })
 
 router.post('/relationship/:claimant_id', function (request, response, next) {

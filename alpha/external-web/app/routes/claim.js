@@ -17,20 +17,18 @@ router.post('/claim', function (request, response, next) {
     return
   }
 
-  reference.isValid(id, function (isValid) {
-    if (!isValid) {
-      response.redirect('/index')
-      next()
-      return
-    }
-    eligibilityFlag.update(id, eligibility)
+  reference.isValid(id)
+    .then(function (isValid) {
+      if (!isValid) {
+        response.redirect('/')
+      } else {
+        eligibilityFlag.update(id, eligibility)
 
-    if (eligibilityFlag.isModified(eligibility)) {
-      response.redirect('/about-you/' + id)
+        if (eligibilityFlag.isModified(eligibility)) {
+          response.redirect('/about-you/' + id)
+        }
+      }
+      response.redirect('/claim-details/' + id)
       next()
-      return
-    }
-    response.redirect('/claim-details/' + id)
-    next()
-  })
+    })
 })
