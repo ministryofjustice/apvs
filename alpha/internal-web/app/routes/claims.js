@@ -4,8 +4,9 @@ var moment = require('moment')
 
 var claimsCollection = 'claims'
 
-router.get('/claims-list', function (request, response) {
+router.get('/claims-list', function (request, response, next) {
   response.render('claims-list')
+  next()
 })
 
 router.get('/claims', function (request, response, next) {
