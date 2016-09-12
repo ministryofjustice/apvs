@@ -2,7 +2,7 @@
 
 DOCKER_PROCESSES=$(docker ps -a -q)
 DOCKER_IMAGES=$(docker images -q)
-NODE_CACHED_DEPENDENCIES=./alpha/docker
+NODE_CACHED_DEPENDENCIES=`ls -d ./alpha/docker/volumes/*/`
 
 # Stop and delete all containers and their associated volumes.
 if [ -n "$DOCKER_PROCESSES" ]; then
@@ -27,10 +27,9 @@ else
     printf "There were no Docker images to delete.\n"
 fi
 
-# Deletes the cached dependencies for the node applications.
-if [ -d "$NODE_CACHED_DEPENDENCIES" ]; then
-    rm -rf $NODE_CACHED_DEPENDENCIES
-    printf "Deleted all Node applications cached dependencies.\n"
-else
-    printf "There were no cached Node dependencies to delete.\n"
-fi
+# Deletes the cached dependencies for each of the node applications, ignoring .gitignore files.
+for directory in $NODE_CACHED_DEPENDENCIES
+do
+    printf "Deleting contents of directory: %s\n" "$directory"
+    find $directory ! -name '.gitignore' ! -path $directory -delete
+done
