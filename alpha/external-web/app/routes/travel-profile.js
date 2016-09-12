@@ -31,9 +31,9 @@ router.post('/travel-profile/:claimant_id', function (request, response, next) {
 })
 
 // Determine if the eligibility application is a modification and redirect accordingly.
-function isEligibilityModified(id, response, next) {
+function isEligibilityModified (id, response, next) {
   eligibilityFlag.get(id)
-    .then(function(isEligibilityModified) {
+    .then(function (isEligibilityModified) {
       if (isEligibilityModified) {
         response.redirect('/claim-details/' + id)
       } else {

@@ -53,7 +53,7 @@ function save (id, request, response, next) {
 
   client.save(claimant)
     .then(function (claimant) {
-      updateEligibilityFlag(id)
+      updateEligibilityFlag(id, claimant._id)
       response.redirect('/relationship/' + claimant._id)
     })
     .catch(function (error) {
@@ -76,12 +76,12 @@ function update (id, request, response, next) {
 }
 
 // If we were directed here from the claim page mark the new eligibility claim as being a modification.
-function updateEligibilityFlag (id) {
+function updateEligibilityFlag (id, newID) {
   if (id) {
     eligibilityFlag.get(id)
       .then(function (isEligibilityModified) {
         if (isEligibilityModified) {
-          eligibilityFlag.update(claimant._id, 'Yes')
+          eligibilityFlag.update(newID, 'Yes')
         }
       })
   }
