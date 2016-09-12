@@ -5,12 +5,12 @@ A java implementation of an external API using dropwizard.
 ## Run the API within Docker
 The API runs within a docker container, and assumes that the JAR file `external-api-dropwizard-1.0-SNAPSHOT.jar` is located in a `target` folder in this directory.
 
-To generate the necessary jar, run `nvm package` in this directory.
+To generate the necessary jar, run `mvn package` in this directory.
 
 To use this API with docker compose, uncomment the following section in the `docker-compose.yml` file (in the project root folder):
 
 ```
-# Build the external api java application and expose it on port 3003.
+# Build the external api java application and expose it on port 3002.
   external-api-apvs:
     build: ./alpha/external-api-dropwizard
     ports:
