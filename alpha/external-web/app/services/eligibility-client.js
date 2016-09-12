@@ -3,23 +3,25 @@ var Promise = require('bluebird')
 
 exports.get = function (id) {
   return new Promise(function (resolve, reject) {
-      mongo.db.collection('claimants').findOne({ _id: exports.mongoId(id) }, function (error, claimant) {
-        if (!error) {
-          resolve(claimant)
-        } else {
-          reject(error)
-        }
-      })
+    mongo.db.collection('claimants').findOne({ _id: exports.mongoId(id) }, function (error, claimant) {
+      if (!error) {
+        resolve(claimant)
+      } else {
+        reject(error)
+      }
+    })
   })
 }
 
-exports.save = function (claimant, callback) {
-  mongo.db.collection('claimants').insertOne(claimant, function (error, savedClaimant) {
-    if (!error) {
-      callback(null, savedClaimant.ops[0])
-    } else {
-      callback(error, null)
-    }
+exports.save = function (claimant) {
+  return new Promise(function (resolve, reject) {
+    mongo.db.collection('claimants').insertOne(claimant, function (error, savedClaimant) {
+      if (!error) {
+        resolve(savedClaimant.ops[0])
+      } else {
+        reject(error)
+      }
+    })
   })
 }
 

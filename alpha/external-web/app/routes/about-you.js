@@ -38,6 +38,7 @@ router.post('/about-you/:claimant_id', function (request, response, next) {
         update(id, request, response, next)
       }
     })
+  next()
 })
 
 function save (id, request, response, next) {
@@ -50,24 +51,14 @@ function save (id, request, response, next) {
     }
   }
 
-  client.save(claimant, function (error, claimant) {
-    if (!error) {
+  client.save(claimant)
+    .then(function (claimant) {
+      updateEligibilityFlag(id)
       response.redirect('/relationship/' + claimant._id)
-    } else {
-      response.status(500).render('error', { message: error.message, error: error })
-    }
-
-    // If we were directed here from the claim page mark the new eligibility claim as being a modification.
-    if (id) {
-      eligibilityFlag.get(id)
-        .then(function (isEligibilityModified) {
-          if (isEligibilityModified) {
-            eligibilityFlag.update(claimant._id, 'Yes')
-          }
-        })
-    }
-    next()
-  })
+    })
+    .catch(function (error) {
+      response.status(500).render('error', { error: error })
+    })
 }
 
 function update (id, request, response, next) {
@@ -82,5 +73,16 @@ function update (id, request, response, next) {
       response.status(500).render('error', { message: error.message, error: error })
     }
   })
-  next()
+}
+
+// If we were directed here from the claim page mark the new eligibility claim as being a modification.
+function updateEligibilityFlag (id) {
+  if (id) {
+    eligibilityFlag.get(id)
+      .then(function (isEligibilityModified) {
+        if (isEligibilityModified) {
+          eligibilityFlag.update(claimant._id, 'Yes')
+        }
+      })
+  }
 }
