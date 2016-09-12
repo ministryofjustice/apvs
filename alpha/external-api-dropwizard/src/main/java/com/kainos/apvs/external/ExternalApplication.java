@@ -1,6 +1,5 @@
 package com.kainos.apvs.external;
 
-
 import com.kainos.apvs.external.health.ApplicationHealthCheck;
 import com.kainos.apvs.external.resources.ClaimCheckerResource;
 import com.kainos.apvs.external.services.ClaimCheckerService;
