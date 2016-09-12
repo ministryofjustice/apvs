@@ -32,16 +32,16 @@ router.post('/about-you/:claimant_id', function (request, response, next) {
     .then(function (isEligibilityModified) {
       if (isEligibilityModified) {
         logger.info('This is a modification of an eligibility application. Saving new record.')
-        save(id, request, response, next)
+        save(id, request, response)
       } else {
         logger.info('This is a brand new eligibility application.')
-        update(id, request, response, next)
+        update(id, request, response)
       }
     })
   next()
 })
 
-function save (id, request, response, next) {
+function save (id, request, response) {
   var claimant = {
     personal: request.body,
     status: {
@@ -61,7 +61,7 @@ function save (id, request, response, next) {
     })
 }
 
-function update (id, request, response, next) {
+function update (id, request, response) {
   var claimant = {
     personal: request.body
   }
