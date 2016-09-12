@@ -1,19 +1,27 @@
-$('#approve-claim').click(function () {
-  var url = window.location.pathname
-  var id = url.substring(url.lastIndexOf('/') + 1)
+const ACTION_APPROVE = 'approve'
+const ACTION_REJECT = 'reject'
 
-  console.log(id.toString())
+$('#approve-claim').click(handleClickCallback(ACTION_APPROVE))
+$('#reject-claim').click(handleClickCallback(ACTION_REJECT))
 
-  $.ajax({
-    url: '/claim-details/approve',
-    type: 'POST',
-    contentType: 'application/json',
-    data: JSON.stringify({ id: id }),
-    success: function (data) {
-      $('#claim-status').text(data['status'])
-    },
-    error: function (err) {
-      console.log(err)
-    }
-  })
-})
+function handleClickCallback (action) {
+  return function () {
+    var url = window.location.pathname
+    var id = url.substring(url.lastIndexOf('/') + 1)
+
+    console.log(id.toString())
+
+    $.ajax({
+      url: '/claim-details/' + action,
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify({ id: id }),
+      success: function (status) {
+        $('#claim-status').text(status)
+      },
+      error: function (err) {
+        console.log(err)
+      }
+    })
+  }
+}
