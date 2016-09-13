@@ -1,0 +1,17 @@
+{
+  "name": "notify-worker",
+  "version": "0.0.1",
+  "description": "",
+  "main": "app/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "notify-worker": "app/app.js"
+  },
+  "author": "Tom Swann",
+  "license": "ISC",
+  "devDependencies": {
+    "standard": "^8.0.0"
+  }
+}
