@@ -6,29 +6,28 @@ This is an example node application which includes the [GOV.UK front-end toolkit
 
 ### TODO
 
-* GDS styles
 * gzip
 * logging
 * error handling
 * async processing
 * use a process manager
 * run in NODE_ENV `production`
-* set caching headers
-* set security headers
 
 ### DONE
 
 * structured for containers - move all but package.json and node_modules into app folder, so when running container for development you can run using nodemon with volumes mapped to local folders and reload on changes with application files separated from dependencies. `npm install` can still be run by attaching to containers and executing manually
 * GDS styles - added npm modules for GOV.UK styles, build script and documented in ODP
+* security headers - added [helmet](https://www.npmjs.com/package/helmet)
 
 ## Notes
 
 * Using
   * Express (path of least resistance)
     * nunjunks templates
-  * Grunt (required by toolkit)
+  * Shell script to build
   * PM2 process manager
   * Docker
+  * [helmet](https://www.npmjs.com/package/helmet) for security headers
 
 
 

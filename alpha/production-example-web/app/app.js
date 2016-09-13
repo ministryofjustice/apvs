@@ -3,6 +3,7 @@ var nunjucks = require('express-nunjucks')
 var path = require('path')
 var favicon = require('serve-favicon')
 var bodyParser = require('body-parser')
+var helmet = require('helmet')
 
 var index = require('./routes/index')
 
@@ -28,6 +29,9 @@ app.use(favicon(path.join(__dirname, 'govuk_modules', 'govuk_template', 'images'
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
+
+// Set security headers
+app.use(helmet())
 
 // send assetPath to all views
 app.use(function (req, res, next) {
