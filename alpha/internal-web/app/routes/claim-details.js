@@ -9,25 +9,22 @@ var CLAIM_STATUS = {
 }
 
 router.get('/claim-details/:claim_id', function (request, response, next) {
-  var id = request.params.claim_id
-  client.get(id, claimsCollection, function (error, claim) {
-    if (!error) {
+  client.get(request.params.claim_id, claimsCollection)
+    .then(function (claim) {
       response.render('claim-details', { 'claim': claim })
-    } else {
-      response.status(500).render('error', { message: error.message, error: error })
-    }
-    next()
-  })
+    })
+    .catch(function (error) {
+      response.status(500).render('error', { error: error })
+    })
+  next()
 })
 
 router.post('/claim-details/approve', function (request, response, next) {
-  updateClaimStatus(CLAIM_STATUS.ACCEPTED, request, response)
-  next()
+  updateClaimStatus(CLAIM_STATUS.ACCEPTED, request, response, next)
 })
 
 router.post('/claim-details/reject', function (request, response, next) {
-  updateClaimStatus(CLAIM_STATUS.REJECTED, request, response)
-  next()
+  updateClaimStatus(CLAIM_STATUS.REJECTED, request, response, next)
 })
 
 function updateClaimStatus (status, request, response, next) {
@@ -36,11 +33,12 @@ function updateClaimStatus (status, request, response, next) {
   }
 
   var id = request.body.id
-  client.update(id, updatedStatus, claimsCollection, function (error, claim) {
-    if (!error) {
+  client.update(id, updatedStatus, claimsCollection)
+    .then(function () {
       response.json(status)
-    } else {
-      response.status(500).render('error', { message: error.message, error: error })
-    }
-  })
+    })
+    .catch(function (error) {
+      response.status(500).render('error', { error: error })
+    })
+  next()
 }

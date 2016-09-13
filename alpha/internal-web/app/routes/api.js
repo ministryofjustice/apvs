@@ -4,16 +4,14 @@ var client = require('../services/db-client')
 const claimantsCollection = 'claimants'
 
 router.post('/api/income-check', function (request, response, next) {
-  var id = request.body.id
   var status = getIncomeStatus()
 
-  client.update(id, status, claimantsCollection, function (error, claimant) {
-    if (error) {
-      response.status(500).render('error', { message: error.message, error: error })
-      next()
-    }
-    response.json(status)
-  })
+  client.update(request.body.id, status, claimantsCollection)
+    .catch(function (error) {
+      response.status(500).render('error', { error: error })
+    })
+  response.json(status)
+  next()
 })
 
 function getIncomeStatus () {
@@ -26,17 +24,15 @@ function getIncomeStatus () {
 
 router.post('/api/relationship-check/:claimant_id', function (request, response, next) {
   var id = request.params.claimant_id
-  var status = getRelationshipStatus()
 
-  client.update(id, status, claimantsCollection, function (error, claimant) {
-    if (!error) {
+  client.update(id, getRelationshipStatus(), claimantsCollection)
+    .then(function () {
       response.redirect('/claimant-details/' + id)
-      next()
-    } else {
-      response.status(500).render('error', { message: error.message, error: error })
-      next()
-    }
-  })
+    })
+    .catch(function (error) {
+      response.status(500).render('error', { error: error })
+    })
+  next()
 })
 
 function getRelationshipStatus () {

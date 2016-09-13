@@ -10,38 +10,32 @@ router.get('/claims-list', function (request, response, next) {
 })
 
 router.get('/claims', function (request, response, next) {
-  client.getAll(claimsCollection, function (error, claims) {
-    if (!error) {
+  client.getAll(claimsCollection)
+    .then(function (claims) {
       var jsonClaims = { data: claims }
       response.json(jsonClaims)
-    } else {
+    })
+    .catch(function (error) {
       response.status(500).render('error', { message: error.message, error: error })
-    }
-    next()
-  })
+    })
+  next()
 })
 
 router.get('/refresh-claims', function (request, response, next) {
-  client.dropCollection(claimsCollection, function (error) {
-    if (error) {
-      response.status(500).render('error', { message: error.message, error: error })
-    }
-  })
-
-  client.save(getRandomClaim(), claimsCollection, function (error) {
-    if (!error) {
-      response.render('claims-list')
-    } else {
-      response.status(500).render('error', { message: error.message, error: error })
-    }
-  })
+  client.dropCollection(claimsCollection)
+    .then(function() {
+      saveRandomClaimant(response)
+    })
+    .catch(function (error) {
+      return response.status(500).render('error', { error: error })
+    })
   next()
 })
 
 var getRandomClaim = function () {
   var eligibilityId = 'empty'
 
-  var claimViewModel = {
+  return {
     reference: 'CL12345TS',
     eligibilityId: eligibilityId,
     approvedEligibilityId: eligibilityId,
@@ -49,10 +43,18 @@ var getRandomClaim = function () {
     dateApproved: null,
     amount: 45.00,
     claimant: {
-      name: 'Tom Swann'
+      name: 'Tam Swann'
     },
     status: 'PENDING'
   }
+}
 
-  return claimViewModel
+function saveRandomClaimant(response) {
+  client.save(getRandomClaim(), claimsCollection)
+    .then(function () {
+      response.render('claims-list')
+    })
+    .catch(function (error) {
+      response.status(500).render('error', { error: error })
+    })
 }
