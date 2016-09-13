@@ -12,10 +12,14 @@ var job = new CronJob({
 })
 
 function runWorker () {
-  var results = client.getAll()
-
-  _(results).forEach(function (value) {
-    logger.info(value.name + ': ' + value.status)
+  client.getAll(function (error, data) {
+    if (!error) {
+      _(data).forEach(function (value) {
+        logger.info(value.name + ': ' + value.status)
+      })
+    } else {
+      logger.error(error)
+    }
   })
 }
 
