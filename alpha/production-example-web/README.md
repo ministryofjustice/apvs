@@ -6,7 +6,6 @@ This is an example node application which includes the [GOV.UK front-end toolkit
 
 ### TODO
 
-* logging
 * use a process manager
 * run in NODE_ENV `production`
 
@@ -16,6 +15,7 @@ This is an example node application which includes the [GOV.UK front-end toolkit
 * GDS styles - added npm modules for GOV.UK styles, build script and documented in ODP
 * security headers - added [helmet](https://www.npmjs.com/package/helmet)
 * gzip - added [compression](https://www.npmjs.com/package/compression)
+* logger - added basic bunyan logger
 
 ## Notes
 
