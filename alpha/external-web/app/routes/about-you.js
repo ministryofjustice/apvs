@@ -66,13 +66,13 @@ function update (id, request, response) {
     personal: request.body
   }
 
-  client.update(id, claimant, function (error) {
-    if (!error) {
+  client.update(id, claimant)
+    .then(function () {
       response.redirect('/relationship/' + id)
-    } else {
-      response.status(500).render('error', { message: error.message, error: error })
-    }
-  })
+    })
+    .catch(function (error) {
+      response.status(500).render('error', { error: error })
+    })
 }
 
 // If we were directed here from the claim page mark the new eligibility claim as being a modification.

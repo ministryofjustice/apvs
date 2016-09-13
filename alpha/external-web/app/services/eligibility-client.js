@@ -25,13 +25,15 @@ exports.save = function (claimant) {
   })
 }
 
-exports.update = function (id, claimant, callback) {
-  mongo.db.collection('claimants').updateOne({ _id: exports.mongoId(id) }, { $set: claimant }, function (error, updatedClaimant) {
-    if (!error) {
-      callback(null, updatedClaimant)
-    } else {
-      callback(error, null)
-    }
+exports.update = function (id, claimant) {
+  return new Promise(function (resolve, reject) {
+    mongo.db.collection('claimants').updateOne({ _id: exports.mongoId(id) }, { $set: claimant }, function (error, updatedClaimant) {
+      if (!error) {
+        resolve(updatedClaimant)
+      } else {
+        reject(error)
+      }
+    })
   })
 }
 

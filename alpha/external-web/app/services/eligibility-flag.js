@@ -30,9 +30,15 @@ exports.get = function (id) {
 }
 
 exports.update = function (id, eligibility) {
-  client.update(id, exports.build(eligibility), function (error, claimant) {
-    if (!error) {
-      logger.info('Successfully modified the isEligibilityModified flag for claimant with id: ' + id)
-    }
+  return new Promise(function (resolve, reject) {
+    client.update(id, exports.build(eligibility))
+      .then(function (claimant) {
+        logger.info('Successfully modified the isEligibilityModified flag for claimant with id: ' + id)
+        resolve(claimant)
+      })
+      .catch(function (error) {
+        logger.error('Failed to modify the isEligibilityModified flag for claimant with id: %s. Error: %s', id, error)
+        reject(error)
+      })
   })
 }

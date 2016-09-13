@@ -20,18 +20,19 @@ router.post('/travel-profile/:claimant_id', function (request, response, next) {
     'travel-profile': request.body
   }
 
-  client.update(id, travelProfile, function (error, claimant) {
-    if (!error) {
+  client.update(id, travelProfile)
+    .then(function () {
       logger.info('Successfully updated travel profile for claimant with id: %s', id)
-    } else {
-      response.status(500).render('error', { message: error.message, error: error })
-    }
-  })
-  isEligibilityModified(id, response, next)
+      isEligibilityModified(id, response)
+    })
+    .catch(function (error) {
+      response.status(500).render('error', { error: error })
+    })
+  next()
 })
 
 // Determine if the eligibility application is a modification and redirect accordingly.
-function isEligibilityModified (id, response, next) {
+function isEligibilityModified (id, response) {
   eligibilityFlag.get(id)
     .then(function (isEligibilityModified) {
       if (isEligibilityModified) {
@@ -43,5 +44,4 @@ function isEligibilityModified (id, response, next) {
     .catch(function (error) {
       response.status(500).render('error', { error: error })
     })
-  next()
 }

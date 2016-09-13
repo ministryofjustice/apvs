@@ -1,6 +1,5 @@
 var router = require('../routes')
 var client = require('../services/eligibility-client')
-var logger = require('../services/bunyan-logger')
 
 // Require file upload library.
 var multer = require('multer')
@@ -32,16 +31,13 @@ router.post('/about-your-income/:claimant_id', upload.single('evidence'), functi
       'benefits': request.body
     }
 
-    client.update(id, incomeDetails, function (error, claimant) {
-      if (!error) {
-        logger.info('Successfully updated claimant with id: %s', id)
-      } else {
-        response.status(500).render('error', { message: error.message, error: error })
-        next()
-      }
-    })
-
-    response.redirect('/travel-profile/' + id)
+    client.update(id, incomeDetails)
+      .then(function () {
+        response.redirect('/travel-profile/' + id)
+      })
+      .catch(function (error) {
+        response.status(500).render('error', { error: error })
+      })
     next()
   }
 })
