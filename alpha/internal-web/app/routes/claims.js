@@ -23,7 +23,7 @@ router.get('/claims', function (request, response, next) {
 
 router.get('/refresh-claims', function (request, response, next) {
   client.dropCollection(claimsCollection)
-    .then(function() {
+    .then(function () {
       saveRandomClaimant(response)
     })
     .catch(function (error) {
@@ -49,7 +49,7 @@ var getRandomClaim = function () {
   }
 }
 
-function saveRandomClaimant(response) {
+function saveRandomClaimant (response) {
   client.save(getRandomClaim(), claimsCollection)
     .then(function () {
       response.render('claims-list')
