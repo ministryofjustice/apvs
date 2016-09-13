@@ -7,8 +7,6 @@ This is an example node application which includes the [GOV.UK front-end toolkit
 ### TODO
 
 * logging
-* error handling
-* async processing
 * use a process manager
 * run in NODE_ENV `production`
 
@@ -35,7 +33,7 @@ This is an example node application which includes the [GOV.UK front-end toolkit
 
 This is important for consistency between services and to keep styles maintable inline with GDS updates.
 
-* Added govuk_frontend_toolkit, govuk_template_jinja (using nunjucks templates)
+* Added govuk_frontend_toolkit, govuk_template_jinja (using nunjucks templates) and govuk_elements
 
 ## Links
 
