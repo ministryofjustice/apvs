@@ -86,6 +86,9 @@ services:
     build: alpha/notify-worker
     depends_on:
       - mongo
+    volumes:
+      - "./alpha/notify-worker/app:/usr/src/app/app"
+      - "./alpha/notify-worker/logs:/usr/src/app/logs"
     #links:
     #  - elk
     #environment:
