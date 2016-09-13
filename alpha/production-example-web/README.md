@@ -2,6 +2,30 @@
 
 This is an example node application which includes the [GOV.UK front-end toolkit](https://github.com/alphagov/govuk_frontend_toolkit) but has been modified to be production ready. It is intended as an example and template for beta node applications.
 
+## Run
+
+### Run local
+
+```
+npm install # install dependencies
+./build.sh  # build static resources from dependencies
+npm start   # http://localhost:3100
+```
+
+### Run development container
+
+```
+# Compile
+docker build -f Dockerfile-dev -t production-example-node:dev .
+
+# Run with nodemon and host volumes for app folder mapped to container to reload on changes and cached node_modules
+docker run --rm -p 3100:3100 -v $(pwd)/app:/usr/src/app/app -v $(pwd)/cache_node_modules:/usr/src/app/node_modules --name production-example-node-dev production-example-node:dev
+```
+
+### Run production container
+
+TODO
+
 ## Features
 
 ### TODO
