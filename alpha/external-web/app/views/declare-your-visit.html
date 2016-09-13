@@ -18,33 +18,38 @@
 
         <div id="visit-stamp-question" class="panel panel-border-narrow">
             <p>Have you received a prison visit stamp?</p>
-            <label class="block-label">
+            <label class="block-label" data-target="upload-prison-stamp">
                 <input type="radio" id="stamp-yes" name="visit-stamp-received" value="Yes"
-                    {% if claimant['claim']['visit-stamp-received'] == 'Yes' %} checked {% endif %}>
+                    {% if claimant['visit-stamp-received'] == 'Yes' %} checked {% endif %}>
                 Yes
             </label>
 
             <label class="block-label">
                 <input type="radio" id="stamp-no" name="visit-stamp-received" value="No"
-                    {% if claimant['claim']['visit-stamp-received'] == 'No' %} checked {% endif %}>
+                    {% if claimant['visit-stamp-received'] == 'No' %} checked {% endif %}>
                 No
             </label>
         </div>
 
-        <div class="form-group">
-          <label class="form-label-bold" for="evidence">
+        <div id="upload-prison-stamp" 
+          class="form-group 
+                {% if claimant['visit-stamp-received'] != 'Yes' %} 
+                  js-hidden 
+                {% endif %}" >
+          <label class="form-label-bold" for="stamp">
             Prison visit stamp
             <span class="form-hint">
               Submit a photograph your prison visit stamp.
             </span>
           </label>
-          <input id="evidence" type="file" name="evidence">
+          <input id="stamp" type="file" name="stamp">
         </div>
 
         <div class="form-group">
-          <input type="submit" class="button" value="Continue">
+          <input type="submit" class="button" value="Submit">
         </div>
       </form>
+
     </div>
   </div>
 </main>
