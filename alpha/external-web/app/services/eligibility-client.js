@@ -4,8 +4,8 @@ var Promise = require('bluebird')
 exports.get = function (id, collection) {
   return new Promise(function (resolve, reject) {
     mongo.db.collection(collection).findOne({ _id: exports.mongoId(id) })
-      .then(function (claimant) {
-        resolve(claimant)
+      .then(function (record) {
+        resolve(record)
       })
       .catch(function (error) {
         reject(error)
@@ -13,11 +13,12 @@ exports.get = function (id, collection) {
   })
 }
 
-exports.save = function (claimant, collection) {
+// savedRecord.ops[0] is retrieving the actual saved document from the mongo response.
+exports.save = function (record, collection) {
   return new Promise(function (resolve, reject) {
-    mongo.db.collection(collection).insertOne(claimant)
-      .then(function (savedClaimant) {
-        resolve(savedClaimant.ops[0])
+    mongo.db.collection(collection).insertOne(record)
+      .then(function (savedRecord) {
+        resolve(savedRecord.ops[0])
       })
       .catch(function (error) {
         reject(error)
@@ -25,11 +26,11 @@ exports.save = function (claimant, collection) {
   })
 }
 
-exports.update = function (id, claimant, collection) {
+exports.update = function (id, record, collection) {
   return new Promise(function (resolve, reject) {
-    mongo.db.collection(collection).updateOne({ _id: exports.mongoId(id) }, { $set: claimant })
-      .then(function (updatedClaimant) {
-        resolve(updatedClaimant)
+    mongo.db.collection(collection).updateOne({ _id: exports.mongoId(id) }, { $set: record })
+      .then(function (updatedRecord) {
+        resolve(updatedRecord)
       })
       .catch(function (error) {
         reject(error)
