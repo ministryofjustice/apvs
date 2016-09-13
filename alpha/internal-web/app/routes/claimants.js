@@ -1,7 +1,7 @@
 var router = require('../routes')
 var client = require('../services/db-client')
 
-var claimantsCollection = 'claimants'
+const claimantsCollection = 'claimants'
 
 // Append 'data' to the JSON object as this is required by the DataTable library.
 router.get('/claimants', function (request, response, next) {

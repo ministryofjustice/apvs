@@ -1,7 +1,7 @@
 var router = require('../routes')
 var client = require('../services/db-client')
 
-var claimantsCollection = 'claimants'
+const claimantsCollection = 'claimants'
 
 // Valid Statuses for a claimant application.
 var APPLICATION_STATUS = {

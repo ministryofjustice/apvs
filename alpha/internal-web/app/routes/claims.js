@@ -2,7 +2,7 @@ var router = require('../routes')
 var client = require('../services/db-client')
 var moment = require('moment')
 
-var claimsCollection = 'claims'
+const claimsCollection = 'claims'
 
 router.get('/claims-list', function (request, response, next) {
   response.render('claims-list')

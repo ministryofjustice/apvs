@@ -1,7 +1,7 @@
 var router = require('../routes')
 var client = require('../services/db-client')
 
-var claimsCollection = 'claims'
+const claimsCollection = 'claims'
 
 var CLAIM_STATUS = {
   ACCEPTED: 'ACCEPTED',

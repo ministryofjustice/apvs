@@ -1,7 +1,7 @@
 var router = require('../routes')
 var client = require('../services/db-client')
 
-var claimantsCollection = 'claimants'
+const claimantsCollection = 'claimants'
 
 router.post('/api/income-check', function (request, response, next) {
   var id = request.body.id
