@@ -1,8 +1,10 @@
 var router = require('../routes')
 var client = require('../services/eligibility-client')
 
+const claimantsCollection = 'claimants'
+
 router.get('/relationship/:claimant_id', function (request, response, next) {
-  client.get(request.params.claimant_id)
+  client.get(request.params.claimant_id, claimantsCollection)
     .then(function (claimant) {
       response.render('relationship', { 'claimant': claimant })
     })
@@ -18,7 +20,7 @@ router.post('/relationship/:claimant_id', function (request, response, next) {
   }
 
   var id = request.params.claimant_id
-  client.update(id, relationship)
+  client.update(id, relationship, claimantsCollection)
     .then(function () {
       escortRedirect(id, request, response)
     })

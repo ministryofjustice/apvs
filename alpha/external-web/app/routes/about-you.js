@@ -4,6 +4,7 @@ var eligibilityFlag = require('../services/eligibility-flag')
 var logger = require('../services/bunyan-logger')
 
 var PENDING = 'PENDING'
+const claimantsCollection = 'claimants'
 
 router.get('/about-you', function (request, response, next) {
   response.render('about-you')
@@ -11,7 +12,7 @@ router.get('/about-you', function (request, response, next) {
 })
 
 router.get('/about-you/:claimant_id', function (request, response, next) {
-  client.get(request.params.claimant_id)
+  client.get(request.params.claimant_id, claimantsCollection)
     .then(function (claimant) {
       response.render('about-you', { 'claimant': claimant })
     })
@@ -28,7 +29,7 @@ router.post('/about-you', function (request, response, next) {
 
 router.post('/about-you/:claimant_id', function (request, response, next) {
   var id = request.params.claimant_id
-  eligibilityFlag.get(id)
+  eligibilityFlag.get(id, claimantsCollection)
     .then(function (isEligibilityModified) {
       if (isEligibilityModified) {
         logger.info('This is a modification of an eligibility application. Saving new record.')
@@ -51,7 +52,7 @@ function save (id, request, response) {
     }
   }
 
-  client.save(claimant)
+  client.save(claimant, claimantsCollection)
     .then(function (claimant) {
       updateEligibilityFlag(id, claimant._id)
       response.redirect('/relationship/' + claimant._id)
@@ -66,7 +67,7 @@ function update (id, request, response) {
     personal: request.body
   }
 
-  client.update(id, claimant)
+  client.update(id, claimant, claimantsCollection)
     .then(function () {
       response.redirect('/relationship/' + id)
     })
@@ -78,10 +79,10 @@ function update (id, request, response) {
 // If we were directed here from the claim page mark the new eligibility claim as being a modification.
 function updateEligibilityFlag (id, newID) {
   if (id) {
-    eligibilityFlag.get(id)
+    eligibilityFlag.get(id, claimantsCollection)
       .then(function (isEligibilityModified) {
         if (isEligibilityModified) {
-          eligibilityFlag.update(newID, 'Yes')
+          eligibilityFlag.update(newID, 'Yes', claimantsCollection)
         }
       })
   }

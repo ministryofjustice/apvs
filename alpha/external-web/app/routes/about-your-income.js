@@ -5,8 +5,10 @@ var client = require('../services/eligibility-client')
 var multer = require('multer')
 var upload = multer({ dest: 'eligibility-uploads/' })
 
+const claimantsCollection = 'claimants'
+
 router.get('/about-your-income/:claimant_id', function (request, response, next) {
-  client.get(request.params.claimant_id)
+  client.get(request.params.claimant_id, claimantsCollection)
     .then(function (claimant) {
       response.render('about-your-income', { 'claimant': claimant })
     })
@@ -31,7 +33,7 @@ router.post('/about-your-income/:claimant_id', upload.single('evidence'), functi
       'benefits': request.body
     }
 
-    client.update(id, incomeDetails)
+    client.update(id, incomeDetails, claimantsCollection)
       .then(function () {
         response.redirect('/travel-profile/' + id)
       })

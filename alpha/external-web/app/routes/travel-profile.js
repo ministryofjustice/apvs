@@ -3,8 +3,10 @@ var client = require('../services/eligibility-client')
 var eligibilityFlag = require('../services/eligibility-flag')
 var logger = require('../services/bunyan-logger')
 
+const claimantsCollection = 'claimants'
+
 router.get('/travel-profile/:claimant_id', function (request, response, next) {
-  client.get(request.params.claimant_id)
+  client.get(request.params.claimant_id, claimantsCollection)
     .then(function (claimant) {
       response.render('travel-profile', { 'claimant': claimant })
     })
@@ -20,7 +22,7 @@ router.post('/travel-profile/:claimant_id', function (request, response, next) {
     'travel-profile': request.body
   }
 
-  client.update(id, travelProfile)
+  client.update(id, travelProfile, claimantsCollection)
     .then(function () {
       logger.info('Successfully updated travel profile for claimant with id: %s', id)
       isEligibilityModified(id, response)
@@ -33,7 +35,7 @@ router.post('/travel-profile/:claimant_id', function (request, response, next) {
 
 // Determine if the eligibility application is a modification and redirect accordingly.
 function isEligibilityModified (id, response) {
-  eligibilityFlag.get(id)
+  eligibilityFlag.get(id, claimantsCollection)
     .then(function (isEligibilityModified) {
       if (isEligibilityModified) {
         response.redirect('/claim-details/' + id)

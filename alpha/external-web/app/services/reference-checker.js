@@ -1,8 +1,8 @@
 var client = require('./eligibility-client')
 
-exports.isValid = function (reference) {
+exports.isValid = function (reference, collection) {
   return new Promise(function (resolve) {
-    client.get(reference)
+    client.get(reference, collection)
       .then(function (claimant) {
         var isValidID = client.isValidMongoId(reference) && claimant != null
         resolve(isValidID)

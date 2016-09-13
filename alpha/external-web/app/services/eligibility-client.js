@@ -1,9 +1,9 @@
 var mongo = require('./database')
 var Promise = require('bluebird')
 
-exports.get = function (id) {
+exports.get = function (id, collection) {
   return new Promise(function (resolve, reject) {
-    mongo.db.collection('claimants').findOne({ _id: exports.mongoId(id) })
+    mongo.db.collection(collection).findOne({ _id: exports.mongoId(id) })
       .then(function (claimant) {
         resolve(claimant)
       })
@@ -13,9 +13,9 @@ exports.get = function (id) {
   })
 }
 
-exports.save = function (claimant) {
+exports.save = function (claimant, collection) {
   return new Promise(function (resolve, reject) {
-    mongo.db.collection('claimants').insertOne(claimant)
+    mongo.db.collection(collection).insertOne(claimant)
       .then(function (savedClaimant) {
         resolve(savedClaimant.ops[0])
       })
@@ -25,9 +25,9 @@ exports.save = function (claimant) {
   })
 }
 
-exports.update = function (id, claimant) {
+exports.update = function (id, claimant, collection) {
   return new Promise(function (resolve, reject) {
-    mongo.db.collection('claimants').updateOne({ _id: exports.mongoId(id) }, { $set: claimant })
+    mongo.db.collection(collection).updateOne({ _id: exports.mongoId(id) }, { $set: claimant })
       .then(function (updatedClaimant) {
         resolve(updatedClaimant)
       })

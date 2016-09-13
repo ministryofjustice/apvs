@@ -20,18 +20,18 @@ exports.build = function (eligibility) {
   }
 }
 
-exports.get = function (id) {
+exports.get = function (id, collection) {
   return new Promise(function (resolve) {
-    client.get(id)
+    client.get(id, collection)
       .then(function (claimant) {
         resolve(claimant.isEligibilityModified)
       })
   })
 }
 
-exports.update = function (id, eligibility) {
+exports.update = function (id, eligibility, collection) {
   return new Promise(function (resolve, reject) {
-    client.update(id, exports.build(eligibility))
+    client.update(id, exports.build(eligibility), collection)
       .then(function (claimant) {
         logger.info('Successfully modified the isEligibilityModified flag for claimant with id: ' + id)
         resolve(claimant)
