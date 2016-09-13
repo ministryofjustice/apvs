@@ -1,7 +1,7 @@
 var router = require('../routes')
 var client = require('../services/db-client')
 
-var claimantsCollection = 'claimants'
+const claimantsCollection = 'claimants'
 
 // Valid Statuses for a claimant application.
 var APPLICATION_STATUS = {
@@ -11,16 +11,14 @@ var APPLICATION_STATUS = {
 }
 
 router.get('/claimant-details/:claimant_id', function (request, response, next) {
-  var id = request.params.claimant_id
-  client.get(id, claimantsCollection, function (error, claimant) {
-    if (!error) {
+  client.get(request.params.claimant_id, claimantsCollection)
+    .then(function (claimant) {
       response.render('claimant-details', { 'claimant': claimant })
-      next()
-    } else {
-      response.status(500).render('error', { message: error.message, error: error })
-      next()
-    }
-  })
+    })
+    .catch(function (error) {
+      response.status(500).render('error', { error: error })
+    })
+  next()
 })
 
 router.post('/claimant-details/:claimant_id/approve', function (request, response, next) {
@@ -41,28 +39,23 @@ function updateApplicationStatus (status, request, response, next) {
   }
 
   var id = request.params.claimant_id
-  client.update(id, updatedStatus, claimantsCollection, function (error, claimant) {
-    if (!error) {
+  client.update(id, updatedStatus, claimantsCollection)
+    .then(function () {
       response.redirect('/claimant-details/' + id)
-      next()
-    } else {
-      response.status(500).render('error', { message: error.message, error: error })
-      next()
-    }
-  })
+    })
+    .catch(function (error) {
+      response.status(500).render('error', { error: error })
+    })
+  next()
 }
 
 router.get('/claimant-details/:claimant_id/evidence/:eligibility_id', function (request, response, next) {
-  var id = request.params.claimant_id
-  var eligibilityId = request.params.eligibility_id
-
-  client.get(id, claimantsCollection, function (error, claimant) {
-    if (!error) {
-      response.download('./eligibility-uploads/' + eligibilityId, claimant[ 'eligibility-file' ][ 'originalFilename' ])
-      next()
-    } else {
-      response.status(500).render('error', { message: error.message, error: error })
-      next()
-    }
-  })
+  client.get(request.params.claimant_id, claimantsCollection)
+    .then(function (claimant) {
+      response.download('./eligibility-uploads/' + request.params.eligibility_id, claimant[ 'eligibility-file' ][ 'originalFilename' ])
+    })
+    .catch(function (error) {
+      response.status(500).render('error', { error: error })
+    })
+  next()
 })

@@ -7,13 +7,9 @@ router.get('/', function (request, response, next) {
 })
 
 router.get('/clean', function (request, response, next) {
-  client.drop(function (error) {
-    if (!error) {
+  client.drop()
+    .finally(function () {
       response.redirect('/')
-      next()
-    } else {
-      response.redirect('/')
-      next()
-    }
-  })
+    })
+  next()
 })

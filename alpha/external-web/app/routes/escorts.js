@@ -1,17 +1,17 @@
 var router = require('../routes')
 var client = require('../services/eligibility-client')
 
+const claimantsCollection = 'claimants'
+
 router.get('/escorts/:claimant_id', function (request, response, next) {
-  var id = request.params.claimant_id
-  client.get(id, function (error, claimant) {
-    if (!error) {
+  client.get(request.params.claimant_id, claimantsCollection)
+    .then(function (claimant) {
       response.render('escorts', { 'claimant': claimant })
-      next()
-    } else {
-      response.status(500).render('error', { message: error.message, error: error })
-      next()
-    }
-  })
+    })
+    .catch(function (error) {
+      response.status(500).render('error', { error: error })
+    })
+  next()
 })
 
 router.post('/escorts/:claimant_id', function (request, response, next) {
@@ -20,13 +20,12 @@ router.post('/escorts/:claimant_id', function (request, response, next) {
   }
 
   var id = request.params.claimant_id
-  client.update(id, escorts, function (error, claimant) {
-    if (!error) {
+  client.update(id, escorts, claimantsCollection)
+    .then(function () {
       response.redirect('/about-your-income/' + id)
-      next()
-    } else {
-      response.status(500).render('error', { message: error.message, error: error })
-      next()
-    }
-  })
+    })
+    .catch(function (error) {
+      response.status(500).render('error', { error: error })
+    })
+  next()
 })

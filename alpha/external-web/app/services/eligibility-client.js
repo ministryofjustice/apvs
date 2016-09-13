@@ -1,32 +1,40 @@
 var mongo = require('./database')
+var Promise = require('bluebird')
 
-exports.get = function (id, callback) {
-  mongo.db.collection('claimants').findOne({ _id: exports.mongoId(id) }, function (error, claimant) {
-    if (!error) {
-      callback(null, claimant)
-    } else {
-      callback(error, null)
-    }
+exports.get = function (id, collection) {
+  return new Promise(function (resolve, reject) {
+    mongo.db.collection(collection).findOne({ _id: exports.mongoId(id) })
+      .then(function (record) {
+        resolve(record)
+      })
+      .catch(function (error) {
+        reject(error)
+      })
   })
 }
 
-exports.save = function (claimant, callback) {
-  mongo.db.collection('claimants').insertOne(claimant, function (error, savedClaimant) {
-    if (!error) {
-      callback(null, savedClaimant.ops[0])
-    } else {
-      callback(error, null)
-    }
+// savedRecord.ops[0] is retrieving the actual saved document from the mongo response.
+exports.save = function (record, collection) {
+  return new Promise(function (resolve, reject) {
+    mongo.db.collection(collection).insertOne(record)
+      .then(function (savedRecord) {
+        resolve(savedRecord.ops[0])
+      })
+      .catch(function (error) {
+        reject(error)
+      })
   })
 }
 
-exports.update = function (id, claimant, callback) {
-  mongo.db.collection('claimants').updateOne({ _id: exports.mongoId(id) }, { $set: claimant }, function (error, updatedClaimant) {
-    if (!error) {
-      callback(null, updatedClaimant)
-    } else {
-      callback(error, null)
-    }
+exports.update = function (id, record, collection) {
+  return new Promise(function (resolve, reject) {
+    mongo.db.collection(collection).updateOne({ _id: exports.mongoId(id) }, { $set: record })
+      .then(function (updatedRecord) {
+        resolve(updatedRecord)
+      })
+      .catch(function (error) {
+        reject(error)
+      })
   })
 }
 
