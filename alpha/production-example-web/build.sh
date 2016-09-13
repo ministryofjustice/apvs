@@ -30,8 +30,8 @@ function compile_scss() {
 }
 
 main () {
-  delete_node_modules
-  install_modules
+  #delete_node_modules
+  #install_modules
   copy_assets
   copy_templates
   compile_scss
