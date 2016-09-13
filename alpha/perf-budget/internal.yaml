@@ -1,0 +1,8 @@
+url: 'http://localhost:3000'
+reporter: 'elasticsearch'
+asserts:
+  timeToFirstByte: 600
+  httpTrafficCompleted: 1000
+elasticsearch-host: 'localhost'
+elasticsearch-port: 9200
+elasticsearch-index: 'perf-internal'
