@@ -82,3 +82,12 @@ services:
   #    - "5000:5000"
   #    - "9998:9998"
   #    - "9999:9999"
+  notify-worker:
+    build: alpha/notify-worker
+    depends_on:
+      - mongo
+    #links:
+    #  - elk
+    #environment:
+    #  - LOGSTASH_HOST=elk
+    #  - LOGSTASH_PORT=9998
