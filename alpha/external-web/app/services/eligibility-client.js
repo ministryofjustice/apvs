@@ -3,38 +3,38 @@ var Promise = require('bluebird')
 
 exports.get = function (id) {
   return new Promise(function (resolve, reject) {
-    mongo.db.collection('claimants').findOne({ _id: exports.mongoId(id) }, function (error, claimant) {
-      if (!error) {
+    mongo.db.collection('claimants').findOne({ _id: exports.mongoId(id) })
+      .then(function(claimant) {
         resolve(claimant)
-      } else {
+      })
+      .catch(function(error) {
         reject(error)
-      }
-    })
+      })
   })
 }
 
 exports.save = function (claimant) {
   return new Promise(function (resolve, reject) {
-    mongo.db.collection('claimants').insertOne(claimant, function (error, savedClaimant) {
-      if (!error) {
+    mongo.db.collection('claimants').insertOne(claimant)
+      .then(function(savedClaimant) {
         resolve(savedClaimant.ops[0])
-      } else {
+      })
+      .catch(function(error) {
         reject(error)
-      }
-    })
+      })
   })
 }
 
 exports.update = function (id, claimant) {
   return new Promise(function (resolve, reject) {
-    mongo.db.collection('claimants').updateOne({ _id: exports.mongoId(id) }, { $set: claimant }, function (error, updatedClaimant) {
-      if (!error) {
+    mongo.db.collection('claimants').updateOne({ _id: exports.mongoId(id) }, { $set: claimant })
+      .then(function(updatedClaimant) {
         resolve(updatedClaimant)
-      } else {
+      })
+      .catch(function(error) {
         reject(error)
-      }
+      })
     })
-  })
 }
 
 // Takes a string and wraps it as a Mongo ObjectID.

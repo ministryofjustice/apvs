@@ -23,7 +23,6 @@ router.post('/claim', function (request, response, next) {
         response.redirect('/')
       } else {
         eligibilityFlag.update(id, eligibility)
-
         if (eligibilityFlag.isModified(eligibility)) {
           response.redirect('/about-you/' + id)
         }
