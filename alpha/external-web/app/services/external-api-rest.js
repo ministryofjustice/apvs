@@ -1,5 +1,5 @@
 var request = require('request')
-var apiUrl = process.env.API_URL || 'http://node-external-api-apvs:3002/'
+var apiUrl = process.env.API_URL || 'http://external-api-apvs:3002/'
 
 module.exports = {
   checkForAutomaticProcessing: function (claim, callback) {

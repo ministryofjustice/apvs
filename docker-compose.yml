@@ -3,13 +3,19 @@ version: '2'
 services:
 
   # Build the external api node application and expose it on port 3002.
-  node-external-api-apvs:
+  external-api-apvs:
     build: ./alpha/external-api-node # This is where you switch to Java API
     volumes:
      - "./alpha/docker/volumes/node_modules-external-api-node:/usr/src/app/node_modules" # cache node_modules in local volume
      - "./alpha/external-api-node/app:/usr/src/app/app"
     ports:
       - "3002:3002"
+
+  # Build the external api java application and expose it on port 3002.
+  # external-api-apvs:
+  #   build: ./alpha/external-api-dropwizard
+  #   ports:
+  #     - "3002:3002"
 
   # Build the external facing node application and expose it on port 3000.
   node-external-apvs:
@@ -24,7 +30,7 @@ services:
       - "3000:3000"
     depends_on:
       - mongo
-      - node-external-api-apvs
+      - external-api-apvs
     #links:
     #  - elk
     #environment:
