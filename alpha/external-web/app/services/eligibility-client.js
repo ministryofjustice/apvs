@@ -4,10 +4,10 @@ var Promise = require('bluebird')
 exports.get = function (id) {
   return new Promise(function (resolve, reject) {
     mongo.db.collection('claimants').findOne({ _id: exports.mongoId(id) })
-      .then(function(claimant) {
+      .then(function (claimant) {
         resolve(claimant)
       })
-      .catch(function(error) {
+      .catch(function (error) {
         reject(error)
       })
   })
@@ -16,10 +16,10 @@ exports.get = function (id) {
 exports.save = function (claimant) {
   return new Promise(function (resolve, reject) {
     mongo.db.collection('claimants').insertOne(claimant)
-      .then(function(savedClaimant) {
+      .then(function (savedClaimant) {
         resolve(savedClaimant.ops[0])
       })
-      .catch(function(error) {
+      .catch(function (error) {
         reject(error)
       })
   })
@@ -28,13 +28,13 @@ exports.save = function (claimant) {
 exports.update = function (id, claimant) {
   return new Promise(function (resolve, reject) {
     mongo.db.collection('claimants').updateOne({ _id: exports.mongoId(id) }, { $set: claimant })
-      .then(function(updatedClaimant) {
+      .then(function (updatedClaimant) {
         resolve(updatedClaimant)
       })
-      .catch(function(error) {
+      .catch(function (error) {
         reject(error)
       })
-    })
+  })
 }
 
 // Takes a string and wraps it as a Mongo ObjectID.
