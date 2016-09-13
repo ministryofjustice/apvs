@@ -6,7 +6,6 @@ This is an example node application which includes the [GOV.UK front-end toolkit
 
 ### TODO
 
-* gzip
 * logging
 * error handling
 * async processing
@@ -18,6 +17,7 @@ This is an example node application which includes the [GOV.UK front-end toolkit
 * structured for containers - move all but package.json and node_modules into app folder, so when running container for development you can run using nodemon with volumes mapped to local folders and reload on changes with application files separated from dependencies. `npm install` can still be run by attaching to containers and executing manually
 * GDS styles - added npm modules for GOV.UK styles, build script and documented in ODP
 * security headers - added [helmet](https://www.npmjs.com/package/helmet)
+* gzip - added [compression](https://www.npmjs.com/package/compression)
 
 ## Notes
 

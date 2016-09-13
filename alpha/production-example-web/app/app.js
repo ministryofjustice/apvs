@@ -4,10 +4,17 @@ var path = require('path')
 var favicon = require('serve-favicon')
 var bodyParser = require('body-parser')
 var helmet = require('helmet')
+var compression = require('compression')
 
 var index = require('./routes/index')
 
 var app = express()
+
+// Use gzip compression - remove if possible via reverse proxy/Azure gateway
+app.use(compression())
+
+// Set security headers
+app.use(helmet())
 
 var packageJson = require('../package.json')
 var releaseVersion = packageJson.version
@@ -29,9 +36,6 @@ app.use(favicon(path.join(__dirname, 'govuk_modules', 'govuk_template', 'images'
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
-
-// Set security headers
-app.use(helmet())
 
 // send assetPath to all views
 app.use(function (req, res, next) {
