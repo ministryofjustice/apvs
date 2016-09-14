@@ -16,6 +16,7 @@ npm start   # http://localhost:3100
 
 ```
 # Compile static resources and container image
+npm install
 ./build.sh
 docker build -f Dockerfile-dev -t production-example-node:dev .
 
@@ -27,6 +28,7 @@ docker run --rm -p 3100:3100 -v $(pwd)/app:/usr/src/app/app -v $(pwd)/cache_node
 
 ```
 # Compile static resources and container image
+npm install
 ./build.sh
 docker build -t production-example-node:prod .
 
