@@ -25,8 +25,9 @@ var processNotification = function (notification) {
   var action = notification.action
 
   if (action.method === EMAIL_CONTACT_METHOD) {
-    logger.info('Sending email to recipient: ' + action.recipient)
-    mailer.sendMail(action.reference, action.recipient)
+    logger.info('Sending email to recipient: ' + action.email)
+    mailer.sendMail(action.reference, action.email)
+    client.setTaskComplete(notification._id)
   } else {
     logger.info('No action for contact preferene ' + action.method)
   }

@@ -40,7 +40,7 @@ function isEligibilityModified (id, response) {
       if (isEligibilityModified) {
         response.redirect('/claim-details/' + id)
       } else {
-        response.redirect('/application-submitted')
+        response.redirect('/application-submitted/' + id)
       }
     })
     .catch(function (error) {
