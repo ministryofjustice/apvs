@@ -2,6 +2,8 @@ var router = require('../routes')
 var eligibilityFlag = require('../services/eligibility-flag')
 var reference = require('../services/reference-checker')
 
+const claimantsCollection = 'claimants'
+
 router.get('/claim', function (request, response, next) {
   response.render('claim')
   next()
@@ -17,20 +19,17 @@ router.post('/claim', function (request, response, next) {
     return
   }
 
-  reference.isValid(id, function (isValid) {
-    if (!isValid) {
-      response.redirect('/index')
+  reference.isValid(id, claimantsCollection)
+    .then(function (isValid) {
+      if (!isValid) {
+        response.redirect('/')
+      } else {
+        eligibilityFlag.update(id, eligibility, claimantsCollection)
+        if (eligibilityFlag.isModified(eligibility)) {
+          response.redirect('/about-you/' + id)
+        }
+      }
+      response.redirect('/claim-details/' + id)
       next()
-      return
-    }
-    eligibilityFlag.update(id, eligibility)
-
-    if (eligibilityFlag.isModified(eligibility)) {
-      response.redirect('/about-you/' + id)
-      next()
-      return
-    }
-    response.redirect('/claim-details/' + id)
-    next()
-  })
+    })
 })

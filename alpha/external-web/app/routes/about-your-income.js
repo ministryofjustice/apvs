@@ -1,22 +1,21 @@
 var router = require('../routes')
 var client = require('../services/eligibility-client')
-var logger = require('../services/bunyan-logger')
 
 // Require file upload library.
 var multer = require('multer')
 var upload = multer({ dest: 'eligibility-uploads/' })
 
+const claimantsCollection = 'claimants'
+
 router.get('/about-your-income/:claimant_id', function (request, response, next) {
-  var id = request.params.claimant_id
-  client.get(id, function (error, claimant) {
-    if (!error) {
+  client.get(request.params.claimant_id, claimantsCollection)
+    .then(function (claimant) {
       response.render('about-your-income', { 'claimant': claimant })
-      next()
-    } else {
-      response.status(500).render('error', { message: error.message, error: error })
-      next()
-    }
-  })
+    })
+    .catch(function (error) {
+      response.status(500).render('error', { error: error })
+    })
+  next()
 })
 
 router.post('/about-your-income/:claimant_id', upload.single('evidence'), function (request, response, next) {
@@ -34,16 +33,13 @@ router.post('/about-your-income/:claimant_id', upload.single('evidence'), functi
       'benefits': request.body
     }
 
-    client.update(id, incomeDetails, function (error, claimant) {
-      if (!error) {
-        logger.info('Successfully updated claimant with id: %s', id)
-      } else {
-        response.status(500).render('error', { message: error.message, error: error })
-        next()
-      }
-    })
-
-    response.redirect('/travel-profile/' + id)
+    client.update(id, incomeDetails, claimantsCollection)
+      .then(function () {
+        response.redirect('/travel-profile/' + id)
+      })
+      .catch(function (error) {
+        response.status(500).render('error', { error: error })
+      })
     next()
   }
 })
