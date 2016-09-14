@@ -1,14 +1,14 @@
 var router = require('../routes')
-var client = require('../services/eligibility-client')
 var externalApiRest = require('../services/external-api-rest')
+var reference = require('../services/reference-checker')
 
 const claimantsCollection = 'claimants'
 
 router.get('/submit-claim/:claimant_id', function (request, response, next) {
   var id = request.params.claimant_id
-  client.get(id, claimantsCollection)
-    .then(function (claimant) {
-      response.render('submit-claim', { 'id': claimant._id })
+  reference.isValid(id, claimantsCollection)
+    .then(function (isValid) {
+      response.render('submit-claim', { 'id': id })
     })
     .catch(function (error) {
       response.status(500).render('error', { message: error.message, error: error })
