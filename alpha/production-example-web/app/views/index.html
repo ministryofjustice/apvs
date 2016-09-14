@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+{% if serviceName %} {{ serviceName }} {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+    {% include "includes/phase_banner_alpha.html" %}
+
+    <div class="grid-row">
+        <div class="column-two-thirds">
+
+            <h1 class="heading-xlarge">
+                {% if serviceName %} {{ serviceName }} {% endif %}
+            </h1>
+
+            <p>You may be able to get help with the cost of visiting a close relative or partner in prison if you’re
+                aged over 18, are on certain benefits or have a low income.</p>
+
+            <p>You might not need to answer all the questions, depending on your circumstances. </p>
+
+            <p>
+                <a class="button button-start" href="/" role="button">Start now</a>
+            </p>
+
+            <h2 class="heading-medium">Before you start</h2>
+            <p>You’ll need to have:</p>
+            <ul class="list list-bullet">
+                <li>Your National Insurance number</li>
+                <li>Prison number of the prison where the prisoner related to you is held</li>
+                <li>A valid award notice (if claiming Universal credit, child tax credit, pension credit or health
+                    certificate)
+                </li>
+                <li>Proof of parentage - eg Long birth certificate (if acting as an escort for the prisoner's child)
+                </li>
+                <li>Letter from the doctor (if acting as a medical escort for another adult who qualifies for
+                    assistance)
+                </li>
+            </uL>
+
+            <p>You might also have to give details about ....</p>
+
+            <h2 class="heading-medium">Other ways to apply</h2>
+
+            <p>You can apply by filling in a paper form instead.</p>
+
+            <p>You will need to complete the paper form and send it to the address on the form to get help with travel
+                costs.</p>
+
+        </div>
+
+    </div>
+
+</main>
+
+{% endblock %}
