@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+  Declare your visit
+{% endblock %}
+
+{% block content %}
+<main id="content" role="main">
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <form action="/declare-your-visit/{{ claimant['_id'] }}" method="post" class="form" enctype="multipart/form-data">
+
+        <h1 class="heading-xlarge">
+          Declare your visit
+        </h1>
+
+        <div id="visit-stamp-question" class="panel panel-border-narrow">
+            <p>Have you received a prison visit stamp?</p>
+            <label class="block-label" data-target="upload-prison-stamp">
+                <input type="radio" id="stamp-yes" name="visit-stamp-received" value="Yes"
+                    {% if claimant['visit-stamp-received'] == 'Yes' %} checked {% endif %}>
+                Yes
+            </label>
+
+            <label class="block-label">
+                <input type="radio" id="stamp-no" name="visit-stamp-received" value="No"
+                    {% if claimant['visit-stamp-received'] == 'No' %} checked {% endif %}>
+                No
+            </label>
+        </div>
+
+        <div id="upload-prison-stamp" 
+          class="form-group 
+                {% if claimant['visit-stamp-received'] != 'Yes' %} 
+                  js-hidden 
+                {% endif %}" >
+          <label class="form-label-bold" for="stamp">
+            Prison visit stamp
+            <span class="form-hint">
+              Submit a photograph your prison visit stamp.
+            </span>
+          </label>
+          <input id="stamp" type="file" name="stamp">
+        </div>
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Continue">
+        </div>
+      </form>
+
+    </div>
+  </div>
+</main>
+{% endblock %}

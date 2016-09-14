@@ -26,6 +26,7 @@ services:
      - "./alpha/external-web/public:/usr/src/app/public"
      - "./alpha/external-web/logs:/usr/src/app/logs"
      - "./alpha/uploads/eligibility-uploads:/usr/src/app/eligibility-uploads"
+     - "./alpha/uploads/visit-stamp-uploads:/usr/src/app/visit-stamp-uploads"
     ports:
       - "3000:3000"
     depends_on:

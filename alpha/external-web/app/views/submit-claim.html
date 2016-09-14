@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+APVS Application Form
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+    {% include "includes/phase_banner_alpha.html" %}
+
+    <div class="grid-row">
+
+        <h1 class="heading-xlarge">
+            Submit claim
+        </h1>
+
+        <form action="/submit-claim/{{ id }}" method="post" class="form">
+            <div class="form-group">
+                <input type="submit" value="Submit Automatic" class="button">
+            </div>
+        </form>
+
+        <form action="/submit-claim/{{ id }}?amount=999" method="post" class="form">
+            <div class="form-group">
+                <input type="submit" value="Submit Manual" class="button">
+            </div>
+        </form>
+
+    </div>
+
+</main>
+
+{% endblock %}
