@@ -6,7 +6,7 @@ var bodyParser = require('body-parser')
 var helmet = require('helmet')
 var compression = require('compression')
 
-var index = require('./routes/index')
+var routeIndex = require('./routes/index')
 
 var app = express()
 
@@ -17,6 +17,7 @@ app.use(compression())
 app.use(helmet())
 
 var packageJson = require('../package.json')
+var developmentMode = app.get('env') === 'development'
 var releaseVersion = packageJson.version
 var serviceName = 'Assisted Prison Visit Service'
 var cookieText = 'GOV.UK uses cookies to make the site simpler. <a href="#" title="Find out more about cookies">Find out more about cookies</a>'
@@ -25,8 +26,8 @@ app.set('view engine', 'html')
 app.set('views', path.join(__dirname, 'views'))
 
 nunjucks(app, {
-  watch: true,
-  noCache: true
+  watch: developmentMode,
+  noCache: developmentMode
 })
 
 app.use('/public', express.static(path.join(__dirname, 'public')))
@@ -51,7 +52,8 @@ app.use(function (req, res, next) {
   next()
 })
 
-app.use('/', index)
+// index route will mount itself with any required dependencies
+routeIndex(app)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -61,7 +63,7 @@ app.use(function (req, res, next) {
 })
 
 // error handlers
-if (app.get('env') === 'development') {
+if (developmentMode) {
   app.use(function (err, req, res, next) {
     res.status(err.status || 500)
     res.render('error', {

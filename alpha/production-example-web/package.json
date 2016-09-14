@@ -3,7 +3,14 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node app/bin/www"
+    "start": "node app/bin/www",
+    "test": "node_modules/.bin/standard && node_modules/.bin/mocha -u exports test/**/*"
+  },
+  "standard": {
+    "ignore": [
+      "cache_node_modules/*",
+      "jquery*.js"
+    ]
   },
   "dependencies": {
     "body-parser": "~1.15.1",
@@ -20,8 +27,13 @@
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.0.2",
     "node-sass": "^3.9.3",
     "nodemon": "^1.10.2",
-    "standard": "^8.0.0"
+    "proxyquire": "^1.7.10",
+    "sinon": "^1.17.5",
+    "standard": "^8.0.0",
+    "supertest": "^2.0.0"
   }
 }
