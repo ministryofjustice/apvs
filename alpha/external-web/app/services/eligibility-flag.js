@@ -8,6 +8,7 @@
  */
 var client = require('./eligibility-client')
 var logger = require('./bunyan-logger')
+var Promise = require('bluebird')
 
 exports.isModified = function (eligibility) {
   return eligibility === 'Yes'
@@ -19,19 +20,25 @@ exports.build = function (eligibility) {
   }
 }
 
-exports.get = function (id, callback) {
-  client.get(id, function (error, claimant) {
-    if (!error) {
-      logger.info('Successfully retrieved claimant with id: ' + id)
-      callback(claimant.isEligibilityModified)
-    }
+exports.get = function (id, collection) {
+  return new Promise(function (resolve) {
+    client.get(id, collection)
+      .then(function (claimant) {
+        resolve(claimant.isEligibilityModified)
+      })
   })
 }
 
-exports.update = function (id, eligibility) {
-  client.update(id, exports.build(eligibility), function (error, claimant) {
-    if (!error) {
-      logger.info('Successfully modified the isEligibilityModified flag for claimant with id: ' + id)
-    }
+exports.update = function (id, eligibility, collection) {
+  return new Promise(function (resolve, reject) {
+    client.update(id, exports.build(eligibility), collection)
+      .then(function (claimant) {
+        logger.info('Successfully modified the isEligibilityModified flag for claimant with id: ' + id)
+        resolve(claimant)
+      })
+      .catch(function (error) {
+        logger.error('Failed to modify the isEligibilityModified flag for claimant with id: %s. Error: %s', id, error)
+        reject(error)
+      })
   })
 }
