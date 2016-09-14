@@ -1,0 +1,6 @@
+// Path to assets for use with the file-url function
+// in the govuk frontend toolkit's url-helpers partial
+$path: "/public/images/";
+
+// This includes entire govuk-elements from _govuk-elements.scss
+@import 'govuk-elements';
