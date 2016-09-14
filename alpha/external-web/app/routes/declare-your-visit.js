@@ -6,64 +6,60 @@ var logger = require('../services/bunyan-logger')
 var multer = require('multer')
 var upload = multer({ dest: 'visit-stamp-uploads/' })
 
+const claimantsCollection = 'claimants'
+
 router.get('/declare-your-visit/:claimant_id', function (request, response, next) {
-  var id = request.params.claimant_id
-  client.get(id, function (error, claimant) {
-    if (!error) {
+  client.get(request.params.claimant_id, claimantsCollection)
+    .then(function (claimant) {
       response.render('declare-your-visit', { 'claimant': claimant })
-      next()
-    } else {
+    })
+    .catch(function (error) {
       response.status(500).render('error', { message: error.message, error: error })
-      next()
-    }
-  })
+    })
+  next()
 })
 
 router.post('/declare-your-visit/:claimant_id', upload.single('stamp'), function (request, response, next) {
   var id = request.params.claimant_id
-  client.get(id, function (error, claimant) {
-    if (!error) {
+  client.get(id, claimantsCollection)
+    .then(function (claimant) {
       var stampReceived = request['body']['visit-stamp-received']
-      var visitStampDetails = {}
-      visitStampDetails['visit-stamp-received'] = stampReceived
+      var visitStampDetails = {
+        'visit-stamp-received': stampReceived
+      }
 
       if (stampReceived === 'Yes') {
-        // only require a file upload if claimant has received a stamp
-        if (!request.file) {
+        if (request.file) {
+          visitStampDetails['visit-stamp-file'] = buildStampDetails(request)
+        } else {
           response.status(500).render('error', { error: 'Failed to update claimant with id: ' + id + '. No file was uploaded.' })
           next()
-        } else {
-          visitStampDetails['visit-stamp-file'] = {
-            visitStampId: request.file.filename,
-            originalFilename: request.file.originalname,
-            path: request.file.path
-          }
-          client.update(id, visitStampDetails, function (error, claimant) {
-            if (!error) {
-              logger.info('Successfully updated claimant with id: %s', id)
-              response.redirect('/submit-claim/' + id)
-              next()
-            } else {
-              response.status(500).render('error', { message: error.message, error: error })
-              next()
-            }
-          })
+          return
         }
-      } else { // stampReceived !== Yes
-        client.update(id, visitStampDetails, function (error, claimant) {
-          if (!error) {
-            logger.info('Successfully updated claimant with id: %s', id)
-            response.redirect('/submit-claim/' + id)
-            next()
-          } else {
-            response.status(500).render('error', { message: error.message, error: error })
-            next()
-          }
-        })
       }
-    } else {
+      updateStampDetails(id, visitStampDetails, response)
+    })
+    .catch(function (error) {
       response.status(500).render('error', { message: error.message, error: error })
-      next()
-    }
-  })
+    })
+  next()
 })
+
+function updateStampDetails (id, visitStampDetails, response) {
+  client.update(id, visitStampDetails, claimantsCollection)
+    .then(function () {
+      logger.info('Successfully updated claimant with id: %s', id)
+      response.redirect('/submit-claim/' + id)
+    })
+    .catch(function (error) {
+      response.status(500).render('error', { message: error.message, error: error })
+    })
+}
+
+function buildStampDetails (request) {
+  return {
+    visitStampId: request.file.filename,
+    originalFilename: request.file.originalname,
+    path: request.file.path
+  }
+}
