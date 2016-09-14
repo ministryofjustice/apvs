@@ -87,6 +87,7 @@ services:
     build: alpha/notify-worker
     depends_on:
       - mongo
+      - smtp-server
     volumes:
       - "./alpha/notify-worker/app:/usr/src/app/app"
       - "./alpha/notify-worker/logs:/usr/src/app/logs"
