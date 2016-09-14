@@ -94,3 +94,7 @@ services:
     #environment:
     #  - LOGSTASH_HOST=elk
     #  - LOGSTASH_PORT=9998
+  smtp-server:
+    build: alpha/smtp-server
+    ports:
+      - "25:25"
