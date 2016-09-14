@@ -1,14 +1,14 @@
 var mongo = require('./database')
 var Promise = require('bluebird')
 
-const collectionName = 'notifications'
-const taskType = 'application-notification'
+const collectionName = 'tasks'
+const taskName = 'application-notification'
 const pendingStatus = 'PENDING'
 
 exports.getPendingNotifications = function () {
   return new Promise(function (resolve, reject) {
     mongo.db.collection(collectionName).find({
-      name: taskType,
+      name: taskName,
       status: pendingStatus
     }).toArray()
       .then(function (records) {
