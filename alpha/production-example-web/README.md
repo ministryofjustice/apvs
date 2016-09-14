@@ -15,7 +15,8 @@ npm start   # http://localhost:3100
 ### Run development container
 
 ```
-# Compile
+# Compile static resources and container image
+./build.sh
 docker build -f Dockerfile-dev -t production-example-node:dev .
 
 # Run with nodemon and host volumes for app folder mapped to container to reload on changes and cached node_modules
@@ -25,7 +26,8 @@ docker run --rm -p 3100:3100 -v $(pwd)/app:/usr/src/app/app -v $(pwd)/cache_node
 ### Run production container
 
 ```
-# Compile
+# Compile static resources and container image
+./build.sh
 docker build -t production-example-node:prod .
 
 # Run with PM2 process manager to run clustered process per CPU and restart on any failures
