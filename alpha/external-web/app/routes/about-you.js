@@ -2,6 +2,7 @@ var router = require('../routes')
 var client = require('../services/eligibility-client')
 var eligibilityFlag = require('../services/eligibility-flag')
 var logger = require('../services/bunyan-logger')
+var util = require('util')
 
 var PENDING = 'PENDING'
 const claimantsCollection = 'claimants'
@@ -23,11 +24,19 @@ router.get('/about-you/:claimant_id', function (request, response, next) {
 })
 
 router.post('/about-you', function (request, response, next) {
+  if (validationErrors(request, response, next)) {
+    return
+  }
+
   save(null, request, response)
   next()
 })
 
 router.post('/about-you/:claimant_id', function (request, response, next) {
+  if (validationErrors(request, response, next)) {
+    return
+  }
+
   var id = request.params.claimant_id
   eligibilityFlag.get(id, claimantsCollection)
     .then(function (isEligibilityModified) {
@@ -38,6 +47,9 @@ router.post('/about-you/:claimant_id', function (request, response, next) {
         logger.info('This is a brand new eligibility application.')
         update(id, request, response)
       }
+    })
+    .catch(function (error) {
+      response.status(500).render('error', { error: error })
     })
   next()
 })
@@ -86,4 +98,21 @@ function updateEligibilityFlag (id, newID) {
         }
       })
   }
+}
+
+function validationErrors (request, response, next) {
+  request.checkBody('title', 'Title must not be empty and only contain letters').notEmpty().isAlpha()
+  request.checkBody('first-name', 'First name must not be empty and only contain letters').notEmpty().isAlpha()
+  request.checkBody('last-name', 'Last name must not be empty and only contain letters').notEmpty().isAlpha()
+  request.checkBody('dob-day', 'dob-day must not be empty and only contain numbers').notEmpty().isNumeric()
+  request.checkBody('dob-month', 'dob-month must not be empty and only contain numbers').notEmpty().isNumeric()
+  request.checkBody('dob-year', 'dob-year must not be empty and only contain numbers').notEmpty().isNumeric()
+
+  var errors = request.validationErrors(true)
+
+  if (errors) {
+    response.status(400).render('error', { error: 'There were validation errors: ' + util.inspect(errors) })
+  }
+
+  return errors
 }
