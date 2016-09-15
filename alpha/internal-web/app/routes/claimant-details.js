@@ -50,9 +50,11 @@ function updateApplicationStatus (status, request, response, next) {
 }
 
 router.get('/claimant-details/:claimant_id/evidence/:eligibility_id', function (request, response, next) {
+  var eligibilityId = request.params.eligibility_id
+
   client.get(request.params.claimant_id, claimantsCollection)
     .then(function (claimant) {
-      response.download('./eligibility-uploads/' + request.params.eligibility_id, claimant[ 'eligibility-file' ][ 'originalFilename' ])
+      response.download('./eligibility-uploads/' + eligibilityId, claimant[ 'eligibility-file' ][ 'originalFilename' ])
     })
     .catch(function (error) {
       response.status(500).render('error', { error: error })

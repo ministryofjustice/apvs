@@ -14,6 +14,8 @@ require('./routes/application-submitted')
 require('./routes/claim')
 require('./routes/claim-details')
 require('./routes/travel-profile')
+require('./routes/declare-your-visit')
+require('./routes/submit-claim')
 
 // Executed prior to any route being called.
 router.use(function (request, response, next) {
