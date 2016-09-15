@@ -36,13 +36,4 @@ if (logstashHost && logstashPort) {
   })
 }
 
-// Add file stream.
-logger.addStream({
-  type: 'rotating-file',
-  level: 'DEBUG',
-  path: '/usr/src/app/logs/notify-worker.log',
-  period: '1d',
-  count: 7
-})
-
 module.exports = logger

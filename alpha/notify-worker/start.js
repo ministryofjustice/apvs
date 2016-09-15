@@ -1,5 +1,5 @@
 var CronJob = require('cron').CronJob
-var process = require('./app/process-notifications')
+var process = require('./app/process-tasks')
 var logger = require('./app/bunyan-logger')
 
 logger.info('Launched Notify Worker process!')
