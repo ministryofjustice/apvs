@@ -89,6 +89,7 @@ services:
       - mongo
       - smtp-server
     volumes:
+      - "./alpha/docker/volumes/node_modules-notify-worker:/usr/src/app/node_modules" # cache node_modules in local volume
       - "./alpha/notify-worker/app:/usr/src/app/app"
       - "./alpha/notify-worker/logs:/usr/src/app/logs"
     #links:

@@ -4,6 +4,7 @@ var eligibilityFlag = require('../services/eligibility-flag')
 var logger = require('../services/bunyan-logger')
 
 const claimantsCollection = 'claimants'
+const tasksCollection = 'tasks'
 
 router.get('/travel-profile/:claimant_id', function (request, response, next) {
   client.get(request.params.claimant_id, claimantsCollection)
@@ -25,7 +26,9 @@ router.post('/travel-profile/:claimant_id', function (request, response, next) {
   client.update(id, travelProfile, claimantsCollection)
     .then(function () {
       logger.info('Successfully updated travel profile for claimant with id: %s', id)
-      isEligibilityModified(id, response)
+      var reference = 'APVS' + getRandomReference()
+      createNotificationTask(reference)
+      isEligibilityModified(id, response, reference)
     })
     .catch(function (error) {
       response.status(500).render('error', { error: error })
@@ -34,16 +37,38 @@ router.post('/travel-profile/:claimant_id', function (request, response, next) {
 })
 
 // Determine if the eligibility application is a modification and redirect accordingly.
-function isEligibilityModified (id, response) {
+function isEligibilityModified (id, response, reference) {
   eligibilityFlag.get(id, claimantsCollection)
     .then(function (isEligibilityModified) {
       if (isEligibilityModified) {
         response.redirect('/claim-details/' + id)
       } else {
-        response.redirect('/application-submitted/' + id)
+        response.redirect('/application-submitted/' + reference)
       }
     })
     .catch(function (error) {
       response.status(500).render('error', { error: error })
     })
+}
+
+var createNotificationTask = function (reference, email) {
+  var task = {
+    name: 'application-notification',
+    status: 'PENDING',
+    action: {
+      method: 'email',
+      reference: reference,
+      email: email || 'test@test.com'
+    }
+  }
+
+  client.save(task, tasksCollection)
+    .then(function (claimant) {})
+    .catch(function (error) {
+      logger.error(error)
+    })
+}
+
+var getRandomReference = function () {
+  return Math.floor(Math.random() * 90000) + 10000
 }
