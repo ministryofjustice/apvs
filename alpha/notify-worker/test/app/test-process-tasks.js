@@ -4,8 +4,7 @@ var sinon = require('sinon')
 var client = require('../../app/db-client')
 var logger = require('../../app/bunyan-logger')
 var mailer = require('../../app/mailer')
-var sinonBluebird = require('sinon-bluebird')
-var taskNotification = require('../../app/tasks/notification')
+require('sinon-bluebird')
 
 describe('process-tasks', function () {
   var processTasks, dummyPendingTask, processNotification

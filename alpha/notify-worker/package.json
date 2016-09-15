@@ -4,7 +4,7 @@
   "description": "",
   "main": "app/app.js",
   "scripts": {
-    "test": "node_modules/.bin/mocha -u exports test/**/*"
+    "test": "node_modules/.bin/standard && node_modules/.bin/mocha -u exports test/**/*"
   },
   "bin": {
     "notify-worker": "app/app.js"
