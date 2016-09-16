@@ -46,7 +46,6 @@ describe('process-tasks', function () {
 
       processTasks.run().finally(() => {
         notificationProcessSpy.should.have.been.calledTwice
-        console.info('done')
       })
     })
   })
