@@ -3,11 +3,10 @@ var logger = require('./bunyan-logger')
 var Promise = require('bluebird')
 
 const collectionName = 'tasks'
-const taskName = 'application-notification'
 const pendingStatus = 'PENDING'
 const completedStatus = 'COMPLETED'
 
-exports.getPendingNotifications = function () {
+exports.getPendingTasks = function (taskName) {
   return new Promise(function (resolve, reject) {
     mongo.db.collection(collectionName).find({
       name: taskName,

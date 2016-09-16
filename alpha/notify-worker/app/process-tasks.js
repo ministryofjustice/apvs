@@ -3,8 +3,10 @@ var client = require('./db-client')
 var Promise = require('bluebird')
 var notificationTaskHandler = require('./tasks/notification')
 
+const notificationTaskName = 'application-notification'
+
 exports.run = function () {
-  client.getPendingNotifications()
+  return client.getPendingTasks(notificationTaskName)
     .then(function (notifications) {
       if (notifications) {
         Promise.all(notifications.map(function (notification) {

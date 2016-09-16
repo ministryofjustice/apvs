@@ -1,16 +1,21 @@
 /* global describe it */
 var proxyquire = require('proxyquire')
 var sinon = require('sinon')
+var chai = require('chai')
+var sinonChai = require('sinon-chai')
+chai.should()
+chai.use(sinonChai)
+require('sinon-bluebird')
 var client = require('../../app/db-client')
 var logger = require('../../app/bunyan-logger')
 var mailer = require('../../app/mailer')
-require('sinon-bluebird')
 
 describe('process-tasks', function () {
-  var processTasks, processNotification
+  const APPLICATION_NOTIFICATION = 'application-notification'
+  var processTasks, processNotification, notificationProcessSpy
 
   var dummyPendingTask = {
-    name: 'application-notification',
+    name: APPLICATION_NOTIFICATION,
     status: 'PENDING',
     action: {
       method: 'email',
@@ -21,10 +26,12 @@ describe('process-tasks', function () {
 
   describe('run', function () {
     it('should run notification task twice', function () {
+      notificationProcessSpy = sinon.spy(function (notification) {
+        console.log(notification)
+      })
+
       processNotification = {
-        process: function (notification) {
-          console.log(notification)
-        }
+        process: notificationProcessSpy
       }
 
       processTasks = proxyquire('../../app/process-tasks', {
@@ -33,11 +40,14 @@ describe('process-tasks', function () {
         './bunyan-logger': logger
       })
 
-      sinon.stub(client, 'getPendingNotifications').resolves([dummyPendingTask, dummyPendingTask])
+      sinon.stub(client, 'getPendingTasks').resolves([dummyPendingTask, dummyPendingTask])
       sinon.stub(client, 'setTaskComplete')
       sinon.stub(mailer, 'sendMail')
 
-      processTasks.run()
+      processTasks.run().finally(() => {
+        notificationProcessSpy.should.have.been.calledTwice
+        console.info('done')
+      })
     })
   })
 })
