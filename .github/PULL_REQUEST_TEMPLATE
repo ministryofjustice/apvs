@@ -1,0 +1,23 @@
+## Description
+
+A few sentences describing the overall context and goals for the PR's commits.
+
+## Impacted Areas of Application
+
+List high-level components of the application that this PR will affect.
+
+* External web application
+* ...
+
+## Checklist
+
+A checklist is for the benefit of the primary reviewer - aka __YOU__ - the person submitting the pull request.
+
+[] Unit tests written and passing
+[] Comment and coding standards adhered to
+[] Error Handling
+[] Security considered
+[] Performance considered
+[] Appropriate use of logging
+[] README updated?
+
