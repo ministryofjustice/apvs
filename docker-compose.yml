@@ -83,3 +83,20 @@ services:
   #    - "5000:5000"
   #    - "9998:9998"
   #    - "9999:9999"
+  notify-worker:
+    build: alpha/notify-worker
+    depends_on:
+      - mongo
+      - smtp-server
+    volumes:
+      - "./alpha/notify-worker/app:/usr/src/app/app"
+      - "./alpha/notify-worker/logs:/usr/src/app/logs"
+    #links:
+    #  - elk
+    #environment:
+    #  - LOGSTASH_HOST=elk
+    #  - LOGSTASH_PORT=9998
+  smtp-server:
+    build: alpha/smtp-server
+    ports:
+      - "25:25"
