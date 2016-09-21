@@ -1,7 +1,11 @@
 {
   "name": "notify-worker",
   "version": "0.0.1",
-  "description": "",
+  "description": "APVS async worker example for notifications",
+  "private": true,
+  "engines": {
+    "node": ">=4.0 <5.0"
+  },
   "main": "app/app.js",
   "scripts": {
     "test": "node_modules/.bin/standard && node_modules/.bin/mocha -u exports test/**/*"
