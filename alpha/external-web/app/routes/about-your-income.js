@@ -1,9 +1,6 @@
 var router = require('../routes')
 var client = require('../services/eligibility-client')
-
-// Require file upload library.
-var multer = require('multer')
-var upload = multer({ dest: 'eligibility-uploads/' })
+var upload = require('../services/upload')
 
 const claimantsCollection = 'claimants'
 
