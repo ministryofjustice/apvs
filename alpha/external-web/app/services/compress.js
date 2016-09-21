@@ -13,8 +13,6 @@ const CONFIGURATION = {
   ]
 }
 
-// TODO: Need to branch. Based on if the file type is an image or pdf.
-// Function should only be called with a file's whose mimetype is image/pdf or image/jpeg.
 var compress = function (file) {
   imagemin([ file.path ], FILE_DESTINATION, CONFIGURATION)
     .then(function () {
