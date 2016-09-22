@@ -6,16 +6,12 @@ var expect = require('chai').expect
 var express = require('express')
 var nunjucks = require('express-nunjucks')
 var bodyParser = require('body-parser')
-//var client = require('../../app/services/eligibility-client')
 var sinon = require('sinon')
 require('sinon-bluebird')
-
-// var logger = require('../../app/services/bunyan-logger')
 
 describe('about-you', function () {
   var request
   var validationErrors
-  var client
   var claimant = {
     '_id': '123'
   }
@@ -37,18 +33,24 @@ describe('about-you', function () {
 
     app.use('/', router)
 
-    var client = proxyquire('../../app/services/eligibility-client.js', {
-      './database': { '@noCallThru': true },
-      'save': function save () {
-        return claimant
-      }
+    var client = proxyquire('../../app/services/eligibility-client', {
+      './database': { '@noCallThru': true }
     })
 
     sinon.stub(client, 'save').resolves(claimant)
 
+    var eligibilityFlag = proxyquire('../../app/services/eligibility-flag', {
+      './eligibility-client': { '@noCallThru': true },
+      './bunyan-logger': { '@noCallThru': true }
+    })
+
+    // sinon.stub(eligibilityFlag, 'get').resolves(false)
+
     var routeAboutYou = proxyquire('../../app/routes/about-you.js', {
       '../services/validators/about-you-validator.js': function (data) { return validationErrors },
-      '../services/eligibility-client': client
+      '../services/eligibility-client': client,
+      '../services/eligibility-flag': eligibilityFlag,
+      '../services/bunyan-logger': { '@noCallThru': true }
     })
 
     routeAboutYou(router)
@@ -82,31 +84,33 @@ describe('about-you', function () {
         })
     })
 
-    // it('should respond with a 400 when errors', function (done) {
-    //   validationErrors = {'first-name': ['First name required']}
-    //   request
-    //     .post('/about-you')
-    //     .send({ 'name': 'test name' })
-    //     .expect(400)
-    //     .end(function (err, res) {
-    //       if (err) return done(err)
-    //       expect(res.statusCode).to.equal(400)
-    //       done()
-    //     })
-    // })
+    it('should respond with a 400 when errors', function (done) {
+      validationErrors = {'first-name': ['First name required']}
+      request
+        .post('/about-you')
+        .send({ 'name': 'test name' })
+        .expect(400)
+        .end(function (err, res) {
+          if (err) return done(err)
+          expect(res.statusCode).to.equal(400)
+          done()
+        })
+    })
+  })
 
-    // it('should respond with a 400 when errors', function (done) {
-    //   validationErrors = {'first-name': ['First name required']}
-    //   request
-    //     .post('/about-you')
-    //     .send({ 'name': 'test name' })
-    //     .expect(400)
-    //     .end(function (err, res) {
-    //       if (err) return done(err)
-    //       expect(res.statusCode).to.equal(400)
-    //       done()
-    //     })
-    // })
+  describe('POST /about-you/123', function () {
+    it('should respond with a 400 when errors', function (done) {
+      validationErrors = {'first-name': ['First name required']}
+      request
+        .post('/about-you/123')
+        .send({ 'name': 'test name' })
+        .expect(400)
+        .end(function (err, res) {
+          if (err) return done(err)
+          expect(res.statusCode).to.equal(400)
+          done()
+        })
+    })
   })
 
   /*
