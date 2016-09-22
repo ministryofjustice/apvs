@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node start.js",
     "lint": "standard",
-    "test": "npm run lint"
+    "test": "node_modules/.bin/standard && node ./test/wcag/test-wcag-aa.js"
   },
   "standard": {
     "ignore": [
@@ -50,5 +50,8 @@
     "request": "^2.74.0",
     "serve-favicon": "2.3.0",
     "standard": "^7.1.2"
+  },
+  "devDependencies": {
+    "pa11y": "^4.0.1"
   }
 }
