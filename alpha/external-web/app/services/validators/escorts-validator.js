@@ -1,21 +1,23 @@
 var FieldValidator = require('./field-validator')
 var PersonalDetailsValidator = require('./personal-details-validator')
 
-class AboutYouValidator extends PersonalDetailsValidator {
+class EscortsValidator extends PersonalDetailsValidator {
   validate (data) {
     var errors = {}
 
-    var title = data['title']
+    var address = data['escort-address']
+    // var postcode = data['escort-postcode']
+    // var ninumber = data['escort-NIN']
     var fields = {
-      'name1': 'first-name',
-      'dob-day': 'dob-day',
-      'dob-month': 'dob-month',
-      'dob-year': 'dob-year'
+      'name1': 'escort-name',
+      'dob-day': 'escort-dob-day',
+      'dob-month': 'escort-dob-month',
+      'dob-year': 'escort-dob-year'
     }
 
-    FieldValidator(title, 'title', errors)
+    FieldValidator(address, 'escort-address', errors)
       .isRequired()
-      .isAlpha()
+      .isAddress()
 
     errors = super.validate(data, fields, errors)
 
@@ -27,8 +29,7 @@ class AboutYouValidator extends PersonalDetailsValidator {
     return false
   }
 }
-
 exports.default = function (data) {
-  return new AboutYouValidator().validate(data)
+  return new EscortsValidator().validate(data)
 }
 module.exports = exports['default']

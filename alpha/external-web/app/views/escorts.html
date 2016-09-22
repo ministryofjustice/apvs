@@ -18,6 +18,26 @@ APVS Application Form
                 Please enter the details of the claimant's escort.
             </p>
 
+            {% if errors %}
+                <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+
+                <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                    Message to alert the user to a problem goes here
+                </h1>
+
+                <p>
+                    Optional description of the errors and how to correct them
+                </p>
+
+                <ul class="error-summary-list">
+                    {% for field, messages in errors %}
+                        <li><a href="#{{ field }}">{{ messages[0] }}</a></li>
+                    {% endfor %}
+                </ul>
+
+                </div>
+            {% endif %}
+
             <form action="/escorts/{{ claimant['_id'] }}" method="post" class="form">
                 <div class="form-group">
 
