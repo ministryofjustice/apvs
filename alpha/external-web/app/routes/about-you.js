@@ -2,6 +2,7 @@ var router = require('../routes')
 var client = require('../services/eligibility-client')
 var eligibilityFlag = require('../services/eligibility-flag')
 var logger = require('../services/bunyan-logger')
+var validator = require('../services/validators/about-you-validator.js')
 
 var PENDING = 'PENDING'
 const claimantsCollection = 'claimants'
@@ -23,11 +24,19 @@ router.get('/about-you/:claimant_id', function (request, response, next) {
 })
 
 router.post('/about-you', function (request, response, next) {
+  if (validator.validationErrors(request, response, next)) {
+    return
+  }
+
   save(null, request, response)
   next()
 })
 
 router.post('/about-you/:claimant_id', function (request, response, next) {
+  if (validator.validationErrors(request, response, next)) {
+    return
+  }
+
   var id = request.params.claimant_id
   eligibilityFlag.get(id, claimantsCollection)
     .then(function (isEligibilityModified) {
@@ -38,6 +47,9 @@ router.post('/about-you/:claimant_id', function (request, response, next) {
         logger.info('This is a brand new eligibility application.')
         update(id, request, response)
       }
+    })
+    .catch(function (error) {
+      response.status(500).render('error', { error: error })
     })
   next()
 })
