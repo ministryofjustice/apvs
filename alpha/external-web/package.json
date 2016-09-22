@@ -49,6 +49,7 @@
     "readdir": "0.0.6",
     "request": "^2.74.0",
     "serve-favicon": "2.3.0",
-    "standard": "^7.1.2"
+    "standard": "^7.1.2",
+    "touch": "^1.0.0"
   }
 }
