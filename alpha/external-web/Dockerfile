@@ -6,7 +6,8 @@ WORKDIR /usr/src/app
 COPY package.json /usr/src/app/
 COPY . /usr/src/app
 
-# TODO: Split this into a script.
+EXPOSE 3000
+
 # Install PDF Toolkit. Required for PDF compression.
 ENV PDFTK_VERSION 2.02
 
@@ -22,7 +23,5 @@ RUN unzip /tmp/pdftk-${PDFTK_VERSION}-src.zip -d /tmp && \
     make -f Makefile.Debian && \
     make -f Makefile.Debian install && \
     rm -Rf /tmp/pdftk-*
-
-EXPOSE 3000
 
 CMD npm install && npm start

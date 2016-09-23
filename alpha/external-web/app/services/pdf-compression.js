@@ -1,19 +1,14 @@
-const scissors = require('scissors');
-const fs = require('fs');
+const scissors = require('scissors')
+const fs = require('fs')
 const logger = require('./bunyan-logger')
 
-const FILE_DESTINATION = 'eligibility-uploads/'
+const FILE_DESTINATION = 'eligibility-uploads/out'
 
 exports.compress = function (file) {
-
   scissors(file.path)
     .compress()
     .pdfStream()
-    .pipe(fs.createWriteStream('eligibility-uploads/out'));
-
-  // TODO: Add error handling.
-  // TODO: The output file should replace the original file + have the same name.
+    .pipe(fs.createWriteStream(FILE_DESTINATION))
 
   logger.info('PDF compression complete.')
-
 }
