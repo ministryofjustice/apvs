@@ -1,0 +1,33 @@
+## Description
+ 
+High-level description - a few sentences on the overall context and goals for the PR's commits.
+
+## Impacted Areas of Application
+
+List high-level components of the application that this PR will affect.
+
+### External web application
+
+* A list of
+* The changes made
+* To this component
+
+### Component 2
+
+* ...
+
+## Checklist
+
+This checklist is for the benefit of the primary reviewer - aka __YOU__ - the person submitting the pull request. Have you considered the following:
+
+- [ ] Unit tests written and passing
+- [ ] Coding standards adhered to
+- [ ] Error Handling
+- [ ] Security considered
+- [ ] Performance considered
+- [ ] Appropriate use of logging
+- [ ] README updated?
+- [ ] Comments and/or API documentation?
+- [ ] Updates required for deployment?
+
+

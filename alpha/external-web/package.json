@@ -44,6 +44,9 @@
     "grunt-sass": "^1.1.0",
     "grunt-sync": "^0.5.1",
     "hogan.js": "3.0.2",
+    "imagemin": "^5.2.2",
+    "imagemin-mozjpeg": "^6.0.0",
+    "imagemin-pngquant": "^5.0.0",
     "minimist": "0.0.8",
     "mocha": "^3.0.2",
     "mongodb": "^2.2.8",
@@ -56,8 +59,9 @@
     "serve-favicon": "2.3.0",
     "sinon": "^1.17.6",
     "sinon-bluebird": "^3.0.2",
-    "standard": "^8.1.0",
+    "standard": "^7.1.2",
     "supertest": "^2.0.0",
+    "touch": "^1.0.0",
     "validator": "^5.7.0"
   }
 }
