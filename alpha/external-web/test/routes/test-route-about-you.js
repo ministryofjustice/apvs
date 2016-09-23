@@ -9,11 +9,20 @@ var bodyParser = require('body-parser')
 var sinon = require('sinon')
 require('sinon-bluebird')
 
-describe('about-you', function () {
+describe('about-you route', function () {
   var request
   var validationErrors
+  var eligibilityFlag
+  var eligibilityFlagGetStub
   var claimant = {
     '_id': '123'
+  }
+  var isEligibilityModified = true
+  var logger = {
+    info: function (text) {
+      // console.log('test-logger-info: ' + text)
+    },
+    '@noCallThru': true
   }
 
   before(function () {
@@ -38,19 +47,22 @@ describe('about-you', function () {
     })
 
     sinon.stub(client, 'save').resolves(claimant)
+    sinon.stub(client, 'update').resolves(claimant)
 
-    var eligibilityFlag = proxyquire('../../app/services/eligibility-flag', {
+    eligibilityFlag = proxyquire('../../app/services/eligibility-flag', {
       './eligibility-client': { '@noCallThru': true },
-      './bunyan-logger': { '@noCallThru': true }
+      './bunyan-logger': { logger,
+        '@noCallThru': true }
     })
 
-    // sinon.stub(eligibilityFlag, 'get').resolves(false)
+    eligibilityFlagGetStub = sinon.stub(eligibilityFlag, 'get').resolves(isEligibilityModified)
+    sinon.stub(eligibilityFlag, 'update').resolves({})
 
     var routeAboutYou = proxyquire('../../app/routes/about-you.js', {
       '../services/validators/about-you-validator.js': function (data) { return validationErrors },
       '../services/eligibility-client': client,
       '../services/eligibility-flag': eligibilityFlag,
-      '../services/bunyan-logger': { '@noCallThru': true }
+      '../services/bunyan-logger': logger
     })
 
     routeAboutYou(router)
@@ -99,6 +111,33 @@ describe('about-you', function () {
   })
 
   describe('POST /about-you/123', function () {
+    it('should respond with a 302 when no errors', function (done) {
+      request
+        .post('/about-you/123')
+        .send({ 'name': 'test name' })
+        .expect(302)
+        .end(function (err, res) {
+          if (err) return done(err)
+          expect(res.headers.location).to.equal('/relationship/123')
+          done()
+        })
+    })
+
+    it('should respond with a 302 when no errors and eligibility not modified', function (done) {
+      isEligibilityModified = false
+      eligibilityFlagGetStub.restore()
+      eligibilityFlagGetStub = sinon.stub(eligibilityFlag, 'get').resolves(isEligibilityModified)
+      request
+        .post('/about-you/123')
+        .send({ 'name': 'test name' })
+        .expect(302)
+        .end(function (err, res) {
+          if (err) return done(err)
+          expect(res.headers.location).to.equal('/relationship/123')
+          done()
+        })
+    })
+
     it('should respond with a 400 when errors', function (done) {
       validationErrors = {'first-name': ['First name required']}
       request
@@ -112,40 +151,4 @@ describe('about-you', function () {
         })
     })
   })
-
-  /*
-  describe('POST /about-you', function () {
-    // it('should response with a 200 with no validation errors', function (done) {
-    //   var data = {
-    //     'title': 'Mr',
-    //     'first-name': 'John',
-    //     'last-name': 'Smith',
-    //     'dob-day': '12',
-    //     'dob-month': '12',
-    //     'dob-year': '1990'
-    //   }
-    //   request
-    //     .post('/about-you')
-    //     .send(data)
-    //     .expect(200, done)
-    // })
-
-    it('should respond with a 400 when there are validation errors', function (done) {
-      console.log('test started')
-      validationErrors = [{title: 'title is required'}]
-
-      var validatorStub = sinon.mock('validator')
-      validatorStub.restore()
-
-      request
-        .post('/about-you')
-        .send({'first-name': 'John'})
-        .expect(400)
-        .end(function (err, res) {
-          if (err) return done(err)
-          done()
-        })
-    })
-  })
-  */
 })

@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node start.js",
     "lint": "standard",
-    "test": "npm run lint"
+    "test": "npm run lint && node_modules/.bin/mocha -u exports test/**/*"
   },
   "standard": {
     "ignore": [

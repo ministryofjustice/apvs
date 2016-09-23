@@ -1,20 +1,20 @@
 var FieldValidator = require('./field-validator')
 
 class PersonalDetailsValidator {
-  validate (data, fields, errors = {}) {
-    var name1Field = fields['name1']
+  validate (data, fieldNames, errors = {}) {
+    var name1Field = fieldNames['name1']
     var name1 = data[name1Field]
 
-    var name2Field = fields['name2']
+    var name2Field = fieldNames['name2']
     var name2 = data[name2Field]
 
-    var dobDayField = fields['dob-day']
+    var dobDayField = fieldNames['dob-day']
     var dobDay = data[dobDayField]
 
-    var dobMonthField = fields['dob-month']
+    var dobMonthField = fieldNames['dob-month']
     var dobMonth = data[dobMonthField]
 
-    var dobYearField = fields['dob-year']
+    var dobYearField = fieldNames['dob-year']
     var dobYear = data[dobYearField]
 
     if (name1Field) {

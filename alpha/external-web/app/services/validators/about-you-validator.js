@@ -6,8 +6,9 @@ class AboutYouValidator extends PersonalDetailsValidator {
     var errors = {}
 
     var title = data['title']
-    var fields = {
+    var personalFieldNames = {
       'name1': 'first-name',
+      'name2': 'last-name',
       'dob-day': 'dob-day',
       'dob-month': 'dob-month',
       'dob-year': 'dob-year'
@@ -17,7 +18,7 @@ class AboutYouValidator extends PersonalDetailsValidator {
       .isRequired()
       .isAlpha()
 
-    errors = super.validate(data, fields, errors)
+    errors = super.validate(data, personalFieldNames, errors)
 
     for (var field in errors) {
       if (errors.hasOwnProperty(field)) {

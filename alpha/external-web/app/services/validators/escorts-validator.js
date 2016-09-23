@@ -6,9 +6,7 @@ class EscortsValidator extends PersonalDetailsValidator {
     var errors = {}
 
     var address = data['escort-address']
-    // var postcode = data['escort-postcode']
-    // var ninumber = data['escort-NIN']
-    var fields = {
+    var personalFieldNames = {
       'name1': 'escort-name',
       'dob-day': 'escort-dob-day',
       'dob-month': 'escort-dob-month',
@@ -19,7 +17,7 @@ class EscortsValidator extends PersonalDetailsValidator {
       .isRequired()
       .isAddress()
 
-    errors = super.validate(data, fields, errors)
+    errors = super.validate(data, personalFieldNames, errors)
 
     for (var field in errors) {
       if (errors.hasOwnProperty(field)) {
