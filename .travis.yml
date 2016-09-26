@@ -6,5 +6,4 @@ env:
   - TEST_DIR=alpha/external-web
   - TEST_DIR=alpha/internal-web
 script: 
-  - cd $TEST_DIR && npm install && npm test
-  
+  - cd $TEST_DIR && npm install && npm TEST_DIR
