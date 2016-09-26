@@ -7,7 +7,7 @@ var expect = require('chai').expect
 var path = require('path')
 var express = require('express')
 var nunjucks = require('express-nunjucks')
-var logger = require('../../app/services/bunyan-logger-test')
+var logger = require('../../app/bunyan-logger')
 
 describe('index', function () {
   var request
