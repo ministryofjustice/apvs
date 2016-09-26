@@ -1,12 +1,11 @@
 /* global describe before beforeEach it */
-var path = require('path')
 var supertest = require('supertest')
 var proxyquire = require('proxyquire')
 var expect = require('chai').expect
 var express = require('express')
-var nunjucks = require('express-nunjucks')
 var bodyParser = require('body-parser')
 var sinon = require('sinon')
+var mockViewEngine = require('./mock-view-engine')
 require('sinon-bluebird')
 
 describe('about-you route', function () {
@@ -27,14 +26,8 @@ describe('about-you route', function () {
 
   before(function () {
     var app = express()
-    app.set('view engine', 'html')
-    app.set('views', [ path.join(__dirname, '../../app/views'), path.join(__dirname, '../../lib/') ])
 
-    nunjucks.setup({
-      autoescape: true,
-      watch: true,
-      noCache: true
-    }, app)
+    mockViewEngine(app, '../../app/views')
 
     app.use(bodyParser.urlencoded({ extended: false }))
 
