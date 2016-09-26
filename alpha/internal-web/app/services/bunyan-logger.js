@@ -2,6 +2,7 @@ var bunyan = require('bunyan')
 var PrettyStream = require('bunyan-prettystream')
 var bunyanLogstash = require('bunyan-logstash-tcp')
 
+var logstashPath = process.env.LOGGING_PATH || 'logs/internal-web.log'
 var logstashHost = process.env.LOGSTASH_HOST
 var logstashPort = process.env.LOGSTASH_PORT
 
@@ -45,7 +46,7 @@ if (logstashHost && logstashPort) {
 logger.addStream({
   type: 'rotating-file',
   level: 'DEBUG',
-  path: '/usr/src/app/logs/internal-web.log',
+  path: logstashPath,
   period: '1d',
   count: 7
 })
