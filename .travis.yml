@@ -1,8 +1,9 @@
 language: node_js
+env:
+  - CXX=g++-4.8
 node_js:
   - "4"
 env:
-  - CXX=g++-4.8
   - TEST_DIR=alpha/external-api-node
   - TEST_DIR=alpha/external-web
   - TEST_DIR=alpha/internal-web
