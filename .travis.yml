@@ -10,6 +10,7 @@ addons:
     packages:
     - gcc-4.8
     - g++-4.8
+os: linux
 env:
   - TEST_DIR=alpha/external-api-node
   - TEST_DIR=alpha/external-web
