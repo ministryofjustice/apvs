@@ -11,7 +11,6 @@ addons:
     - gcc-4.8
     - g++-4.8
     - gcj-4.8-jdk
-os: linux
 env:
   - TEST_DIR=alpha/external-api-node
   - TEST_DIR=alpha/external-web
