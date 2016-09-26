@@ -17,7 +17,7 @@ class EscortsValidator extends PersonalDetailsValidator {
       .isRequired()
       .isAddress()
 
-    errors = super.validate(data, personalFieldNames, errors)
+    errors = super.validate(data, errors, personalFieldNames)
 
     for (var field in errors) {
       if (errors.hasOwnProperty(field)) {
