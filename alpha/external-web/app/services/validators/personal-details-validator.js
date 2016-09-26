@@ -5,7 +5,7 @@ class PersonalDetailsValidator {
     data,
     errors = {},
     {
-      name1: name1Field,
+      'name1': name1Field,
       'name2': name2Field,
       'dob-day': dobDayField,
       'dob-month': dobMonthField,
