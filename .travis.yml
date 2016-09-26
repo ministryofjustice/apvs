@@ -1,8 +1,22 @@
 language: node_js
 node_js:
   - "4"
+
+env:
+  - CXX=g++-4.8
+
 compiler:
   - gcc
+
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - gcc-4.8
+    - g++-4.8
+    - gcj-4.8-jdk
+
 env:
   - TEST_DIR=alpha/external-api-node
   - TEST_DIR=alpha/external-web
