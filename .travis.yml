@@ -15,4 +15,7 @@ env:
   - TEST_DIR=alpha/external-api-node
   - TEST_DIR=alpha/external-web
   - TEST_DIR=alpha/internal-web
-script: cd $TEST_DIR && npm install --no-optional && npm test
+script: cd $TEST_DIR && \
+        apt-get install -y gcj-4.8-jdk g++-4.8 && \
+        npm install && \
+        npm test
