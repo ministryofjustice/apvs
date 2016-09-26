@@ -2,7 +2,7 @@ var bunyan = require('bunyan')
 var PrettyStream = require('bunyan-prettystream')
 var bunyanLogstash = require('bunyan-logstash-tcp')
 
-var logstashPath = process.env.LOGGING_PATH || 'logs/external-web.log'
+var logstashPath = process.env.LOGGING_PATH || 'logs/internal-web.log'
 var logstashHost = process.env.LOGSTASH_HOST
 var logstashPort = process.env.LOGSTASH_PORT
 
