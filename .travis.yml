@@ -2,9 +2,6 @@ language: node_js
 node_js:
   - "4"
 
-env:
-  - CXX=g++-4.8
-
 compiler:
   - gcc
 
@@ -19,6 +16,9 @@ addons:
 
 env:
   - TEST_DIR=alpha/external-api-node
+    CXX=g++-4.8
   - TEST_DIR=alpha/external-web
+    CXX=g++-4.8
   - TEST_DIR=alpha/internal-web
+    CXX=g++-4.8
 script: cd $TEST_DIR && npm install && npm test
