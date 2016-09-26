@@ -41,6 +41,9 @@
     "grunt-sass": "^1.1.0",
     "grunt-sync": "^0.5.1",
     "hogan.js": "3.0.2",
+    "imagemin": "^5.2.2",
+    "imagemin-mozjpeg": "^6.0.0",
+    "imagemin-pngquant": "^5.0.0",
     "minimist": "0.0.8",
     "mongodb": "^2.2.8",
     "multer": "^1.2.0",
@@ -48,10 +51,11 @@
     "prompt": "^0.2.14",
     "readdir": "0.0.6",
     "request": "^2.74.0",
-    "serve-favicon": "2.3.0",
-    "standard": "^7.1.2"
+    "serve-favicon": "2.3.0"
   },
   "devDependencies": {
-    "pa11y": "^4.0.1"
+    "pa11y": "^4.0.1",
+    "standard": "^7.1.2",
+    "touch": "^1.0.0"
   }
 }

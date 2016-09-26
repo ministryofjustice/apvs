@@ -1,7 +1,6 @@
-var multer = require('multer')
-
+const multer = require('multer')
 const maxFileSize = 5242880 // 5MB in Bytes.
-const allowedFileTypes = ['image/png', 'image/jpeg', 'application/pdf']
+const allowedFileTypes = [ 'image/png', 'image/jpeg', 'application/pdf' ]
 
 function fileFilter (req, file, callback) {
   if (!allowedFileTypes.includes(file.mimetype)) {

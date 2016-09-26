@@ -1,7 +1,11 @@
 {
   "name": "notify-worker",
   "version": "0.0.1",
-  "description": "",
+  "description": "APVS async worker example for notifications",
+  "private": true,
+  "engines": {
+    "node": ">=4.0 <5.0"
+  },
   "main": "app/app.js",
   "scripts": {
     "test": "node_modules/.bin/standard && node_modules/.bin/mocha -u exports test/**/*"
@@ -23,7 +27,6 @@
   "dependencies": {
     "bluebird": "^3.4.6",
     "bunyan": "^1.8.1",
-    "bunyan-logger": "0.0.2",
     "bunyan-logstash-tcp": "^0.3.4",
     "bunyan-prettystream": "^0.1.3",
     "cron": "^1.1.0",
