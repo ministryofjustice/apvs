@@ -4,12 +4,13 @@ var config = require('./accessibility-config')
 var tester = pa11y(config)
 var htmlReporter = require('pa11y/reporter/html')
 
-const url = 'http://localhost:3000'
-const outputDir = './test/wcag/html'
+const url = 'http://node-external-apvs:3000'
+const outputDir = './html'
 const outputFilename = 'aa-results.html'
 const outputRelativePath = outputDir + '/' + outputFilename
 
 tester.run(url, function (error, results) {
+  console.log('WCAG Accessibility audit initiated')
   if (!error) {
     var html = htmlReporter.process(results, url)
 
@@ -24,5 +25,7 @@ tester.run(url, function (error, results) {
     })
 
     return console.log('WCAG Accessibility report completed')
+  } else {
+    console.log(error)
   }
 })

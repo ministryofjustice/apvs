@@ -57,12 +57,9 @@ The external web application contains an example [pa11y](http://pa11y.org/) scri
 
 This script checks the running internal web application for `WCAG AA` accessibility standard violations in the HTML.
 
-To try the sample:
+This script runs in it's own container which is launched along with all the others on `docker-compose up`
 
-- cd alpha/external-web
-- `npm test`
-
-Report outputs to `./test/wcag/html`
+Report outputs to `./alpha/wcag_audit/html`
 
 ### SMTP debug server
 
