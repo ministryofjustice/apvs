@@ -38,7 +38,7 @@ Optional configuration for the prototype.
 ### Bunyan Logging
 The prototype uses the Bunyan Logging library to produce JSON logs which it outputs to file, console, and optionally an ELK instance (see [ELK Stack](#elk_stack)).
 
-- LOGGING_PATH :: Set where to output log files. Defaults to 'logs/external-web.log' & 'logs/internal-web.log'.
+- LOGGING_PATH :: Sets the path to output Bunyan log files. Defaults to 'logs/external-web.log' & 'logs/internal-web.log'.
 
 ### ELK Stack
 The prototype has been configured to stream log messages from the Bunyan logger to an instance of the ELK stack running in a Docker container. By default this is disabled. To enable this functionality uncomment the ELK configuration, ELK links, and the environmental defined below for both the internal and external web in the docker-compose.yml file.
