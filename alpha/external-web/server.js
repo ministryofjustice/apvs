@@ -9,7 +9,6 @@ var bodyParser = require('body-parser')
 var browserSync = require('browser-sync')
 var config = require('./app/config.js')
 var utils = require('./lib/utils.js')
-var expressValidator = require('express-validator')
 
 var packageJson = require(path.join(__dirname, '/package.json'))
 
@@ -66,8 +65,6 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
   extended: true
 }))
-// Support for express-validator
-app.use(expressValidator())
 
 // Support session data
 app.use(session({
