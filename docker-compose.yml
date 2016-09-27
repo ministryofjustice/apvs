@@ -30,13 +30,15 @@ services:
     ports:
       - "3000:3000"
     depends_on:
+      - db
       - mongo
       - external-api-apvs
     environment:
       - LOGGING_PATH=/usr/src/app/logs/external-web.log
     #  - LOGSTASH_HOST=elk
     #  - LOGSTASH_PORT=9998
-    #links:
+    links:
+      - db
     #  - elk
 
   # Build the internal facing node application and expose it on port 3001.
@@ -51,14 +53,30 @@ services:
     ports:
       - "3001:3001"
     depends_on:
+      - db
       - mongo
     environment:
       - LOGGING_PATH=/usr/src/app/logs/external-web.log
     #  - LOGSTASH_HOST=elk
     #  - LOGSTASH_PORT=9998
-    #links:
+    links:
+      - db
     #  - elk
 
+  # MySQL database being used as a stand-in for Azure storage, and testing of the Knex ORM library.
+  db:
+    image: mysql:5.7
+    volumes:
+      - "./.data/db:/var/lib/mysql"
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: apvs
+      MYSQL_DATABASE: apvs
+      MYSQL_USER: apvs
+      MYSQL_PASSWORD: apvs
+
+  # TODO: Remove this.
   # Build a mongo contianer that will serve as the database for the internal and external node applications.
   mongo:
     image: mongo
