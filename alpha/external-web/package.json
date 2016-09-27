@@ -44,6 +44,7 @@
     "imagemin": "^5.2.2",
     "imagemin-mozjpeg": "^6.0.0",
     "imagemin-pngquant": "^5.0.0",
+    "knex": "^0.12.1",
     "minimist": "0.0.8",
     "mongodb": "^2.2.8",
     "multer": "^1.2.0",
