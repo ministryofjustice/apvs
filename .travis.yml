@@ -1,8 +1,22 @@
 language: node_js
 node_js:
   - "6"
+
+# Add C++ compiler to be used by native libaries included by node dependencies.
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - g++-4.8
+
 env:
+  global:
+  - CXX=g++-4.8
+
+  matrix:
   - TEST_DIR=alpha/external-api-node
   - TEST_DIR=alpha/external-web
   - TEST_DIR=alpha/internal-web
+
 script: cd $TEST_DIR && npm install && npm test

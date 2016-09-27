@@ -56,6 +56,7 @@
     "proxyquire": "^1.7.10",
     "readdir": "0.0.6",
     "request": "^2.74.0",
+    "scissors": "^0.1.0",
     "serve-favicon": "2.3.0",
     "sinon": "^1.17.6",
     "sinon-bluebird": "^3.0.2",

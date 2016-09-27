@@ -1,7 +1,7 @@
 const router = require('../routes')
 const client = require('../services/eligibility-client')
 const upload = require('../services/upload')
-const compress = require('../services/compress')
+const compress = require('../services/compression')
 
 const claimantsCollection = 'claimants'
 
