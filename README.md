@@ -8,7 +8,7 @@ Prototype implementation of the Assisted Prison Visits Scheme alpha. A bare bone
 ## Requirements
 
 * docker (with docker-compose)
-* Node (including npm)
+* Node 6 (including npm)
 
 ## Run
 
