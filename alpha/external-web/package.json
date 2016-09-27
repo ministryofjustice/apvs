@@ -48,6 +48,7 @@
     "minimist": "0.0.8",
     "mongodb": "^2.2.8",
     "multer": "^1.2.0",
+    "mysql": "^2.11.1",
     "portscanner": "^1.0.0",
     "prompt": "^0.2.14",
     "readdir": "0.0.6",
