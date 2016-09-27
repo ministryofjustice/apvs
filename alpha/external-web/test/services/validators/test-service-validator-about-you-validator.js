@@ -1,4 +1,3 @@
-/* global describe beforeEach it */
 var proxyquire = require('proxyquire')
 var sinon = require('sinon')
 var expect = require('chai').expect

@@ -1,4 +1,3 @@
-/* global describe before beforeEach it */
 var supertest = require('supertest')
 var proxyquire = require('proxyquire')
 var expect = require('chai').expect

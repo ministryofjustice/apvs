@@ -13,9 +13,9 @@
   },
   "standard": {
     "ignore": [
-      "jquery*.js",
-      "test-*"
-    ]
+      "jquery*.js"
+    ],
+    "globals": [ "describe", "before", "beforeEach", "it" ]
   },
   "dependencies": {
     "basic-auth": "^1.0.3",

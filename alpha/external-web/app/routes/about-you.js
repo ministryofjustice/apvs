@@ -28,22 +28,19 @@ module.exports = function (router) {
   router.post('/about-you', function (request, response, next) {
     var validationErrors = validator(request.body)
 
+    claimant = {
+      'personal': request.body
+    }
     if (validationErrors) {
-      claimant = {
-        'personal': request.body
-      }
       response.status(400).render('about-you', { errors: validationErrors, 'claimant': claimant })
       next()
       return
     }
 
-    claimant = {
-      personal: request.body,
-      status: {
-        applicationStatus: PENDING,
-        incomeVerificationStatus: PENDING,
-        relationshipVerificationStatus: PENDING
-      }
+    claimant['status'] = {
+      applicationStatus: PENDING,
+      incomeVerificationStatus: PENDING,
+      relationshipVerificationStatus: PENDING
     }
 
     var id = null
@@ -63,11 +60,12 @@ module.exports = function (router) {
     var id = request.params.claimant_id
     var validationErrors = validator(request.body)
 
+    claimant = {
+      'personal': request.body
+    }
+
     if (validationErrors) {
-      claimant = {
-        '_id': id,
-        'personal': request.body
-      }
+      claimant['_id'] = id
       response.status(400).render('about-you', { errors: validationErrors, 'claimant': claimant })
       next()
       return
@@ -78,14 +76,10 @@ module.exports = function (router) {
         if (isEligibilityModified) {
           logger.info('This is a modification of an eligibility application. Saving new record.')
 
-          // save(id, request, response)
-          claimant = {
-            personal: request.body,
-            status: {
-              applicationStatus: PENDING,
-              incomeVerificationStatus: PENDING,
-              relationshipVerificationStatus: PENDING
-            }
+          claimant['status'] = {
+            applicationStatus: PENDING,
+            incomeVerificationStatus: PENDING,
+            relationshipVerificationStatus: PENDING
           }
 
           client.save(claimant, CLAIMANTS_COLLECTION)
@@ -98,10 +92,6 @@ module.exports = function (router) {
             })
         } else {
           logger.info('This is a brand new eligibility application.')
-          // update(id, request, response)
-          claimant = {
-            personal: request.body
-          }
 
           client.update(id, claimant, CLAIMANTS_COLLECTION)
             .then(function () {
