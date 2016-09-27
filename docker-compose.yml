@@ -71,6 +71,7 @@ services:
     ports:
       - "3306:3306"
     environment:
+      MYSQL_HOST: 127.0.0.1
       MYSQL_ROOT_PASSWORD: apvs
       MYSQL_DATABASE: apvs
       MYSQL_USER: apvs
