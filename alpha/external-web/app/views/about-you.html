@@ -59,7 +59,7 @@ APVS Application Form
 
                 <div class="form-group {% if errors['first-name'][0] %} error {% endif %}">
                     <label class="form-label-bold" for="first-name">First name</label>
-                    {% if errors['title'][0] %}
+                    {% if errors['first-name'][0] %}
                         <span class="error-message" id="error-message-first-name">{{ errors['first-name'][0] }}</span>
                     {% endif %}
                     <input type="text" class="form-control" id="first-name" name="first-name"
