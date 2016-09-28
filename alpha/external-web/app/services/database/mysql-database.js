@@ -19,15 +19,15 @@ const MAX_CONNECTIONS = 10
 const DATABASE_CONFIGURATION = {
   client: CLIENT,
   connection: {
-    host : HOST,
-    user : USERNAME,
-    password : PASSWORD,
-    database : DATABASE_NAME
+    host: HOST,
+    user: USERNAME,
+    password: PASSWORD,
+    database: DATABASE_NAME
   },
   pool: {
     min: MIN_CONNECTIONS,
     max: MAX_CONNECTIONS
-  },
+  }
 }
 
 module.exports = client(DATABASE_CONFIGURATION)

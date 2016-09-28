@@ -6,8 +6,8 @@ services:
   external-api-apvs:
     build: ./alpha/external-api-node # This is where you switch to Java API
     volumes:
-     - "./alpha/docker/volumes/node_modules-external-api-node:/usr/src/app/node_modules" # cache node_modules in local volume
-     - "./alpha/external-api-node/app:/usr/src/app/app"
+      - "./alpha/docker/volumes/node_modules-external-api-node:/usr/src/app/node_modules" # cache node_modules in local volume
+      - "./alpha/external-api-node/app:/usr/src/app/app"
     ports:
       - "3002:3002"
 
@@ -21,12 +21,12 @@ services:
   node-external-apvs:
     build: ./alpha/external-web
     volumes:
-     - "./alpha/docker/volumes/node_modules-external-web:/usr/src/app/node_modules" # cache node_modules in local volume
-     - "./alpha/external-web/app:/usr/src/app/app"
-     - "./alpha/external-web/public:/usr/src/app/public"
-     - "./alpha/external-web/logs:/usr/src/app/logs"
-     - "./alpha/uploads/eligibility-uploads:/usr/src/app/eligibility-uploads"
-     - "./alpha/uploads/visit-stamp-uploads:/usr/src/app/visit-stamp-uploads"
+      - "./alpha/docker/volumes/node_modules-external-web:/usr/src/app/node_modules" # cache node_modules in local volume
+      - "./alpha/external-web/app:/usr/src/app/app"
+      - "./alpha/external-web/public:/usr/src/app/public"
+      - "./alpha/external-web/logs:/usr/src/app/logs"
+      - "./alpha/uploads/eligibility-uploads:/usr/src/app/eligibility-uploads"
+      - "./alpha/uploads/visit-stamp-uploads:/usr/src/app/visit-stamp-uploads"
     ports:
       - "3000:3000"
     depends_on:
@@ -35,6 +35,7 @@ services:
       - external-api-apvs
     environment:
       - LOGGING_PATH=/usr/src/app/logs/external-web.log
+
     #  - LOGSTASH_HOST=elk
     #  - LOGSTASH_PORT=9998
     links:
@@ -45,11 +46,11 @@ services:
   node-internal-apvs:
     build: ./alpha/internal-web
     volumes:
-     - "./alpha/docker/volumes/node_modules-internal-web:/usr/src/app/node_modules" # cache node_modules in local volume
-     - "./alpha/internal-web/app:/usr/src/app/app"
-     - "./alpha/internal-web/public:/usr/src/app/public"
-     - "./alpha/internal-web/logs:/usr/src/app/logs"
-     - "./alpha/uploads/eligibility-uploads:/usr/src/app/eligibility-uploads/"
+      - "./alpha/docker/volumes/node_modules-internal-web:/usr/src/app/node_modules" # cache node_modules in local volume
+      - "./alpha/internal-web/app:/usr/src/app/app"
+      - "./alpha/internal-web/public:/usr/src/app/public"
+      - "./alpha/internal-web/logs:/usr/src/app/logs"
+      - "./alpha/uploads/eligibility-uploads:/usr/src/app/eligibility-uploads/"
     ports:
       - "3001:3001"
     depends_on:
@@ -71,11 +72,11 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_HOST: 127.0.0.1
-      MYSQL_ROOT_PASSWORD: apvs
-      MYSQL_DATABASE: apvs
-      MYSQL_USER: apvs
-      MYSQL_PASSWORD: apvs
+      - MYSQL_HOST=127.0.0.1
+      - MYSQL_ROOT_PASSWORD=apvs
+      - MYSQL_DATABASE=apvs
+      - MYSQL_USER=apvs
+      - MYSQL_PASSWORD=apvs
 
   # TODO: Remove this.
   # Build a mongo contianer that will serve as the database for the internal and external node applications.
