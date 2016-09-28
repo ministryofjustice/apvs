@@ -1,0 +1,20 @@
+{
+  "name": "wcag-audit",
+  "version": "1.0.0",
+  "description": "Example WCAG AA auditing with pa11y",
+  "private": true,
+  "engines": {
+    "node": ">=4.0 <5.0"
+  },
+  "main": "test-wcag-aa.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tom Swann",
+  "devDependencies": {
+    "standard": "^8.1.0"
+  },
+  "dependencies": {
+    "pa11y": "^4.0.1"
+  }
+}
