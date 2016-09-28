@@ -16,6 +16,4 @@ WORKDIR /usr/src/app
 COPY package.json /usr/src/app/
 COPY . /usr/src/app
 
-RUN npm install
-
-CMD wait-for-it.sh -t 0 node-external-apvs:3000 -- node test-wcag-aa.js
+CMD npm install && wait-for-it.sh -t 0 node-external-apvs:3000 -- node test-wcag-aa.js

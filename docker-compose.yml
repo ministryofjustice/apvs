@@ -110,3 +110,4 @@ services:
     volumes:
       - "./alpha/wcag-audit/:/usr/src/app"
       - "./alpha/wcag-audit/html:/usr/src/app/html"
+      - "./alpha/wcag-audit/node_modules:/usr/src/app/node_modules"
