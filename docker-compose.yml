@@ -122,3 +122,12 @@ services:
     build: alpha/smtp-server
     ports:
       - "25:25"
+
+  wcag-audit:
+    build: alpha/wcag-audit
+    depends_on:
+      - node-external-apvs
+    volumes:
+      - "./alpha/wcag-audit/:/usr/src/app"
+      - "./alpha/wcag-audit/html:/usr/src/app/html"
+      - "./alpha/wcag-audit/node_modules:/usr/src/app/node_modules"
