@@ -8,8 +8,48 @@ const CLAIMANTS_COLLECTION = 'claimants'
 
 var claimant
 
+// TODO: TEMP
+const knex = require('../services/database/database-client')
+const TABLE = 'eligibility'
+
+
+
+
 module.exports = function (router) {
   router.get('/about-you', function (request, response, next) {
+
+
+
+    knex.get(1, TABLE)
+
+
+    // TODO: TEMP
+
+    var testClaimant = {
+      'title': 'Mr',
+      'first_name': 'Thomas',
+      'last_name': 'Rowe',
+      'dob-day': '17',
+      'dob-month': '04',
+      'dob-year': '1989',
+      'address': '123 Example Street',
+      'postcode': 'CJ16 234',
+      'email': 'thomas.rowe@gmail.com',
+      'phone_number': '0256897987'
+    }
+
+    logger.info('Test Claimant to Save with knex: %s', testClaimant)
+
+    // knex.save(testClaimant, TABLE)
+    //   .then(function() {
+    //     logger.info('Saved Claimant')
+    //   })
+    //   .catch(function(error) {
+    //     logger.error('Failed to save test claimant: %s', testClaimant, error)
+    //   })
+
+
+
     response.render('about-you')
     next()
   })
