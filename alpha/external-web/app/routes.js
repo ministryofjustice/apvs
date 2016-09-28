@@ -5,8 +5,8 @@ var router = express.Router()
 module.exports = router
 
 // Include custom route files.
+var routeAboutYou = require('./routes/about-you')
 require('./routes/index')
-require('./routes/about-you')
 require('./routes/relationship')
 require('./routes/escorts')
 require('./routes/about-your-income')
@@ -16,6 +16,9 @@ require('./routes/claim-details')
 require('./routes/travel-profile')
 require('./routes/declare-your-visit')
 require('./routes/submit-claim')
+
+// Passing the router in to make it easier to test
+routeAboutYou(router)
 
 // Executed prior to any route being called.
 router.use(function (request, response, next) {

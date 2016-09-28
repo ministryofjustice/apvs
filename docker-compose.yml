@@ -32,11 +32,12 @@ services:
     depends_on:
       - mongo
       - external-api-apvs
-    #links:
-    #  - elk
-    #environment:
+    environment:
+      - LOGGING_PATH=/usr/src/app/logs/external-web.log
     #  - LOGSTASH_HOST=elk
     #  - LOGSTASH_PORT=9998
+    #links:
+    #  - elk
 
   # Build the internal facing node application and expose it on port 3001.
   node-internal-apvs:
@@ -51,11 +52,12 @@ services:
       - "3001:3001"
     depends_on:
       - mongo
-    #links:
-    #  - elk
-    #environment:
+    environment:
+      - LOGGING_PATH=/usr/src/app/logs/external-web.log
     #  - LOGSTASH_HOST=elk
     #  - LOGSTASH_PORT=9998
+    #links:
+    #  - elk
 
   # Build a mongo contianer that will serve as the database for the internal and external node applications.
   mongo:

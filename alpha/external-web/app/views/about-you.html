@@ -23,32 +23,76 @@ APVS Application Form
                 prison.
             </p>
 
-            <form action="/about-you/{{ claimant['_id'] }}" method="post" class="form">
-                <div class="form-group">
+            {% if errors %}
+                <div class="error-summary" role="group" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+
+                <h1 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">
+                    Message to alert the user to a problem goes here
+                </h1>
+
+                <p>
+                    Optional description of the errors and how to correct them
+                </p>
+
+                <ul class="error-summary-list">
+                    {% for field, messages in errors %}
+                        {% if messages[0] %}
+                            <li><a href="#{{ field }}">{{ messages[0] }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+
+                </div>
+            {% endif %}
+
+            <form action="/about-you/{{ claimant['_id'] }}"
+                method="post" class="form">
+                <div class="form-group {% if errors['title'][0] %} error {% endif %}">
                     <label class="form-label-bold" for="title">Title</label>
                     <p class="form-hint">(Mr/Mrs/Miss/Ms)</p>
+                    {% if errors['title'][0] %}
+                        <span class="error-message" id="error-message-title">{{ errors['title'][0] }}</span>
+                    {% endif %}
                     <input type="text" class="form-control" id="title" name="title"
-                           value="{{ claimant['personal']['title'] }}">
+                        value="{{ claimant['personal']['title'] }}">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group {% if errors['first-name'][0] %} error {% endif %}">
                     <label class="form-label-bold" for="first-name">First name</label>
+                    {% if errors['first-name'][0] %}
+                        <span class="error-message" id="error-message-first-name">{{ errors['first-name'][0] }}</span>
+                    {% endif %}
                     <input type="text" class="form-control" id="first-name" name="first-name"
                            value="{{ claimant['personal']['first-name'] }}">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group {% if errors['last-name'][0] %} error {% endif %}">
                     <label class="form-label-bold" for="last-name">Last name</label>
+                    {% if errors['last-name'][0] %}
+                        <span class="error-message" id="error-message-last-name">{{ errors['last-name'][0] }}</span>
+                    {% endif %}
                     <input type="text" class="form-control" id="last-name" name="last-name"
                            value="{{ claimant['personal']['last-name'] }}">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group {% if errors['dob-day'][0] %} error
+                    {% elif errors['dob-month'][0] %} error
+                    {% elif errors['dob-year'][0] %} error {% endif %}">
                     <fieldset>
                         <legend class="form-label-bold">Date of birth</legend>
 
                         <div class="form-date">
                             <p class="form-hint">For example, 31 3 1980</p>
+
+                            {% if errors['dob-day'][0] %}
+                                <span class="error-message" id="error-message-dob-day">{{ errors['dob-day'][0] }}</span>
+                            {% endif %}
+                            {% if errors['dob-month'][0] %}
+                                <span class="error-message" id="error-message-dob-month">{{ errors['dob-month'][0] }}</span>
+                            {% endif %}
+                            {% if errors['dob-year'][0] %}
+                                <span class="error-message" id="error-message-dob-year">{{ errors['dob-year'][0] }}</span>
+                            {% endif %}
 
                             <div class="form-group form-group-day">
                                 <label for="dob-day">Day</label>

@@ -13,14 +13,12 @@ const CONFIGURATION = {
   ]
 }
 
-var compress = function (file) {
+exports.compress = function (file) {
   imagemin([ file.path ], FILE_DESTINATION, CONFIGURATION)
     .then(function () {
-      logger.info('Image optimization complete.')
+      logger.info('Image compression complete.')
     })
     .catch(function (error) {
-      logger.error('Failed to compress image.', error)
+      logger.error('Image compression failed.', error)
     })
 }
-
-module.exports = compress
