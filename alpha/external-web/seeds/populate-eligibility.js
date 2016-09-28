@@ -26,14 +26,12 @@ const eligibility2 = {
   'phone_number': '0546454678'
 }
 
-exports.seed = function(knex, Promise) {
-
+exports.seed = function (knex, Promise) {
   return knex(TABLE_NAME).del()
     .then(function () {
       return Promise.all([
         knex(TABLE_NAME).insert(eligibility1),
-        knex(TABLE_NAME).insert(eligibility2),
+        knex(TABLE_NAME).insert(eligibility2)
       ])
     })
-
 }

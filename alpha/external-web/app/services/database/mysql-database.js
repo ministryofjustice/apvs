@@ -5,7 +5,7 @@ const knex = require('knex')
 
 // Database connection details.
 const CLIENT = 'mysql'
-const HOST = '127.0.0.1'
+const HOST = 'db'
 const USERNAME = 'apvs'
 const PASSWORD = 'apvs'
 const DATABASE_NAME = 'apvs'
@@ -26,7 +26,7 @@ const DATABASE_CONFIGURATION = {
     min: MIN_CONNECTIONS,
     max: MAX_CONNECTIONS
   },
-  debug: true
+  debug: false
 }
 
 module.exports = knex(DATABASE_CONFIGURATION)

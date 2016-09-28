@@ -35,7 +35,6 @@ services:
       - external-api-apvs
     environment:
       - LOGGING_PATH=/usr/src/app/logs/external-web.log
-
     #  - LOGSTASH_HOST=elk
     #  - LOGSTASH_PORT=9998
     links:
@@ -72,7 +71,6 @@ services:
     ports:
       - "3306:3306"
     environment:
-      - MYSQL_HOST=127.0.0.1
       - MYSQL_ROOT_PASSWORD=apvs
       - MYSQL_DATABASE=apvs
       - MYSQL_USER=apvs
@@ -105,6 +103,7 @@ services:
   #    - "5000:5000"
   #    - "9998:9998"
   #    - "9999:9999"
+
   notify-worker:
     build: alpha/notify-worker
     depends_on:
@@ -118,6 +117,7 @@ services:
     #environment:
     #  - LOGSTASH_HOST=elk
     #  - LOGSTASH_PORT=9998
+
   smtp-server:
     build: alpha/smtp-server
     ports:
