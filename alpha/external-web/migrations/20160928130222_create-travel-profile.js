@@ -1,4 +1,4 @@
-const TABLE_NAME = 'travel-profile'
+const TABLE_NAME = 'travel_profile'
 
 exports.up = function (knex, Promise) {
   return Promise.all([
