@@ -1,4 +1,4 @@
-var client = require('./eligibility-client')
+var client = require('./database/eligibility-client')
 
 exports.isValid = function (reference, collection) {
   return new Promise(function (resolve) {

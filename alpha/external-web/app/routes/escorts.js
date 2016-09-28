@@ -1,5 +1,5 @@
 var router = require('../routes')
-var client = require('../services/eligibility-client')
+var client = require('../services/database/eligibility-client')
 var validator = require('../services/validators/escorts-validator.js')
 
 const claimantsCollection = 'claimants'
