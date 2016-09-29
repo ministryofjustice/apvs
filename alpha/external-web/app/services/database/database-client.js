@@ -26,9 +26,9 @@ exports.save = function (record, table) {
       .insert(record)
       .returning('id')
 
-      .then(function (record) {
-        logger.debug('Successfully saved record %j', record)
-        resolve(record)
+      .then(function (id) {
+        logger.debug('Successfully saved record with id %s', id)
+        resolve(id)
       })
 
       .catch(function (error) {
