@@ -1,15 +1,15 @@
 const TABLE_NAME = 'eligibility'
 
 const eligibility1 = {
-  'title': 'Mr',
-  'first_name': 'Thomas',
+  'title': 'Bob',
+  'first_name': 'Smith',
   'last_name': 'Rowe',
-  'dob-day': '17',
-  'dob-month': '04',
-  'dob-year': '1989',
+  'dob-day': '09',
+  'dob-month': '07',
+  'dob-year': '1985',
   'address': '123 Example Street',
   'postcode': 'CJ16 234',
-  'email': 'thomas.rowe@gmail.com',
+  'email': 'bob.smith@gmail.com',
   'phone_number': '0256897987'
 }
 
