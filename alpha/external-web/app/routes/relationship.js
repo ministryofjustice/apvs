@@ -1,5 +1,5 @@
 var router = require('../routes')
-var client = require('../services/eligibility-client')
+var client = require('../services/database/eligibility-client')
 
 const claimantsCollection = 'claimants'
 

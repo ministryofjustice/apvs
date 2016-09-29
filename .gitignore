@@ -9,3 +9,6 @@ alpha/external-web/node_modules/
 
 # Ignore all log files.
 **.log*
+
+# Ignore mysql files.
+.data**

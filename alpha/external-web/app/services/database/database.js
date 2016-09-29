@@ -3,7 +3,7 @@
  */
 var Promise = require('bluebird')
 var client = Promise.promisifyAll(require('mongodb'))
-var logger = require('./bunyan-logger')
+var logger = require('../bunyan-logger')
 exports.client = client
 
 client.connect('mongodb://mongo:27017/apvs')

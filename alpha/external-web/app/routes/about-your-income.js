@@ -1,5 +1,5 @@
 const router = require('../routes')
-const client = require('../services/eligibility-client')
+const client = require('../services/database/eligibility-client')
 const upload = require('../services/upload')
 const compress = require('../services/compression')
 

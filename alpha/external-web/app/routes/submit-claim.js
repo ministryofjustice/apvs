@@ -7,7 +7,7 @@ const claimantsCollection = 'claimants'
 router.get('/submit-claim/:claimant_id', function (request, response, next) {
   var id = request.params.claimant_id
   reference.isValid(id, claimantsCollection)
-    .then(function (isValid) {
+    .then(function () {
       response.render('submit-claim', { 'id': id })
     })
     .catch(function (error) {

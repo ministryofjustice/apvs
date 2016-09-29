@@ -1,5 +1,5 @@
 var validator = require('../services/validators/about-you-validator.js')
-var client = require('../services/eligibility-client')
+var client = require('../services/database/eligibility-client')
 var eligibilityFlag = require('../services/eligibility-flag')
 var logger = require('../services/bunyan-logger')
 

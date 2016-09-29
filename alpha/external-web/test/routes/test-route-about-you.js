@@ -34,7 +34,7 @@ describe('about-you route', function () {
 
     app.use('/', router)
 
-    var client = proxyquire('../../app/services/eligibility-client', {
+    var client = proxyquire('../../app/services/database/eligibility-client', {
       './database': { '@noCallThru': true }
     })
 

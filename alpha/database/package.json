@@ -1,0 +1,9 @@
+{
+  "name": "database",
+  "version": "1.0.0",
+  "description": "Database migration and seeding.",
+  "dependencies": {
+    "knex": "^0.12.2",
+    "mysql": "^2.11.1"
+  }
+}
