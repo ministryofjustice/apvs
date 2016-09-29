@@ -5,7 +5,7 @@ const knex = require('knex')
 
 // Database connection details.
 const CLIENT = 'mysql'
-const HOST = 'db'
+const HOST = 'mysql'
 const USERNAME = 'apvs'
 const PASSWORD = 'apvs'
 const DATABASE_NAME = 'apvs'
