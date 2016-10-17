@@ -1,0 +1,16 @@
+{
+  "name": "apvs-database-migrations",
+  "version": "0.1.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ministryofjustice/apvs-database-migrations.git"
+  },
+  "engines": {
+    "node": "6.x.x"
+  },
+  "dependencies": {
+    "knex": "^0.12.5",
+    "mssql": "^3.3.0"
+  }
+}
