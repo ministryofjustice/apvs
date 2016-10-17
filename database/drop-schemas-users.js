@@ -6,7 +6,9 @@ knex.schema
   .raw('DROP SCHEMA IF EXISTS ExtSchema;')
   .raw('DROP SCHEMA IF EXISTS IntSchema;')
   .raw('DROP USER IF EXISTS ??;', [process.env.APVS_EXT_WEB_USERNAME])
+  .raw('DROP USER IF EXISTS ??;', [process.env.APVS_EXT_MIGRATION_USERNAME])
   .raw('DROP USER IF EXISTS ??;', [process.env.APVS_INT_WEB_USERNAME])
+  .raw('DROP USER IF EXISTS ??;', [process.env.APVS_INT_MIGRATION_USERNAME])
   .raw('DROP ROLE IF EXISTS ExtSchemaReadWrite;')
   .raw('DROP ROLE IF EXISTS IntSchemaReadWrite;')
   .then(function () {
