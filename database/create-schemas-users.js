@@ -32,6 +32,10 @@ knex.schema
   .raw('CREATE USER ??;', [process.env.APVS_INT_MIGRATION_USERNAME])
   .raw('ALTER USER ?? WITH DEFAULT_SCHEMA = ExtSchema;', [process.env.APVS_INT_MIGRATION_USERNAME])
   .raw('ALTER ROLE db_owner ADD MEMBER ??;', [process.env.APVS_INT_MIGRATION_USERNAME])
+  // Async worker
+  .raw('CREATE USER ??;', [process.env.APVS_ASYNC_WORKER_USERNAME])
+  .raw('ALTER ROLE db_datawriter ADD MEMBER ??;', [process.env.APVS_INT_WEB_USERNAME])
+  .raw('ALTER ROLE db_datareader ADD MEMBER ??;', [process.env.APVS_INT_WEB_USERNAME])
   .then(function () {
     process.exit(0)
   })

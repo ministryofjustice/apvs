@@ -11,6 +11,7 @@ knex.schema
   .raw('CREATE LOGIN ?? WITH Password=\'' + process.env.APVS_EXT_MIGRATION_PASSWORD + '\';', process.env.APVS_EXT_MIGRATION_USERNAME)
   .raw('CREATE LOGIN ?? WITH Password=\'' + process.env.APVS_INT_WEB_PASSWORD + '\';', process.env.APVS_INT_WEB_USERNAME)
   .raw('CREATE LOGIN ?? WITH Password=\'' + process.env.APVS_INT_MIGRATION_PASSWORD + '\';', process.env.APVS_INT_MIGRATION_USERNAME)
+  .raw('CREATE LOGIN ?? WITH Password=\'' + process.env.APVS_ASYNC_WORKER_PASSWORD + '\';', process.env.APVS_ASYNC_WORKER_USERNAME)
   .then(function () {
     process.exit(0)
   })

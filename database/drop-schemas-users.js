@@ -9,8 +9,13 @@ knex.schema
   .raw('DROP USER IF EXISTS ??;', [process.env.APVS_EXT_MIGRATION_USERNAME])
   .raw('DROP USER IF EXISTS ??;', [process.env.APVS_INT_WEB_USERNAME])
   .raw('DROP USER IF EXISTS ??;', [process.env.APVS_INT_MIGRATION_USERNAME])
+  .raw('DROP USER IF EXISTS ??;', [process.env.APVS_ASYNC_WORKER_USERNAME])
   .raw('DROP ROLE IF EXISTS ExtSchemaReadWrite;')
   .raw('DROP ROLE IF EXISTS IntSchemaReadWrite;')
+  .raw('ALTER ROLE db_owner DROP MEMBER ??;', [process.env.APVS_EXT_MIGRATION_USERNAME])
+  .raw('ALTER ROLE db_owner DROP MEMBER ??;', [process.env.APVS_INT_MIGRATION_USERNAME])
+  .raw('ALTER ROLE db_datareader DROP MEMBER ??;', [process.env.APVS_ASYNC_WORKER_USERNAME])
+  .raw('ALTER ROLE db_datawriter DROP MEMBER ??;', [process.env.APVS_ASYNC_WORKER_USERNAME])
   .then(function () {
     process.exit(0)
   })
