@@ -34,8 +34,8 @@ knex.schema
   .raw('ALTER ROLE db_owner ADD MEMBER ??;', [process.env.APVS_INT_MIGRATION_USERNAME])
   // Async worker
   .raw('CREATE USER ??;', [process.env.APVS_ASYNC_WORKER_USERNAME])
-  .raw('ALTER ROLE db_datawriter ADD MEMBER ??;', [process.env.APVS_INT_WEB_USERNAME])
-  .raw('ALTER ROLE db_datareader ADD MEMBER ??;', [process.env.APVS_INT_WEB_USERNAME])
+  .raw('ALTER ROLE db_datawriter ADD MEMBER ??;', [process.env.APVS_ASYNC_WORKER_USERNAME])
+  .raw('ALTER ROLE db_datareader ADD MEMBER ??;', [process.env.APVS_ASYNC_WORKER_USERNAME])
   .then(function () {
     process.exit(0)
   })
