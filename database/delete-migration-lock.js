@@ -3,7 +3,8 @@ const config = require('./knexfile').development
 const knex = require('knex')(config)
 
 knex.schema
-  .raw('DELETE FROM knex_ext_migrations_lock;')
+  .raw('DELETE FROM ExtSchema.knex_ext_migrations_lock;')
+  .raw('DELETE FROM IntSchema.knex_int_migrations_lock;')
   .then(function () {
     process.exit(0)
   })

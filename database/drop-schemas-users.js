@@ -3,8 +3,7 @@ const config = require('./knexfile').development
 const knex = require('knex')(config)
 
 knex.schema
-  .raw('DROP SCHEMA IF EXISTS ExtSchema;')
-  .raw('DROP SCHEMA IF EXISTS IntSchema;')
+  // USERS
   .raw('DROP USER IF EXISTS ??;', [process.env.APVS_EXT_WEB_USERNAME])
   .raw('DROP USER IF EXISTS ??;', [process.env.APVS_EXT_MIGRATION_USERNAME])
   .raw('DROP USER IF EXISTS ??;', [process.env.APVS_INT_WEB_USERNAME])
@@ -12,10 +11,33 @@ knex.schema
   .raw('DROP USER IF EXISTS ??;', [process.env.APVS_ASYNC_WORKER_USERNAME])
   .raw('DROP ROLE IF EXISTS ExtSchemaReadWrite;')
   .raw('DROP ROLE IF EXISTS IntSchemaReadWrite;')
-  .raw('ALTER ROLE db_owner DROP MEMBER ??;', [process.env.APVS_EXT_MIGRATION_USERNAME])
-  .raw('ALTER ROLE db_owner DROP MEMBER ??;', [process.env.APVS_INT_MIGRATION_USERNAME])
-  .raw('ALTER ROLE db_datareader DROP MEMBER ??;', [process.env.APVS_ASYNC_WORKER_USERNAME])
-  .raw('ALTER ROLE db_datawriter DROP MEMBER ??;', [process.env.APVS_ASYNC_WORKER_USERNAME])
+  // TABLES EXTSCHEMA
+  .raw('DROP TABLE IF EXISTS ExtSchema.Task;')
+  .raw('DROP TABLE IF EXISTS ExtSchema.ClaimBankDetail;')
+  .raw('DROP TABLE IF EXISTS ExtSchema.ClaimDocument;')
+  .raw('DROP TABLE IF EXISTS ExtSchema.ClaimExpense;')
+  .raw('DROP TABLE IF EXISTS ExtSchema.ClaimChild;')
+  .raw('DROP TABLE IF EXISTS ExtSchema.Claim;')
+  .raw('DROP TABLE IF EXISTS ExtSchema.Visitor;')
+  .raw('DROP TABLE IF EXISTS ExtSchema.Prisoner;')
+  .raw('DROP TABLE IF EXISTS ExtSchema.Eligibility;')
+  .raw('DROP TABLE IF EXISTS ExtSchema.knex_ext_migrations_lock;')
+  .raw('DROP TABLE IF EXISTS ExtSchema.knex_ext_migrations;')
+  // TABLES INTSCHEMA
+  .raw('DROP TABLE IF EXISTS IntSchema.Task;')
+  .raw('DROP TABLE IF EXISTS IntSchema.ClaimBankDetail;')
+  .raw('DROP TABLE IF EXISTS IntSchema.ClaimDocument;')
+  .raw('DROP TABLE IF EXISTS IntSchema.ClaimExpense;')
+  .raw('DROP TABLE IF EXISTS IntSchema.ClaimChild;')
+  .raw('DROP TABLE IF EXISTS IntSchema.Claim;')
+  .raw('DROP TABLE IF EXISTS IntSchema.Visitor;')
+  .raw('DROP TABLE IF EXISTS IntSchema.Prisoner;')
+  .raw('DROP TABLE IF EXISTS IntSchema.Eligibility;')
+  .raw('DROP TABLE IF EXISTS IntSchema.knex_int_migrations_lock;')
+  .raw('DROP TABLE IF EXISTS IntSchema.knex_int_migrations;')
+  // SCHEMAS
+  .raw('DROP SCHEMA IF EXISTS ExtSchema;')
+  .raw('DROP SCHEMA IF EXISTS IntSchema;')
   .then(function () {
     process.exit(0)
   })
