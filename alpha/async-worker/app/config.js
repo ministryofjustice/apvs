@@ -8,6 +8,6 @@ module.exports = {
   shell: {
     mode: 'text',
     pythonOptions: ['-u'],
-    scriptPath: '/usr/src/app/python'
+    scriptPath: '/usr/src/app/adi_generator'
   }
 }
