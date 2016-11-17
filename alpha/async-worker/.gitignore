@@ -1,0 +1,13 @@
+.DS_Store
+typings/
+node_modules/*
+jsconfig.json
+test_output.xlsm
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual env
+venv/

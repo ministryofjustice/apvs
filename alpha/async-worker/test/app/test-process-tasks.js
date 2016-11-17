@@ -44,7 +44,7 @@ describe('process-tasks', function () {
       sinon.stub(client, 'setTaskComplete')
       sinon.stub(mailer, 'sendMail')
 
-      processTasks.run().finally(() => {
+      processTasks.runNotificationTasks().finally(() => {
         notificationProcessSpy.should.have.been.calledTwice
       })
     })

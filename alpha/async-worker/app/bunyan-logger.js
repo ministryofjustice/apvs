@@ -11,7 +11,7 @@ prettyStream.pipe(process.stdout)
 
 // Create a base logger for the application.
 var logger = bunyan.createLogger({
-  name: 'notify-worker'
+  name: 'async-worker'
 })
 
 // Add console Stream.
