@@ -8,6 +8,6 @@ module.exports = {
   shell: {
     mode: 'text',
     pythonOptions: ['-u'],
-    scriptPath: '/usr/src/scripts'
+    scriptPath: '/usr/src/app/python'
   }
 }

@@ -100,13 +100,14 @@ services:
   #    - "9998:9998"
   #    - "9999:9999"
 
-  notify-worker:
+  async-worker:
     build: alpha/async-worker
     depends_on:
       - mongo
       - smtp-server
     volumes:
       - "./alpha/async-worker/app:/usr/src/app/app"
+      - "./alpha/async-worker/output:/usr/src/app/output"
       - "./alpha/async-worker/logs:/usr/src/app/logs"
     #links:
     #  - elk

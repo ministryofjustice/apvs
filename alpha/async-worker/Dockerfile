@@ -1,6 +1,7 @@
 FROM node:6.5.0
 
 RUN mkdir -p /usr/src/app
+RUN mkdir /usr/src/app/output
 WORKDIR /usr/src/app
 
 COPY package.json /usr/src/app/
@@ -10,9 +11,7 @@ RUN apt-get update \
     && apt-get upgrade -y \
     && apt-get install -y \
     build-essential \
-    ca-certificates \
     gcc \
-    git \
     libpq-dev \
     make \
     python-pip \
