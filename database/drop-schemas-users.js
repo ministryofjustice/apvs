@@ -35,6 +35,9 @@ knex.schema
   .raw('DROP TABLE IF EXISTS IntSchema.Eligibility;')
   .raw('DROP TABLE IF EXISTS IntSchema.knex_int_migrations_lock;')
   .raw('DROP TABLE IF EXISTS IntSchema.knex_int_migrations;')
+  // FUNCTIONS
+  .raw('DROP FUNCTION IF EXISTS IntSchema.getHistoricClaims;')
+  .raw('DROP FUNCTION IF EXISTS IntSchema.getMaskedEligibility;')
   // SCHEMAS
   .raw('DROP SCHEMA IF EXISTS ExtSchema;')
   .raw('DROP SCHEMA IF EXISTS IntSchema;')
