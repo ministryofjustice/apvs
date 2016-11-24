@@ -33,6 +33,7 @@ knex.schema
   .raw('DROP TABLE IF EXISTS IntSchema.Visitor;')
   .raw('DROP TABLE IF EXISTS IntSchema.Prisoner;')
   .raw('DROP TABLE IF EXISTS IntSchema.Eligibility;')
+  .raw('DROP TABLE IF EXISTS IntSchema.DirectPaymentFile;')
   .raw('DROP TABLE IF EXISTS IntSchema.knex_int_migrations_lock;')
   .raw('DROP TABLE IF EXISTS IntSchema.knex_int_migrations;')
   // FUNCTIONS
