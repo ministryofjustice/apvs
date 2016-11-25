@@ -13,6 +13,7 @@ knex.schema
   .raw('DROP ROLE IF EXISTS IntSchemaReadWrite;')
   // TABLES EXTSCHEMA
   .raw('DROP TABLE IF EXISTS ExtSchema.Task;')
+  .raw('DROP TABLE IF EXISTS ExtSchema.EligibilityVisitorUpdateContactDetail;')
   .raw('DROP TABLE IF EXISTS ExtSchema.ClaimBankDetail;')
   .raw('DROP TABLE IF EXISTS ExtSchema.ClaimDocument;')
   .raw('DROP TABLE IF EXISTS ExtSchema.ClaimExpense;')
@@ -25,6 +26,7 @@ knex.schema
   .raw('DROP TABLE IF EXISTS ExtSchema.knex_ext_migrations;')
   // TABLES INTSCHEMA
   .raw('DROP TABLE IF EXISTS IntSchema.Task;')
+  .raw('DROP TABLE IF EXISTS IntSchema.ClaimEvent;')
   .raw('DROP TABLE IF EXISTS IntSchema.ClaimBankDetail;')
   .raw('DROP TABLE IF EXISTS IntSchema.ClaimDocument;')
   .raw('DROP TABLE IF EXISTS IntSchema.ClaimExpense;')
@@ -38,6 +40,8 @@ knex.schema
   // FUNCTIONS
   .raw('DROP FUNCTION IF EXISTS IntSchema.getHistoricClaims;')
   .raw('DROP FUNCTION IF EXISTS IntSchema.getMaskedEligibility;')
+  .raw('DROP FUNCTION IF EXISTS IntSchema.getLastClaimChildren;')
+  .raw('DROP FUNCTION IF EXISTS IntSchema.getLastClaimExpenses;')
   // SCHEMAS
   .raw('DROP SCHEMA IF EXISTS ExtSchema;')
   .raw('DROP SCHEMA IF EXISTS IntSchema;')
