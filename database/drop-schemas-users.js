@@ -25,6 +25,7 @@ knex.schema
   .raw('DROP TABLE IF EXISTS ExtSchema.knex_ext_migrations_lock;')
   .raw('DROP TABLE IF EXISTS ExtSchema.knex_ext_migrations;')
   // TABLES INTSCHEMA
+  .raw('DROP TABLE IF EXISTS IntSchema.DirectPaymentFile;')
   .raw('DROP TABLE IF EXISTS IntSchema.Task;')
   .raw('DROP TABLE IF EXISTS IntSchema.ClaimEvent;')
   .raw('DROP TABLE IF EXISTS IntSchema.ClaimBankDetail;')
