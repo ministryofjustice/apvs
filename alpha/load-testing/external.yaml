@@ -1,0 +1,31 @@
+config:
+  target: 'http://localhost:3000'
+  phases:
+    - duration: 30
+      arrivalRate: 5
+
+scenarios:
+  - flow:
+      - get:
+          url: '/about-you'
+      - think: 3
+      - post:
+          url: '/about-you'
+          json:
+            title: 'Mr'
+            first-name: 'John'
+            last-name: 'Testing'
+            dob-day: '08'
+            dob-month: '09'
+            dob-year: '1989'
+            national-insurance: 'AB12345C'
+            address: '123 Somewhere Road'
+            postcode: 'BT7 1NT'
+            email: 'noreply@apvs.local'
+            phone-number: '012345678'
+          capture:
+            header: 'location'
+            as: relationshipUrl
+      - think: 1
+      - get:
+          url: '{{ relationshipUrl }}'
