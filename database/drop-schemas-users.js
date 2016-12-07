@@ -33,6 +33,7 @@ knex.schema
   .raw('DROP TABLE IF EXISTS IntSchema.ClaimDocument;')
   .raw('DROP TABLE IF EXISTS IntSchema.ClaimExpense;')
   .raw('DROP TABLE IF EXISTS IntSchema.ClaimChild;')
+  .raw('DROP TABLE IF EXISTS IntSchema.ClaimDeduction;')
   .raw('DROP TABLE IF EXISTS IntSchema.Claim;')
   .raw('DROP TABLE IF EXISTS IntSchema.Visitor;')
   .raw('DROP TABLE IF EXISTS IntSchema.Prisoner;')
