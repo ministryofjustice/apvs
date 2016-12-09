@@ -43,8 +43,9 @@ knex.schema
   // FUNCTIONS
   .raw('DROP FUNCTION IF EXISTS IntSchema.getHistoricClaims;')
   .raw('DROP FUNCTION IF EXISTS IntSchema.getMaskedEligibility;')
-  .raw('DROP FUNCTION IF EXISTS IntSchema.getLastClaimChildren;')
-  .raw('DROP FUNCTION IF EXISTS IntSchema.getLastClaimExpenses;')
+  .raw('DROP FUNCTION IF EXISTS IntSchema.getClaimExpenseByIdOrLastApproved;')
+  .raw('DROP FUNCTION IF EXISTS IntSchema.getClaimChildrenByIdOrLastApproved;')
+  .raw('DROP FUNCTION IF EXISTS IntSchema.getClaimDocumentsHistoricClaim;')
   // SCHEMAS
   .raw('DROP SCHEMA IF EXISTS ExtSchema;')
   .raw('DROP SCHEMA IF EXISTS IntSchema;')
