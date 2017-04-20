@@ -50,6 +50,7 @@ knex.schema
   .raw('DROP FUNCTION IF EXISTS IntSchema.getClaimEscortByIdOrLastApproved;')
   .raw('DROP FUNCTION IF EXISTS IntSchema.getClaimDocumentsHistoricClaim;')
   .raw('DROP FUNCTION IF EXISTS IntSchema.getClaimEvents')
+  .raw('DROP FUNCTION IF EXISTS IntSchema.getReferencesForDuplicateCheck')
   // SCHEMAS
   .raw('DROP SCHEMA IF EXISTS ExtSchema;')
   .raw('DROP SCHEMA IF EXISTS IntSchema;')
