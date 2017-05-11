@@ -1,5 +1,5 @@
 DECLARE @deleteReference char(10);
-SET @deleteReference = 'REFXXXX';
+SET @deleteReference = 'ZMSPWNR';
 
 DELETE FROM IntSchema.Task WHERE Reference=@deleteReference;
 DELETE FROM IntSchema.ClaimEvent WHERE Reference=@deleteReference;
